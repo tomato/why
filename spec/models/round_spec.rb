@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Round do
   before(:each) do
     @valid_attributes = {
-      
+      :supplier_id => 1
     }
   end
 

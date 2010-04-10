@@ -1,0 +1,47 @@
+body
+{
+  font-family:arial;
+  font-size:12px;
+  line-height:1.5em;
+  color:#333;
+}
+
+p
+{
+  margin-top:1.5em;
+  margin-bottom:1.5em;
+}
+
+h2
+{
+  font-weight:bold;
+}
+
+.pairs
+{
+  width:600px;
+  padding:0.75em;
+}
+
+.clear
+{
+  clear:both;
+}
+
+.left, .pairs label
+{
+  float:left;
+  text-align:right;
+  margin-right:20px;
+  width:180px;
+}
+
+.right, .pairs input
+{
+  float:right;
+  width:400px;
+}
+
+
+
+

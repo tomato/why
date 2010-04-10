@@ -13,4 +13,9 @@ class SuppliersController < ApplicationController
     Supplier.create(params[:supplier])
     redirect_to :action => 'index'
   end
+
+  def show
+    session[:supplier_id] = params[:id]
+    redirect_to rounds_path
+  end
 end

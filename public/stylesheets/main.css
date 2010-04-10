@@ -28,7 +28,7 @@ h2
   clear:both;
 }
 
-.left, .pairs label
+.left
 {
   float:left;
   text-align:right;
@@ -36,7 +36,7 @@ h2
   width:180px;
 }
 
-.right, .pairs input
+.right
 {
   float:right;
   width:400px;

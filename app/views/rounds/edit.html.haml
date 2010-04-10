@@ -2,13 +2,14 @@
 -form_for @round do |r|
   .pairs
     %p.clear
-      =r.label :name
-      =r.text_field :name
+      .left=r.label :name
+      .right=r.text_field :name
     %p.clear
-      =r.label :area
-      =r.text_area :area, :rows => 3
+      .left=r.label :area
+      .right=r.text_area :area, :rows => 3
     %p.clear
-      =r.label :schedule
-      =r.text_area :schedule, :rows => 3
+      .left=r.label :schedule
+      .right=r.text_area :schedule, :rows => 3
     %p.clear
-      =submit_tag
+      .left
+      .right=submit_tag

@@ -26,5 +26,6 @@ class RoundsController < ApplicationController
 
   def show
     @round = Round.find(params[:id])
+    @deliveries = Delivery.find_by_round_id(params[:id])
   end
 end

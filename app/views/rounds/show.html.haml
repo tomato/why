@@ -8,13 +8,17 @@
 %p
   Add deliveries every:
   %br
-  -%w{ Monday Tuesday Wednesday Thursday Friday Saturday Sunday }.each do |day| 
-    %label=day
-    =check_box_tag day
-  %br
-  From:
-  =select_date Time.now,:prefix => 'from', :order => [:day, :month, :year]
-  Till:
-  =select_date Time.now,:prefix => 'till', :order => [:day, :month, :year]
+  -form_tag({:action => 'create', :controller => 'deliveries'}) do
+    =hidden_field_tag :round, @round.id
+    -DateTime::DAYNAMES.each do |day| 
+      %label=day
+      =check_box_tag "day[]", day, false,:id => "cb#{ day }"
+    %br
+    From:
+    =select_date Time.now,:prefix => 'from', :order => [:day, :month, :year]
+    To:
+    =select_date Time.now,:prefix => 'to', :order => [:day, :month, :year]
+    %br
+    =submit_tag
 %p 
   Current scheduled deliveries are:

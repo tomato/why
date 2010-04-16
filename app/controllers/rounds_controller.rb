@@ -26,6 +26,6 @@ class RoundsController < ApplicationController
 
   def show
     @round = Round.find(params[:id])
-    @deliveries = Delivery.find_by_round_id(params[:id])
+    @deliveries = Delivery.find_all_by_round_id(params[:id], :order => 'date') || []
   end
 end

@@ -12,7 +12,9 @@ describe Supplier do
   end
 
   describe "Associations" do
-    it "can have many rounds" 
+    it "can have many rounds" do 
+      Supplier.new.should have(0).rounds
+    end
       
   end
 end

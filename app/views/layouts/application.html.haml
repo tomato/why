@@ -4,4 +4,6 @@
     %title="Where's my eggs?"
     =stylesheet_link_tag :all
   %body
+    -if(flash[:notice])
+      #notice=flash[:notice]
     =yield

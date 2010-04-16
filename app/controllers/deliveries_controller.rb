@@ -1,10 +1,23 @@
 class DeliveriesController < ApplicationController
 
   def create
-    Delivery.create_all(params[:round].to_i, 
-      convert_to_date(params[:from]),
-      convert_to_date(params[:to]),
-      params[:day])
+    problems = []
+    if(!params[:day] || params[:day].length == 0)
+      problems << "You need to select the day(s) your round is on"
+    end
+
+    if(convert_to_date(params[:from])> convert_to_date(params[:to]))
+      problems << "Your 'to' date needs to be after your 'from' date"
+    end
+
+    if(problems.length == 0)
+      set_count_notice(Delivery.create_all(params[:round].to_i, 
+        convert_to_date(params[:from]),
+        convert_to_date(params[:to]),
+        params[:day].collect{|i| i.to_i}))
+    else
+      flash[:notice] = problems.join('<br/>')
+    end
     redirect_to round_url(params[:round])
   end
 
@@ -12,5 +25,17 @@ class DeliveriesController < ApplicationController
 
   def convert_to_date(d)
     Date.new(d[:year].to_i, d[:month].to_i, d[:day].to_i)
+  end
+
+  def set_count_notice(count)
+    flash[:notice] =
+    case count      
+    when 0
+      "No new deliveries were added"
+    when 1
+      "1 new delivery was added"
+    else
+      "#{count} new deliveries were added"
+    end
   end
 end

@@ -27,5 +27,7 @@ class RoundsController < ApplicationController
   def show
     @round = Round.find(params[:id])
     @deliveries = Delivery.find_all_by_round_id(params[:id], :order => 'date') || []
+    @delivery_months = @deliveries.group_by { |d| d.date.beginning_of_month }
+    @days = Delivery.days
   end
 end

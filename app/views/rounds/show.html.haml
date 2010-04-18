@@ -1,27 +1,31 @@
-%h2=@round.name
+%h1 Deliveries for #{@round.name} Round
 %p
   Here is where you can add and edit delivery dates for
   =@round.name
   \. Your schedule is 
   =@round.schedule
   \.
-%p
-  Add deliveries every:
-  %br
-  -form_tag({:action => 'create', :controller => 'deliveries'}) do
+-form_tag({:action => 'create', :controller => 'deliveries'}) do
+  %p
+    Add deliveries every:
     =hidden_field_tag :round, @round.id
-    -DateTime::DAYNAMES.each_with_index do |day, i| 
-      %label=day
-      =check_box_tag "day[]", i, false
     %br
+    -@days.each do |i, day| 
+      =label_tag "day_#{day}", day
+      =check_box_tag "day[]", i, false, :id => "day_#{day}"
+      -if i%5 == 0
+        %br
+  %p
     From:
     =select_date Time.now,:prefix => 'from', :order => [:day, :month, :year]
     To:
     =select_date Time.now,:prefix => 'to', :order => [:day, :month, :year]
-    %br
+  %p
     =submit_tag
 %p 
   Current scheduled deliveries are:
-  -@deliveries.each do |d|
-    =d.date
-    %br
+  %br
+  -@delivery_months.sort.each do |month, deliveries|
+    %h2=month.strftime('%B %Y')
+    -deliveries.each do |d|
+      =link_to d.date.strftime("%A #{d.date.day.ordinalize}"), edit_delivery_path(d)

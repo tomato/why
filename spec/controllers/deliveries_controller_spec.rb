@@ -24,6 +24,18 @@ describe DeliveriesController do
       post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2011"},  "day"=>["0"],"round"=>"7"}
       flash[:notice].should == "Your 'to' date needs to be after your 'from' date"
     end
+    
+    it "should return a warning if the to date is not valid" do 
+      Delivery.should_not_receive(:create_all)
+      post :create, { "to"=>{"month"=>"2", "day"=>"31", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2008"},  "day"=>["0"],"round"=>"7"}
+      flash[:notice].should == "Your 'to' date is not a valid"
+    end
+
+    it "should return a warning if the from date is not valid" do 
+      Delivery.should_not_receive(:create_all)
+      post :create, { "to"=>{"month"=>"2", "day"=>"3", "year"=>"2010"}, "from"=>{"month"=>"2", "day"=>"31", "year"=>"2008"},  "day"=>["0"],"round"=>"7"}
+      flash[:notice].should == "Your 'from' date is not a valid"
+    end
 
     it "should return a notice if 1 new delivery was added" do
       Delivery.should_receive(:create_all).and_return(1)

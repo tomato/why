@@ -1,15 +1,7 @@
 class DeliveriesController < ApplicationController
 
   def create
-    problems = []
-    if(!params[:day] || params[:day].length == 0)
-      problems << "You need to select the day(s) your round is on"
-    end
-
-    if(convert_to_date(params[:from])> convert_to_date(params[:to]))
-      problems << "Your 'to' date needs to be after your 'from' date"
-    end
-
+    problems = validate()
     if(problems.length == 0)
       set_count_notice(Delivery.create_all(params[:round].to_i, 
         convert_to_date(params[:from]),
@@ -22,9 +14,34 @@ class DeliveriesController < ApplicationController
   end
 
   private
+  def validate()
+    problems = []
+    if(!params[:day] || params[:day].length == 0)
+      problems << "You need to select the day(s) your round is on"
+    end
+
+    if(!valid_date?(params[:from]))
+      problems << "Your 'from' date is not a valid"
+      return problems
+    end
+
+    if(!valid_date?(params[:to]))
+      problems << "Your 'to' date is not a valid"
+      return problems
+    end
+
+    if(convert_to_date(params[:from])> convert_to_date(params[:to]))
+      problems << "Your 'to' date needs to be after your 'from' date"
+    end
+    return problems
+  end
 
   def convert_to_date(d)
     Date.new(d[:year].to_i, d[:month].to_i, d[:day].to_i)
+  end
+
+  def valid_date?(d)
+    Date.valid_date?(d[:year].to_i, d[:month].to_i, d[:day].to_i)
   end
 
   def set_count_notice(count)

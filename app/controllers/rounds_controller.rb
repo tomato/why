@@ -24,10 +24,25 @@ class RoundsController < ApplicationController
     redirect_to rounds_path
   end
 
+  def past
+    setup_show 'date < curdate()'
+  end
+
+  def future
+    setup_show 'date >= curdate()'
+  end
+
   def show
+    setup_show nil
+  end
+
+  private
+
+  def setup_show(conditions)
     @round = Round.find(params[:id])
-    @deliveries = Delivery.find_all_by_round_id(params[:id], :order => 'date') || []
+    @deliveries = Delivery.find_all_by_round_id(params[:id], :order => 'date', :conditions => conditions) || []
     @delivery_months = @deliveries.group_by { |d| d.date.beginning_of_month }
     @days = Delivery.days
+    render :action => 'show'
   end
 end

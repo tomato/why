@@ -21,9 +21,14 @@
     To:
     =select_date Time.now,:prefix => 'to', :order => [:day, :month, :year]
   %p
-    =submit_tag
+    =submit_tag 'Create Deliveries'
 %p 
   Current scheduled deliveries are:
+  %br
+  Show 
+  =link_to 'All', round_path(@round)
+  =link_to 'Past', past_round_path(@round)
+  =link_to 'Future', future_round_path(@round)
   %br
   -@delivery_months.sort.each do |month, deliveries|
     %h2=month.strftime('%B %Y')

@@ -1,0 +1,9 @@
+%h1 Edit a Delivery
+-form_for @delivery do |d|
+  .pairs
+    %p.clear
+      .left=d.label :date
+      .right=d.date_select :date
+    %p.clear
+      .left
+      .right=submit_tag 'Update'

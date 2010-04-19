@@ -1,5 +1,15 @@
 class DeliveriesController < ApplicationController
 
+  def edit
+    @delivery = Delivery.find(params[:id])
+  end
+
+  def update
+    @delivery = Delivery.find(params[:id])
+    @delivery.update_attributes(params[:delivery])
+    redirect_to round_url(@delivery.round_id)
+  end
+
   def create
     problems = validate()
     if(problems.length == 0)

@@ -6,31 +6,31 @@
   =@round.schedule
   \.
 -form_tag({:action => 'create', :controller => 'deliveries'}) do
-  %p
-    Add deliveries every:
+  %fieldset
+    %legend Add deliveries
     =hidden_field_tag :round, @round.id
+    Select delivery days:
     %br
     -@days.each do |i, day| 
       =label_tag "day_#{day}", day
       =check_box_tag "day[]", i, false, :id => "day_#{day}"
       -if i%5 == 0
         %br
-  %p
-    From:
-    =select_date Time.now,:prefix => 'from', :order => [:day, :month, :year]
-    To:
-    =select_date Time.now,:prefix => 'to', :order => [:day, :month, :year]
-  %p
-    =submit_tag 'Create Deliveries'
+    %p
+      From:
+      =select_date Time.now,:prefix => 'from', :order => [:day, :month, :year]
+      To:
+      =select_date Time.now,:prefix => 'to', :order => [:day, :month, :year]
+    %p
+      =submit_tag 'Create Deliveries'
+%h2 Current scheduled deliveries are:
 %p 
-  Current scheduled deliveries are:
-  %br
   Show 
   =link_to 'All', round_path(@round)
   =link_to 'Past', past_round_path(@round)
   =link_to 'Future', future_round_path(@round)
   %br
   -@delivery_months.sort.each do |month, deliveries|
-    %h2=month.strftime('%B %Y')
+    %h3=month.strftime('%B %Y')
     -deliveries.each do |d|
       =link_to d.date.strftime("%A #{d.date.day.ordinalize}"), edit_delivery_path(d)

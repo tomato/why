@@ -4,6 +4,12 @@
     %title="Where's my eggs?"
     =stylesheet_link_tag :all
   %body
+    #header
+      #logo Where's my eggs?
+      #menu
+        %ul
+          %li=link_to 'Rounds', rounds_path
+          %li Products
     -if(flash[:notice])
       #notice=flash[:notice]
     =yield

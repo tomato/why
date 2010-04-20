@@ -14,9 +14,32 @@ p
   width:40em;
 }
 
+h1
+{
+  font-size:16px;
+  font-weight:bold;
+}
+
 h2
 {
-  font-weight:bold;
+  font-size:16px;
+  font-weight:normal;
+}
+
+h3
+{
+  font-size:14px;
+  font-weight:normal;
+}
+
+a
+{
+  color:#333;
+}
+
+legend
+{
+  font-size:16px;
 }
 
 .pairs
@@ -42,6 +65,35 @@ h2
 {
   float:right;
   width:400px;
+}
+
+#header
+{
+  width:100%;
+  height:80px;
+  border-bottom:solid 2px #333;
+}
+
+#logo
+{
+ float:left;
+ width:200px;
+ font-size:24px;
+}
+
+#menu
+{
+  float:right;
+}
+
+#menu ul
+{
+  list-style:none;
+}
+
+#menu a
+{
+  text-decoration:none;
 }
 
 

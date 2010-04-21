@@ -3,13 +3,14 @@
   %head
     %title="Where's my eggs?"
     =stylesheet_link_tag :all
+    =javascript_include_tag 'jquery', 'jquery.autocomplete'
   %body
     #header
       #logo Where's my eggs?
       #menu
         %ul
           %li=link_to 'Rounds', rounds_path
-          %li Products
+          %li=link_to 'Products', products_path
     -if(flash[:notice])
       #notice=flash[:notice]
     =yield

@@ -9,11 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100407200633) do
+ActiveRecord::Schema.define(:version => 20100420205310) do
 
   create_table "deliveries", :force => true do |t|
     t.date     "date"
     t.integer  "round_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "price",       :limit => 10, :precision => 10, :scale => 0
+    t.string   "category"
+    t.integer  "supplier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

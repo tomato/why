@@ -1,0 +1,25 @@
+%script
+  ="var data = '#{@category_list}'.split(',');"
+  $("#product_category").autocomplete(data);
+  
+%h1="#{controller.action_name.capitalize} Product"
+-form_for @product do |p|
+  =p.error_messages
+  .pairs
+    %p.clear
+      .left=p.label :name
+      .right=p.text_field :name
+    %p.clear
+      .left=p.label :category
+      .right=p.text_field :category
+    %p.clear
+      .left=p.label :description
+      .right=p.text_area :description, :rows => 3
+    %p.clear
+      .left=p.label :price
+      .right
+        =p.text_field :price
+        £
+    %p.clear
+      .left
+      .right=submit_tag

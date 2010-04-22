@@ -4,3 +4,7 @@
   =link_to 'create', new_product_path
   new products, and edit the existing ones below
 
+-@product_categories.sort.each do |category, products|
+  %h3=category
+  -products.each do |p|
+    =link_to p.name, edit_product_path(p)

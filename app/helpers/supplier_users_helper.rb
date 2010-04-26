@@ -1,0 +1,2 @@
+module SupplierUsersHelper
+end

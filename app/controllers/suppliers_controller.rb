@@ -16,6 +16,6 @@ class SuppliersController < ApplicationController
 
   def show
     session[:supplier_id] = params[:id]
-    redirect_to rounds_path
+    @supplier = Supplier.find(session[:supplier_id])
   end
 end

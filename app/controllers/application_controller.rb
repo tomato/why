@@ -4,7 +4,13 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :authenticate_admin!
 
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :password
+
+  def authenticate_resource!
+    authenticate_admin! || authenticate!(resource_name)
+  end
+  
 end

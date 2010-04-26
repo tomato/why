@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  map.devise_for :supplier_users
+  map.devise_for :admins
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -7,12 +10,14 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
+  # This route can be invoked with purchase_url(:id => product.idmodel 
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  map.resources :suppliers, :deliveries, :products
+  map.resources :suppliers, :deliveries, :products, :supplier_users
   map.resources :rounds, :member => { :past => :get,
                                       :future => :get}
+  map.supplier_users_root '/supplier_users', :controller => 'supplier_users' # creates user_root_path
+  
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }

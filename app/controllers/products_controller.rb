@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_filter :authenticate_supplier!
   
   def index
     @products = Product.find_all_by_supplier_id(session[:supplier_id])

@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe DeliveriesController do
 
+  before(:each) do
+    sign_in_admin
+  end
+
   #Delete this example and add some real ones
   it "should use DeliveriesController" do
     controller.should be_an_instance_of(DeliveriesController)

@@ -52,3 +52,24 @@ Spec::Runner.configure do |config|
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
+
+SUPPLIER_USER_SIGN_IN_URL = 'http://test.host/supplier_users/sign_in?unauthenticated=true'
+ADMIN_SIGN_IN_URL = 'http://test.host/admins/sign_in?unauthenticated=true'
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+
+  
+  def sign_in_admin
+    @admin = Admin.new(:email => 'tom@tomhowett.com', :password => 'fishfry')
+    @admin.save.should be_true
+    sign_in(@admin).should be_true
+  end
+  
+  def sign_in_supplier_user
+    @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => 1)
+    @su.save.should be_true
+    sign_in(@su).should be_true
+  end
+end
+

@@ -1,4 +1,5 @@
 class DeliveriesController < ApplicationController
+  before_filter :authenticate_supplier!
 
   def edit
     @delivery = Delivery.find(params[:id])

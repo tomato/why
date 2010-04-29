@@ -7,4 +7,14 @@ describe SupplierUsersController do
     controller.should be_an_instance_of(SupplierUsersController)
   end
 
+  it "should not allow annonymous to go to new" do
+    get :new
+    response.should redirect_to SUPPLIER_USER_SIGN_IN_URL
+  end
+  
+  it "should not allow annonymous to create a new supplier" do
+    put :create
+    response.should redirect_to SUPPLIER_USER_SIGN_IN_URL
+  end
+
 end

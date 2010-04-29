@@ -4,13 +4,24 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :authenticate_admin!
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 
-  def authenticate_resource!
-    authenticate_admin! || authenticate!(resource_name)
+  protected
+
+  def authenticate_supplier!(supplier_id = session[:supplier_id])
+    if(admin_signed_in? || valid_user_for_supplier?(supplier_id))
+      return
+    elsif supplier_user_signed_in?
+      flash[:notice] = 'You may not access this page, it belongs to another supplier'
+      authenticate_admin!      
+    else
+      authenticate_supplier_user!
+    end
   end
-  
+
+  def valid_user_for_supplier?(supplier_id)
+    current_supplier_user && current_supplier_user.supplier_id == supplier_id
+  end
 end

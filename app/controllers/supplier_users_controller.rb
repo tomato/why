@@ -1,4 +1,6 @@
 class SupplierUsersController < ApplicationController
+  before_filter :authenticate_supplier!
+
   def new 
     @supplier_user = SupplierUser.new
   end
@@ -10,4 +12,5 @@ class SupplierUsersController < ApplicationController
     @supplier_user.invite!
     redirect_to supplier_path(session[:supplier_id])
   end
+
 end

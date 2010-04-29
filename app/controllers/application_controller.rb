@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticate_supplier!(supplier_id = session[:supplier_id])
+    #logger.debug "supplier_id=#{ supplier_id}, user_supplier_id=#{current_supplier_user.supplier_id}"  
+    #logger.debug "valid_user_for_supplier?=#{ valid_user_for_supplier?(supplier_id)}"
     if(admin_signed_in? || valid_user_for_supplier?(supplier_id))
       return
     elsif supplier_user_signed_in?
@@ -22,6 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_user_for_supplier?(supplier_id)
-    current_supplier_user && current_supplier_user.supplier_id == supplier_id
+    current_supplier_user && current_supplier_user.supplier_id == supplier_id.to_i
   end
 end

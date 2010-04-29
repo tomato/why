@@ -16,8 +16,8 @@ class SuppliersController < ApplicationController
   end
 
   def show
+    authenticate_supplier! params[:id]
     session[:supplier_id] = params[:id]
-    authenticate_supplier!
     @supplier = Supplier.find(session[:supplier_id])
   end
 

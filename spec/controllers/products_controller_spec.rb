@@ -7,4 +7,9 @@ describe ProductsController do
     controller.should be_an_instance_of(ProductsController)
   end
 
+  it "should not allow an annoymous user" do 
+    get :show
+    response.should redirect_to SUPPLIER_USER_SIGN_IN_URL
+  end
+
 end

@@ -26,5 +26,14 @@ describe SuppliersController do
     response.should redirect_to ADMIN_SIGN_IN_URL
   end
 
+  it "should allow supplier user to view their own supplier" do
+    Supplier.stub!(:find).and_return(nil)
+    @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => 1)
+    @su.save.should be_true
+    sign_in(@su).should be_true
+    get :show, {:id => 1}
+    response.should render_template("show")
+  end
+
 
 end

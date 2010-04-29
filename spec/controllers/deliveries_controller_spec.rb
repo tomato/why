@@ -10,6 +10,8 @@ describe DeliveriesController do
   it "should use DeliveriesController" do
     controller.should be_an_instance_of(DeliveriesController)
   end
+
+  it "should only be accessable to admin or correct supplier user"
   
   describe "Create" do
     it "should send message to delivery" do

@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.devise_for :customers
   map.devise_for :supplier_users
   map.devise_for :admins
 
@@ -13,10 +14,10 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.idmodel 
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  map.resources :suppliers, :deliveries, :products, :supplier_users
+  map.resources :suppliers, :deliveries, :products, :supplier_users, :customers
   map.resources :rounds, :member => { :past => :get,
                                       :future => :get}
-  map.supplier_users_root '/supplier_users', :controller => 'supplier_users' # creates user_root_path
+  map.resource :home
   
 
   # Sample resource route with options:
@@ -38,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-map.root :controller => "suppliers"
+map.root :controller => "home"
 
   # See how all your routes lay out with "rake routes"
 

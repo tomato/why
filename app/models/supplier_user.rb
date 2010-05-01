@@ -1,7 +1,7 @@
 class SupplierUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable
-  devise :authenticatable, :recoverable, :invitable,
+  devise :database_authenticatable, :recoverable, :invitable,
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model

@@ -1,0 +1,23 @@
+%h1 Invite a new customer
+
+-form_for @customer do |f|
+  .pairs
+    %p.clear
+      .left=f.label :email
+      .right=f.text_field :email
+    %p.clear
+      .left=f.label :name
+      .right=f.text_field :name
+    %p.clear
+      .left=f.label :address
+      .right=f.text_area :address, :rows => 3
+    %p.clear
+      .left=f.label :postcode
+      .right=f.text_field :postcode
+    %p.clear
+      .left=f.label :telephone
+      .right=f.text_field :telephone
+    %p.clear
+      .left=f.label :round_id
+      .right=f.collection_select(:round_id, @rounds, :id, :name)
+  =f.submit 'Send Invitation'

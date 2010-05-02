@@ -22,8 +22,8 @@ describe SuppliersController do
     @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => 1)
     @su.save.should be_true
     sign_in(@su).should be_true
-    get :show, {:id => 2}
-    response.should redirect_to ADMIN_SIGN_IN_URL
+    get :show, {:id => 3}
+    response.should redirect_to home_path
   end
 
   it "should allow supplier user to view their own supplier" do

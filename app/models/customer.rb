@@ -1,4 +1,4 @@
-class SupplierUser < ActiveRecord::Base
+class Customer < ActiveRecord::Base
   include Authable
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable
@@ -6,7 +6,5 @@ class SupplierUser < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :supplier_id
-
-
+  attr_accessible :email, :password, :password_confirmation, :round_id
 end

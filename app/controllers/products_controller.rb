@@ -2,14 +2,14 @@ class ProductsController < ApplicationController
   before_filter :authenticate_supplier!
   
   def index
-    @products = Product.find_all_by_supplier_id(session[:supplier_id])
+    @products = Product.find_all_by_supplier_id(@supplier.id)
     @product_categories = @products.group_by { |c| c.category }
   end
 
   def new
     @product = Product.new
     @category_list = Product.find_all_by_supplier_id(
-      session[:supplier_id], :group => 'category').join(',')
+      @supplier.id, :group => 'category').join(',')
     render :action => 'edit'
   end
 
@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params[:product].merge(:supplier_id => session[:supplier_id]))
+    @product = Product.new(params[:product].merge(:supplier_id => @supplier.id))
     if(@product.save)
       redirect_to products_path
     else

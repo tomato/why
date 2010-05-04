@@ -1,18 +1,30 @@
+-title()
 !!! 5
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
   %head
-    %title="Where's my eggs?"
+    %title=yield :title
     =stylesheet_link_tag :all
     =javascript_include_tag 'jquery', 'jquery.autocomplete'
   %body
     #header
-      #logo Where's my eggs?
+      #logo=yield :title
       #menu
         %ul
           %li=link_to 'Sign Out Admin', destroy_admin_session_path if admin_signed_in?
           %li=link_to 'Sign Out', destroy_supplier_user_session_path if supplier_user_signed_in?
-    -if(flash[:notice])
-      #notice=flash[:notice]
-    -if(flash[:alert])
-      #notice=flash[:alert]
-    =yield
+          %li=link_to 'Users', supplier_users_path
+    #navigation
+      %ul
+        -if admin_signed_in?
+          %li=link_to 'Suppliers', suppliers_path
+        -if (supplier_user_signed_in? || admin_signed_in?) && @supplier
+          %li=link_to 'Dashboard', supplier_path(@supplier)
+          %li=link_to 'Customers', customers_path
+          %li=link_to 'Products', products_path
+          %li=link_to 'Rounds', rounds_path
+    #content
+      -if(flash[:notice])
+        #notice=flash[:notice]
+      -if(flash[:alert])
+        #notice=flash[:alert]
+      =yield

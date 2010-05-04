@@ -17,8 +17,15 @@ class SuppliersController < ApplicationController
 
   def show
     authenticate_supplier! params[:id]
-    session[:supplier_id] = params[:id]
-    @supplier = Supplier.find(session[:supplier_id])
+    set_supplier_session params[:id]
+    set_supplier
+  end
+
+  private
+
+  def set_supplier_session(id)
+    session[:supplier_id] = id
+    logger.debug "supplier session set to :#{ session[:supplier_id] }"
   end
 
 end

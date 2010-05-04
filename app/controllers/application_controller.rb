@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :set_supplier
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
@@ -45,5 +46,10 @@ class ApplicationController < ActionController::Base
 
   def valid_user_for_supplier?(supplier_id)
     current_supplier_user && current_supplier_user.supplier_id == supplier_id.to_i
+  end
+
+  def set_supplier
+    logger.debug "set_supplier: supplier_id=#{ session[:supplier_id]}"
+    @supplier = Supplier.first(:conditions => ["id = ?", session[:supplier_id]])
   end
 end

@@ -2,7 +2,7 @@ class RoundsController < ApplicationController
   before_filter :authenticate_supplier!
 
   def index
-    @rounds = Round.find_all_by_supplier_id(session[:supplier_id])
+    @rounds = Round.find_all_by_supplier_id(@supplier.id)
   end
 
   def new
@@ -15,7 +15,7 @@ class RoundsController < ApplicationController
   end
 
   def create
-    r = Round.create(params[:round].merge(:supplier_id => session[:supplier_id]))
+    r = Round.create(params[:round].merge(:supplier_id => @supplier.id))
     redirect_to round_path(r)
   end
 

@@ -1,0 +1,12 @@
+#products
+  -@product_categories.each do |category, products| 
+    %h3=category
+    %ul
+      -products.each do |product|
+        %li=product.name
+#deliveries
+  %ul
+    -@deliveries.each do |delivery|
+      %li
+        .order
+          %h3=delivery.date

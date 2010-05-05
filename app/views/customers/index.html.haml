@@ -5,3 +5,4 @@ and view and edit existing ones.
 %ul
   -@customers.each do |c|
     =link_to c.email, edit_customer_path(c)
+    =link_to 'orders', customer_orders_path(c)

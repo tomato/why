@@ -3,11 +3,12 @@ ActionController::Routing::Routes.draw do |map|
   map.devise_for :supplier_users
   map.devise_for :admins
 
-  map.resources :suppliers, :deliveries, :products, :supplier_users, :customers
+  map.resources :suppliers, :deliveries, :products, :supplier_users
   map.resources :rounds, :member => { :past => :get,
                                       :future => :get}
-  map.home 'home/', :controller => 'home'
+  map.resources :customers, :has_many => :orders
 
+  map.home 'home/', :controller => 'home'
   map.root :controller => "home"
 
   map.connect ':controller/:action/:id'

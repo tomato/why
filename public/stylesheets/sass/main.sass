@@ -14,6 +14,8 @@ p
 
 ul
   list-style: none
+  margin: 0px
+  padding: 0px
 
 
 h1
@@ -81,10 +83,6 @@ legend
 #navigation
   border-bottom: solid 2px #333
 
-  ul
-    margin: 0px
-    padding: 0px
-
   li
     display: inline
 
@@ -99,21 +97,25 @@ legend
   float: left
   width: 20%
 
+  ul
+    margin-left: 10px
+
+  #bin
+    border: 1px solid black
+    margin: 10px
+    padding: 10px
+
 #deliveries
   float: right
   width: 80%
 
-  ul
-    margin: 0px
-    padding: 0px
+#deliveries >  ul > li
+  display: inline
 
-  li
-    display: inline
-
-    .order
-      border: 1px solid #333
-      width: 20%
-      margin: 10px
-      padding: 5px
-      display: inline-block
+  .order
+    border: 1px solid #333
+    width: 20%
+    margin: 10px
+    padding: 5px
+    display: inline-block
 

@@ -1,4 +1,27 @@
+=content_for(:head) do
+  :javascript
+    $(function() {
+      $("#products li").draggable({
+              appendTo: "body",
+              helper: "clone"
+      });
+      $(".order").droppable({
+              drop: function(event, ui) {
+                      $(this).find(".placeholder").remove();
+                      $("<li></li>").text(ui.draggable.text())
+                        .appendTo($(this).find("ul"))
+                        .effect("highlight")
+                        .draggable()
+              }
+      })
+      $("#bin").droppable({
+        drop: function(event, ui) {
+          $(ui.draggable).effect("explode");}
+          })
+    })
+
 #products
+  #bin Drop in the bin
   -@product_categories.each do |category, products| 
     %h3=category
     %ul
@@ -10,3 +33,5 @@
       %li
         .order
           %h3=delivery.date
+          %ul
+            %li.placeholder Drop your products here!

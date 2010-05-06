@@ -11,7 +11,9 @@ p {
   width: 40em; }
 
 ul {
-  list-style: none; }
+  list-style: none;
+  margin: 0px;
+  padding: 0px; }
 
 h1 {
   font-size: 16px;
@@ -64,9 +66,6 @@ legend {
 
 #navigation {
   border-bottom: solid 2px #333; }
-  #navigation ul {
-    margin: 0px;
-    padding: 0px; }
   #navigation li {
     display: inline; }
     #navigation li a {
@@ -79,18 +78,22 @@ legend {
 #products {
   float: left;
   width: 20%; }
+  #products ul {
+    margin-left: 10px; }
+  #products #bin {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px; }
 
 #deliveries {
   float: right;
   width: 80%; }
-  #deliveries ul {
-    margin: 0px;
-    padding: 0px; }
-  #deliveries li {
-    display: inline; }
-    #deliveries li .order {
-      border: 1px solid #333;
-      width: 20%;
-      margin: 10px;
-      padding: 5px;
-      display: inline-block; }
+
+#deliveries >  ul > li {
+  display: inline; }
+  #deliveries >  ul > li .order {
+    border: 1px solid #333;
+    width: 20%;
+    margin: 10px;
+    padding: 5px;
+    display: inline-block; }

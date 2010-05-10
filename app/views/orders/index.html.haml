@@ -7,20 +7,38 @@
       });
       $(".order").droppable({
               drop: function(event, ui) {
-                      $(this).find(".placeholder").remove();
+                      $(this).addClass('updated');
                       $("<li></li>").text(ui.draggable.text())
                         .appendTo($(this).find("ul"))
                         .effect("highlight")
-                        .draggable()
+                        .draggable();
               }
       })
+      $('#deliveries li').draggable();
       $("#bin").droppable({
         drop: function(event, ui) {
+          $(event.srcElement).parents('.order').addClass('updated')
           $(ui.draggable).effect("explode");}
           })
+      $('#submit').click(function(){ createOrder(); return false; })
     })
 
+    function createOrder()
+    {
+      var wrappedOrders = $('.updated')
+      var orders = [];
+      for(var n=0; n <  wrappedOrders.length; n++){
+        var wrappedOrder = wrappedOrders.slice(n, n+1)
+        orders.push({
+          date: wrappedOrder.find('h3').get(0).innerHTML,
+          items: $.map(wrappedOrder.find('li'), function(a){ return a.innerHTML })
+          })
+        }
+      $.post('', { orders: orders});
+    }
+
 #products
+  %a#submit{ :href => '#' } Submit
   #bin Drop in the bin
   -@product_categories.each do |category, products| 
     %h3=category
@@ -34,4 +52,4 @@
         .order
           %h3=delivery.date
           %ul
-            %li.placeholder Drop your products here!
+            %li Dummy 

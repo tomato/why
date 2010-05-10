@@ -97,3 +97,5 @@ legend {
     margin: 10px;
     padding: 5px;
     display: inline-block; }
+  #deliveries >  ul > li .updated {
+    border: 1px solid red; }

@@ -1,2 +1,57 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(function(){
+    
+  $("#products li").draggable({ helper: "clone" });
+  
+  $(".order").droppable({ drop: why.addItem })
+
+  $('#deliveries li').draggable();
+  
+  $("#bin").droppable({ drop: why.binItem })
+
+  $('#submit').click(function(){ why.createOrder(); return false; })
+
+})
+
+var why = {}
+
+why.addItem = function(event, ui) {
+  $(this).addClass('updated');
+  $("<li><span class='quantity'>1</span><span class='product'>" 
+    + ui.draggable.text() + "</span></li>")
+    .appendTo($(this).find("ul"))
+    .effect("highlight")
+    .draggable();
+}
+
+why.binItem = function(event, ui) {
+  $(event.srcElement).parents('.order').addClass('updated')
+  $(ui.draggable).effect("explode").remove();
+}
+
+why.createOrder = function()
+{
+  var orders = why.map_slice($('.updated'), function(e){
+    return {
+      date: e.find('h3').get(0).innerHTML,
+      items: why.map_slice(e.find('li'), function(a){ return why.createItem(a) })
+    };
+  })
+    
+  $.post('', { orders: orders});
+}
+
+why.map_slice = function(elems, fn){
+  var result = [];
+  for(var n=0; n < elems.length; n++){
+    result.push(fn(elems.slice(n, n+1)));
+  }
+  return result;
+}
+
+why.createItem = function(li) {
+  return {
+    quantity: li.find('.quantity').get(0).innerHTML,
+    name: li.find('.product').get(0).innerHTML
+    }
+}
+

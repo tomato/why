@@ -1,0 +1,31 @@
+=content_for :head do
+  =javascript_include_tag "http://github.com/jquery/qunit/raw/master/qunit/qunit.js"
+  =stylesheet_link_tag "http://github.com/jquery/qunit/raw/master/qunit/qunit.css"
+  :javascript
+    $(document).ready(function(){
+
+      test("createItem", function() {
+        var expected = {quantity: "1", name:"fish"};
+        var ht = $("<li>\
+          <span class='quantity'>1</span>\
+          <span class='product'>fish</span>\
+        </li>");
+        same(why.createItem(ht), expected);
+
+      });
+
+      test("map_slice", function() {
+        var ht = $("#slice_test p")
+        var fn = function(a){return a.attr('id')}
+        same(why.map_slice(ht,fn),["a","b"]);
+      });
+    });
+%p
+%h1#qunit-header Order Tests
+%h2#qunit-banner
+%h2#qunit-userAgent
+%ol#qunit-tests
+
+#slice_test
+  %p#a
+  %p#b

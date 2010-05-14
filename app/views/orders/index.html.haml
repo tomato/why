@@ -1,3 +1,19 @@
+=content_for :head do
+  :javascript
+    $(function(){
+        
+      $("#products li").draggable({ helper: "clone" });
+      
+      $(".order").droppable({ drop: why.addItem })
+
+      $('#deliveries li').draggable();
+      
+      $("#bin").droppable({ drop: why.binItem })
+
+      $('#submit').click(function(){ why.createOrder(); return false; })
+
+    })
+
 #products
   %a#submit{ :href => '#' } Submit
   #bin Drop in the bin

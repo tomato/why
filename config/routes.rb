@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.home 'home/', :controller => 'home'
   map.root :controller => "home"
+  map.test 'test/', :controller => 'JavaScriptTests', :action => 'order'
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

@@ -1,17 +1,3 @@
-$(function(){
-    
-  $("#products li").draggable({ helper: "clone" });
-  
-  $(".order").droppable({ drop: why.addItem })
-
-  $('#deliveries li').draggable();
-  
-  $("#bin").droppable({ drop: why.binItem })
-
-  $('#submit').click(function(){ why.createOrder(); return false; })
-
-})
-
 var why = {}
 
 why.addItem = function(event, ui) {
@@ -32,7 +18,7 @@ why.createOrder = function()
 {
   var orders = why.map_slice($('.updated'), function(e){
     return {
-      date: e.find('h3').get(0).innerHTML,
+      date: e.find('h3').html(),
       items: why.map_slice(e.find('li'), function(a){ return why.createItem(a) })
     };
   })
@@ -50,8 +36,8 @@ why.map_slice = function(elems, fn){
 
 why.createItem = function(li) {
   return {
-    quantity: li.find('.quantity').get(0).innerHTML,
-    name: li.find('.product').get(0).innerHTML
-    }
+    quantity: li.find('.quantity').html(),
+    name: li.find('.product').html()
+  }
 }
 

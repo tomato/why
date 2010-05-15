@@ -24,10 +24,10 @@
         %li=product.name
 #deliveries
   %ul
-    -@deliveries.each do |delivery|
+    -@orders.each do |order|
       %li
         .order
-          %h3=delivery.date
+          %h3=order.delivery.date
           %ul
             %li 
               %span.quantity 1

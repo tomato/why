@@ -17,12 +17,8 @@ why.binItem = function(event, ui) {
 why.createOrder = function()
 {
   var orders = why.map_slice($('.updated'), function(e){
-    return {
-      date: e.find('h3').html(),
-      items: why.map_slice(e.find('li'), function(a){ return why.createItem(a) })
-    };
-  })
-    
+    return new why.Order(e); 
+  });
   $.post('', { orders: orders});
 }
 
@@ -34,10 +30,14 @@ why.map_slice = function(elems, fn){
   return result;
 }
 
-why.createItem = function(li) {
-  return {
-    quantity: li.find('.quantity').html(),
-    name: li.find('.product').html()
-  }
+why.Order = function(order) {
+    this.date = order.find('h3').html(),
+    this.items = why.map_slice(order.find('li'), function(a){ return new why.Item(a) })
+}
+
+
+why.Item = function(li) {
+    this.quantity = li.find('.quantity').html();
+    this.name = li.find('.product').html();
 }
 

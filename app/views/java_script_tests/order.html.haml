@@ -4,13 +4,14 @@
   :javascript
     $(document).ready(function(){
 
-      test("createItem", function() {
+      test("new Item", function() {
         var expected = {quantity: "1", name:"fish"};
         var ht = $("<li>\
           <span class='quantity'>1</span>\
           <span class='product'>fish</span>\
         </li>");
-        same(why.createItem(ht), expected);
+        same(new why.Item(ht).quantity, expected.quantity);
+        same(new why.Item(ht).product, expected.product);
 
       });
 

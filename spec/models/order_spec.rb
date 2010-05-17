@@ -40,8 +40,10 @@ describe Order do
     end
 
     it "should only allow one order with the same delivery and customer" do 
+      lambda{
       Order.create!(@valid_attributes).should be_true
-      Order.new(@valid_attributes).save.should be_false
+      Order.new(@valid_attributes).save
+      }.should raise_error(ActiveRecord::StatementInvalid)
     end
   end
 
@@ -82,6 +84,13 @@ describe Order do
       orders[0].should have(2).order_items
       orders[0].reload
       orders[0].should have(2).order_items
+    end
+
+    it "should not allow adding of the same item twice" do
+      @params_2_items = {"action"=>"create", "orders"=>{"0"=>{"items"=>{"0"=>{"quantity"=>"1", "product_id"=>"1"}, "1"=>{"quantity"=>"1", "product_id"=>"1"}}, "delivery_id"=>"654"}}, "controller"=>"orders", "customer_id"=>"2"}
+      lambda{
+      orders = Order.create_all(@params_2_items)
+      }.should raise_error(ActiveRecord::StatementInvalid)
     end
   end
 end

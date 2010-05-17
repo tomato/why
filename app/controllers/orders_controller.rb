@@ -9,9 +9,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    Order.create_all(params)
+    begin
+      Order.create_all(params)
+      msg = "We updated your order"
+    rescue Exception => e
+      msg = "This was an error: #{ e.inspect }"
+    end
     render :update do |page|
-      page << "alert('We updated your order')"
+      page << "alert(\"#{msg}\")"
     end
   end
 

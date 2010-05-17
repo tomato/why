@@ -1,10 +1,9 @@
 class Order < ActiveRecord::Base
   belongs_to :customer
   belongs_to :delivery
-  has_many :order_items
+  has_many :order_items, :dependent => :delete_all
 
   validates_presence_of :delivery_id, :customer_id
-  validates_uniqueness_of [:delivery_id, :customer_id]
 
   def self.find_candidates(customer)
     deliveries = Delivery.all(:conditions => 
@@ -28,8 +27,9 @@ class Order < ActiveRecord::Base
         order = Order.new(:delivery_id => v['delivery_id'],
                    :customer_id => params['customer_id'])
       end
+      logger.debug order.inspect
 
-      if(order.save)
+      if(order.save!)
         order.order_items.clear
         v['items'].each do |k,v|
           order.order_items << OrderItem.new(v.merge(:order_id => order.id))

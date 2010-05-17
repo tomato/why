@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    Order.create_all(params)
     render :update do |page|
       page << "alert('We updated your order')"
     end

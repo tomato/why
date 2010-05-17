@@ -21,15 +21,15 @@
     %h3=category
     %ul
       -products.each do |product|
-        %li=product.name
+        %li{"data-product_id" => product.id}=product.name
 #deliveries
   %ul
     -@orders.each do |order|
       %li
         .order
-          %h3=order.delivery.date
+          %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date
           %ul
             %li 
               %span.quantity 1
-              %span.product Dummy 
+              %span.product{"data-product_id" => "1"} Dummy 
 

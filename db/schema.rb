@@ -68,19 +68,23 @@ ActiveRecord::Schema.define(:version => 20100515214121) do
   end
 
   create_table "order_items", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "product_id"
-    t.integer  "quantity"
+    t.integer  "order_id",   :null => false
+    t.integer  "product_id", :null => false
+    t.integer  "quantity",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "order_items", ["order_id", "product_id"], :name => "index_order_items_on_order_id_and_product_id", :unique => true
+
   create_table "orders", :force => true do |t|
-    t.integer  "delivery_id"
-    t.integer  "customer_id"
+    t.integer  "delivery_id", :null => false
+    t.integer  "customer_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "orders", ["delivery_id", "customer_id"], :name => "index_orders_on_delivery_id_and_customer_id", :unique => true
 
   create_table "products", :force => true do |t|
     t.string   "name"

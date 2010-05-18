@@ -29,7 +29,8 @@
         .order
           %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date
           %ul
-            %li 
-              %span.quantity 1
-              %span.product{"data-product_id" => "1"} Dummy 
+            -order.order_items.each do |oi|
+              %li 
+                %span.quantity=oi.quantity
+                %span.product{"data-product_id" => oi.product_id}=oi.product.name
 

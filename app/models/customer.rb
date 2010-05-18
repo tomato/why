@@ -6,5 +6,5 @@ class Customer < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :round_id
+  attr_accessible :email, :password, :password_confirmation, :round_id, :supplier_id
 end

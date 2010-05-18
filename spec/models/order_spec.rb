@@ -48,17 +48,19 @@ describe Order do
   end
 
 
-  describe "candidates" do
-    it "should include an order for the next 12 deliveries" do
+  describe "find_candidates" do
+    it "should include a new order for the next 12 deliveries if no orders exist" do
       @customer = Customer.new({:round_id => 1})
-      Delivery.should_receive(:all).with(:conditions => 
-        ["round_id = ? and date >= curdate()", 1], :limit => 12
-      ).and_return(
-        (1..12).to_a.map{ Delivery.new}
-      )
+      Delivery.create_all(1, DateTime.now, DateTime.now.next_year,[0])
       Order.find_candidates(@customer).should have(12).orders
     end
-    
+
+    it "should find existing orders" do
+      @customer = Customer.create!({:round_id => 1, :email => 't@t.com', :password => 'ab1234', :password_confirmation => 'ab1234', :supplier_id => 1})
+      @delivery = Delivery.create!({:round_id => 1, :date => Date.new(2040,1,1)})
+      @order = Order.create!({ :delivery_id => @delivery.id, :customer_id => @customer.id })
+      Order.find_candidates(@customer)[0].should == @order
+    end
   end
 
   describe "create_all" do

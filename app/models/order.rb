@@ -6,12 +6,10 @@ class Order < ActiveRecord::Base
   validates_presence_of :delivery_id, :customer_id
 
   def self.find_candidates(customer)
-    deliveries = Delivery.all(:conditions => 
-        ["round_id = ? and date >= curdate()", customer.round_id], :limit => 12
-    )
-    
-    deliveries.map do |d| 
-      Order.new({
+    Delivery.all(:conditions => 
+      ["round_id = ? and date >= curdate()", customer.round_id], :limit => 12
+    ).map do |d| 
+      Order.find_by_delivery_id_and_customer_id(d.id, customer.id) || Order.new({
         :customer => customer, 
         :delivery => d})
     end
@@ -27,8 +25,6 @@ class Order < ActiveRecord::Base
         order = Order.new(:delivery_id => v['delivery_id'],
                    :customer_id => params['customer_id'])
       end
-      logger.debug order.inspect
-
       if(order.save!)
         order.order_items.clear
         v['items'].each do |k,v|

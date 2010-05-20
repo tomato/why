@@ -7,6 +7,7 @@ why.addItem = function(event, ui) {
     + ui.draggable.text() + "</span></li>")
     .appendTo($(this).find("ul"))
     .effect("highlight")
+    .hover(why.editItem, why.updateItem)
     .draggable();
 }
 
@@ -29,6 +30,25 @@ why.map_slice = function(elems, fn){
     result.push(fn(elems.slice(n, n+1)));
   }
   return result;
+}
+
+why.editItem = function(){
+  var quantity = $('.quantity', this).html();
+  $(this).addClass('editableItem');
+  $('.quantity', this)
+    .replaceWith('<input type="text" class="editableQuantity" data-quantity="' 
+        + quantity + '"/>')
+  $('input', this).val(quantity);
+}
+
+why.updateItem = function(){
+  $(this).removeClass('editableItem');
+  var quantity = $('.editableQuantity', this).val();
+  if(quantity != $('.editableQuantity', this).attr('data-quantity')){
+    $(this).parents('.order').addClass('updated');
+  }
+  $('.editableQuantity', this)
+    .replaceWith("<span class='quantity'>" + quantity + "</span");
 }
 
 why.Order = function(order) {

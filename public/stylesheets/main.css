@@ -97,5 +97,10 @@ legend {
     margin: 10px;
     padding: 5px;
     display: inline-block; }
+    #deliveries >  ul > li .order li.editableItem {
+      border: 1px solid green;
+      padding-left: 5px; }
+    #deliveries >  ul > li .order input {
+      width: 1em; }
   #deliveries >  ul > li .updated {
     border: 1px solid red; }

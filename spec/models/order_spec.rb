@@ -56,7 +56,7 @@ describe Order do
     end
 
     it "should find existing orders" do
-      @customer = Customer.create!({:round_id => 1, :email => 't@t.com', :password => 'ab1234', :password_confirmation => 'ab1234', :supplier_id => 1})
+      @customer = Factory(:customer)
       @delivery = Delivery.create!({:round_id => 1, :date => Date.new(2040,1,1)})
       @order = Order.create!({ :delivery_id => @delivery.id, :customer_id => @customer.id })
       Order.find_candidates(@customer)[0].should == @order
@@ -94,5 +94,11 @@ describe Order do
       orders = Order.create_all(@params_2_items)
       }.should raise_error(ActiveRecord::StatementInvalid)
     end
+
+    it "should not error if there are no orders to update" do
+      @params = {"regular_orders"=>{"0"=>{"items"=>{"0"=>{"quantity"=>"1", "product_id"=>"4"}, "1"=>{"quantity"=>"1", "product_id"=>"5"}}, "regular_order_id"=>"undefined"}}, "action"=>"create", "controller"=>"orders", "customer_id"=>"2"}
+      Order.create_all(@params).should have(0).orders
+    end
+
   end
 end

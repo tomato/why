@@ -18,10 +18,16 @@ why.binItem = function(event, ui) {
 
 why.createOrder = function()
 {
-  var orders = why.map_slice($('.updated'), function(e){
+
+  var regularOrders = why.map_slice($('.regularOrders .updated'), function(e){
+    return new why.RegularOrder(e); 
+  }) || [];
+
+  var orders = why.map_slice($('.orders .updated'), function(e){
     return new why.Order(e); 
-  });
-  $.post('', { orders: orders});
+  }) || [];
+
+  $.post('', { orders: orders, regular_orders: regularOrders});
 }
 
 why.map_slice = function(elems, fn){
@@ -56,6 +62,10 @@ why.Order = function(order) {
     this.items = why.map_slice(order.find('li'), function(a){ return new why.Item(a) })
 }
 
+why.RegularOrder = function(order) {
+    this.regular_order_id = order.find('h3').attr('data-regular_order_id'),
+    this.items = why.map_slice(order.find('li'), function(a){ return new why.Item(a) })
+}
 
 why.Item = function(li) {
     this.quantity = li.find('.quantity').html();

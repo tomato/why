@@ -18,6 +18,7 @@ class Order < ActiveRecord::Base
 
   def self.create_all(params)
     orders = []
+    return orders unless params['orders']
     params['orders'].each do |k,v|
       delivery_id, customer_id = v['delivery_id'], params['customer_id']
       order = Order.find_by_delivery_id_and_customer_id(delivery_id, customer_id)

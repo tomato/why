@@ -25,7 +25,18 @@
       -products.each do |product|
         %li{"data-product_id" => product.id}=product.name
 #deliveries
-  %ul
+  %ul.regularOrders
+    -@regular_orders.each do |regular|
+      %li
+        .order
+          %h3{"data-regular_order_id" => regular.id} Regular Order
+          %ul
+            -regular.regular_order_items.each do |oi|
+              %li 
+                %span.quantity=oi.quantity
+                %span.product{"data-product_id" => oi.product_id}=oi.product.name
+  %hr
+  %ul.orders
     -@orders.each do |order|
       %li
         .order

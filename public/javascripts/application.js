@@ -72,3 +72,7 @@ why.Item = function(li) {
     this.product_id = li.find('.product').attr('data-product_id');
 }
 
+why.updateRegulars = function(){
+  $('.orders .regular ul').html($('.regularOrders .order ul').html());
+}
+

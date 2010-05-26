@@ -25,11 +25,6 @@ describe OrdersController do
       response.body.should include('This was an error:')
     end
 
-    it "should not error if there are no orders to update" do
-      @params = {"regular_orders"=>{"0"=>{"items"=>{"0"=>{"quantity"=>"1", "product_id"=>"4"}, "1"=>{"quantity"=>"1", "product_id"=>"5"}}, "regular_order_id"=>"undefined"}}, "action"=>"create", "controller"=>"orders", "customer_id"=>"2"}
-      post :create, @params
-      response.body.should include('We updated your order')
-    end
   end
 
 end

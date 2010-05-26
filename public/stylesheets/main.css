@@ -3,7 +3,7 @@ body {
   font-size: 12px;
   line-height: 1.5em;
   color: #333;
-  margin: 20px 20%; }
+  margin: 40px; }
 
 p {
   margin-top: 1.5em;
@@ -78,23 +78,22 @@ legend {
 
 #products {
   float: left;
-  width: 33%; }
+  width: 160px; }
   #products ul {
     margin-left: 10px; }
   #products #bin {
     border: 1px solid black;
     margin: 10px;
-    padding: 10px; }
-
-#deliveries {
-  float: right;
-  width: 66%; }
+    padding: 10px;
+    width: 120px;
+    height: 120px; }
 
 #deliveries >  ul > li {
   display: inline; }
   #deliveries >  ul > li .order {
     border: 1px solid #333;
-    width: 25%;
+    width: 120px;
+    min-height: 120px;
     margin: 10px;
     padding: 5px;
     display: inline-block; }
@@ -105,3 +104,6 @@ legend {
       width: 1em; }
   #deliveries >  ul > li .updated {
     border: 1px solid red; }
+
+.regularOrders .order, .orders .regular {
+  border: 1px solid blue !Important; }

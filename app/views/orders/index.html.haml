@@ -14,6 +14,8 @@
 
       $('.order li').hover(why.editItem, why.updateItem);
 
+      why.updateRegulars();
+
     })
 
 #products
@@ -39,7 +41,7 @@
   %ul.orders
     -@orders.each do |order|
       %li
-        .order
+        %div{:class => order.new_record? ? "order regular" : "order"}  
           %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date
           %ul
             -order.order_items.each do |oi|

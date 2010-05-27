@@ -96,7 +96,10 @@ legend {
     min-height: 120px;
     margin: 10px;
     padding: 5px;
-    display: inline-block; }
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    vertical-align: top; }
     #deliveries >  ul > li .order li.editableItem {
       border: 1px solid green;
       padding-left: 5px; }

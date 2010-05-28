@@ -86,9 +86,10 @@ why.map_slice = function(elems, fn){
 }
 
 why.updateOrders = function(order){
+  $(order).addClass('updated');
   if($(order).parents('.regularOrders').length){
     why.setupOrders();
   } else {
-    $(order).removeClass('regular').addClass('updated');
+    $(order).removeClass('regular');
   }
 }

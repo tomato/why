@@ -14,7 +14,7 @@
     %h3=category
     %ul
       -products.each do |product|
-        %li{"data-product_id" => product.id}=product.name
+        %li.product{"data-product_id" => product.id}=product.name
 #deliveries
   %ul.regularOrders
     -@regular_orders.each do |regular|

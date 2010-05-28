@@ -1,19 +1,26 @@
 var why = {}
 
 why.addItem = function(event, ui) {
-  $(this).addClass('updated');
-  $("<li><span class='quantity'>1</span><span class='product' data-product_id='"
+  $("<li><input class='quantity' type='text' value='1'/><span class='product' data-product_id='"
     + ui.draggable.attr('data-product_id') + "'>" 
     + ui.draggable.text() + "</span></li>")
     .appendTo($(this).find("ul"))
-    .effect("highlight")
-    .hover(why.editItem, why.updateItem)
     .draggable();
+  why.updateOrders(this);
+}
+
+why.updateOrders = function(order){
+  if($(order).parents('.regularOrders').length){
+    why.setupOrders();
+  } else {
+    $(order).removeClass('regular').addClass('updated');
+  }
 }
 
 why.binItem = function(event, ui) {
-  $(event.srcElement).parents('.order').addClass('updated')
+  var order = $(event.srcElement).parents('.order')
   $(ui.draggable).effect("explode").remove();
+  why.updateOrders(order);
 }
 
 why.createOrder = function()
@@ -38,25 +45,6 @@ why.map_slice = function(elems, fn){
   return result;
 }
 
-why.editItem = function(){
-  var quantity = $('.quantity', this).html();
-  $(this).addClass('editableItem');
-  $('.quantity', this)
-    .replaceWith('<input type="text" class="editableQuantity" data-quantity="' 
-        + quantity + '"/>')
-  $('input', this).val(quantity);
-}
-
-why.updateItem = function(){
-  $(this).removeClass('editableItem');
-  var quantity = $('.editableQuantity', this).val();
-  if(quantity != $('.editableQuantity', this).attr('data-quantity')){
-    $(this).parents('.order').addClass('updated');
-  }
-  $('.editableQuantity', this)
-    .replaceWith("<span class='quantity'>" + quantity + "</span");
-}
-
 why.Order = function(order) {
     this.delivery_id = order.find('h3').attr('data-delivery_id'),
     this.items = why.map_slice(order.find('li'), function(a){ return new why.Item(a) })
@@ -76,3 +64,8 @@ why.updateRegulars = function(){
   $('.orders .regular ul').html($('.regularOrders .order ul').html());
 }
 
+why.setupOrders = function(){
+      why.updateRegulars();
+      $(".order").droppable({ drop: why.addItem })
+      $('.order li').draggable();
+}

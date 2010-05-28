@@ -1,21 +1,10 @@
 =content_for :head do
   :javascript
     $(function(){
-        
       $("#products li").draggable({ helper: "clone" });
-      
-      $(".order").droppable({ drop: why.addItem })
-
-      $('.order li').draggable();
-      
-      $("#bin").droppable({ drop: why.binItem })
-
+      $("#bin").droppable({ drop: why.binItem });
+      why.setupOrders();
       $('#submit').click(function(){ why.createOrder(); return false; })
-
-      $('.order li').hover(why.editItem, why.updateItem);
-
-      why.updateRegulars();
-
     })
 
 #products
@@ -35,7 +24,7 @@
           %ul
             -regular.regular_order_items.each do |oi|
               %li 
-                %span.quantity=oi.quantity
+                %input.quantity{ :value => oi.quantity }
                 %span.product{"data-product_id" => oi.product_id}=oi.product.name
   %hr
   %ul.orders
@@ -46,6 +35,6 @@
           %ul
             -order.order_items.each do |oi|
               %li 
-                %span.quantity=oi.quantity
+                %input.quantity{ :value => oi.quantity }
                 %span.product{"data-product_id" => oi.product_id}=oi.product.name
 

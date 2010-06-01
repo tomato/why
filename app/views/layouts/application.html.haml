@@ -6,7 +6,7 @@
     =stylesheet_link_tag :all
     =javascript_include_tag 'jquery', 'jquery.autocomplete', 'jquery-ui', 'application'
     =yield :head
-  %body
+  %body{ :id => tab_name }
     #header
       #logo=yield :title
       #menu
@@ -17,12 +17,12 @@
     #navigation
       %ul
         -if admin_signed_in?
-          %li=link_to 'Suppliers', suppliers_path
+          %li#suppliers_tab=link_to 'Suppliers', suppliers_path
         -if (supplier_user_signed_in? || admin_signed_in?) && @supplier
-          %li=link_to 'Dashboard', supplier_path(@supplier)
-          %li=link_to 'Customers', customers_path
-          %li=link_to 'Products', products_path
-          %li=link_to 'Rounds', rounds_path
+          %li#dashboard_tab=link_to 'Dashboard', supplier_path(@supplier)
+          %li#customers_tab=link_to 'Customers', customers_path
+          %li#products_tab=link_to 'Products', products_path
+          %li#rounds_tab=link_to 'Rounds', rounds_path
     #content
       -if(flash[:notice])
         #notice=flash[:notice]

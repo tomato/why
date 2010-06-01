@@ -7,8 +7,8 @@
       $('#submit').click(function(){ why.createOrder(); return false; })
     })
 
+%a#submit Update Your Order
 #products
-  %a#submit{ :href => '#' } Submit
   #bin Drop in the bin
   -@product_categories.each do |category, products| 
     %h3=category

@@ -3,7 +3,9 @@ body {
   font-size: 12px;
   line-height: 1.5em;
   color: #333;
-  margin: 40px; }
+  margin: 0;
+  padding: 0;
+  background-color: #FDFEF9; }
 
 p {
   margin-top: 1.5em;
@@ -51,8 +53,14 @@ legend {
   width: 400px; }
 
 #header {
-  width: 100%;
-  height: 60px; }
+  height: 40px;
+  background-color: #dde3c1;
+  padding: 20px; }
+
+#content {
+  padding: 0 30px;
+  border-top: #998299 solid 3px;
+  padding-top: 18px; }
 
 #logo {
   float: left;
@@ -65,31 +73,45 @@ legend {
     text-decoration: none; }
 
 #navigation {
-  border-bottom: solid 2px #333;
-  margin-bottom: 18px; }
+  border-bottom: solid 5px #333;
+  padding-left: 20px;
+  background-color: #DDE3C1; }
   #navigation li {
     display: inline; }
     #navigation li a {
       text-decoration: none;
       background-color: #333;
       color: white;
-      margin-right: 2px;
-      padding: 4px; }
+      margin-right: 10px;
+      padding: 7px;
+      -moz-border-radius-topleft: 4px;
+      -webkit-border-top-left-radius: 4px;
+      -moz-border-radius-topright: 4px;
+      -webkit-border-top-right-radius: 4px; }
 
-#products {
+body#customers #customers_tab a,
+body#rounds #rounds_tab a,
+body#suppliers #suppliers_tab a,
+body#products #products_tab a,
+body#dashboard #dashboard_tab a {
+  background-color: #998299; }
+
+div#products {
   float: left;
   width: 160px; }
-  #products ul {
+  div#products ul {
     margin-left: 10px; }
-  #products #bin {
+  div#products #bin {
     border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
+    margin: 10px 10px 10px 0;
+    padding: 5px;
     width: 120px;
     height: 120px; }
 
 #deliveries >  ul > li {
   display: inline; }
+  #deliveries >  ul > li .quantity {
+    margin-right: 1em; }
   #deliveries >  ul > li .order {
     border: 1px solid #333;
     width: 120px;
@@ -110,3 +132,12 @@ legend {
 
 .regularOrders .order, .orders .regular {
   border: 1px solid blue !Important; }
+
+a#submit {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold; }
+
+a#submit:hover {
+  text-decoration: underline; }

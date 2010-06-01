@@ -1,7 +1,7 @@
 =content_for :head do
   :javascript
     $(function(){
-      $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order' });
+      $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order'});
       $("#bin").droppable({ drop: why.binItem });
       why.setupOrders();
       $('#submit').click(function(){ why.createOrder(); return false; })
@@ -9,7 +9,10 @@
 
 %a#submit Update Your Order
 #products
-  #bin Drop in the bin
+  #bin 
+    %h3 Bin it
+    =image_tag 'bin_empty.png', {:alt => 'bin' }
+  %h2 Products
   -@product_categories.each do |category, products| 
     %h3=category
     %ul
@@ -31,7 +34,7 @@
     -@orders.each do |order|
       %li
         %div{:class => order.new_record? ? "order regular" : "order"}  
-          %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date
+          %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date.to_s(:short)
           %ul
             -order.order_items.each do |oi|
               %li 

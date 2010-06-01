@@ -53,7 +53,7 @@ legend {
   width: 400px; }
 
 #header {
-  height: 40px;
+  height: 30px;
   background-color: #dde3c1;
   padding: 20px; }
 
@@ -101,43 +101,71 @@ div#products {
   width: 160px; }
   div#products ul {
     margin-left: 10px; }
+    div#products ul li {
+      cursor: move; }
   div#products #bin {
-    border: 1px solid black;
+    border: 1px solid #ccc;
     margin: 10px 10px 10px 0;
-    padding: 5px;
     width: 120px;
-    height: 120px; }
+    height: 120px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px; }
+    div#products #bin h3 {
+      text-align: center;
+      padding: 2px;
+      margin: 0;
+      background-color: #ccc; }
+    div#products #bin img {
+      margin: 15px 28px; }
 
 #deliveries >  ul > li {
   display: inline; }
   #deliveries >  ul > li .quantity {
     margin-right: 1em; }
   #deliveries >  ul > li .order {
-    border: 1px solid #333;
+    border: 2px solid #998299;
     width: 120px;
     min-height: 120px;
     margin: 10px;
-    padding: 5px;
     display: inline-block;
     zoom: 1;
     *display: inline;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
     vertical-align: top; }
-    #deliveries >  ul > li .order li.editableItem {
-      border: 1px solid green;
-      padding-left: 5px; }
+    #deliveries >  ul > li .order h3 {
+      text-align: center;
+      padding: 2px;
+      margin: 0;
+      background-color: #998299; }
+    #deliveries >  ul > li .order ul {
+      padding: 5px; }
+      #deliveries >  ul > li .order ul li {
+        cursor: move; }
     #deliveries >  ul > li .order input {
       width: 1em; }
-  #deliveries >  ul > li .updated {
-    border: 1px solid red; }
 
-.regularOrders .order, .orders .regular {
-  border: 1px solid blue !Important; }
+#deliveries .regularOrders .order, #deliveries .orders .regular {
+  border: 2px solid #dde3c1; }
+  #deliveries .regularOrders .order h3, #deliveries .orders .regular h3 {
+    background-color: #dde3c1; }
+
+.updated {
+  border: 2px solid red !Important; }
 
 a#submit {
   display: block;
   text-align: center;
+  background-color: #998299;
+  width: 200px;
+  padding: 5px;
+  margin: 0 auto;
   font-size: 16px;
-  font-weight: bold; }
+  font-weight: bold;
+  color: #fff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  cursor: pointer; }
 
 a#submit:hover {
   text-decoration: underline; }

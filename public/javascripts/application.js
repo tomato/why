@@ -49,7 +49,9 @@ why.createOrder = function()
     return new why.Order(e); 
   }) || [];
 
-  $.post('', { orders: orders, regular_orders: regularOrders});
+  $.post($(location).attr('href'), { orders: orders, regular_orders: regularOrders});
+
+  return false;
 }
 
 why.Order = function(order) {

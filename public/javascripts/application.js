@@ -76,7 +76,7 @@ why.updateRegulars = function(){
 why.setupOrders = function(){
       why.updateRegulars();
       $(".order").droppable({ drop: why.addItem , accept: '.product'})
-      $('.order li').draggable();
+      $('.order li').draggable({ revert: 'invalid'});
 }
 
 why.map_slice = function(elems, fn){

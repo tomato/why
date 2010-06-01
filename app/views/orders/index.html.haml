@@ -1,7 +1,7 @@
 =content_for :head do
   :javascript
     $(function(){
-      $("#products li").draggable({ helper: "clone" });
+      $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order' });
       $("#bin").droppable({ drop: why.binItem });
       why.setupOrders();
       $('#submit').click(function(){ why.createOrder(); return false; })

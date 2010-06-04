@@ -31,19 +31,17 @@ why.createOrder = function()
 };
 
 why.setupProducts = function(){
-
-  var binItem = function(event, ui) {
-    var order = $(event.srcElement).parents('.order')
-    $(ui.draggable).effect("explode").remove();
-    why.updateOrders(order);
-  }
-
   $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order'});
-  $("#bin").droppable({ drop: binItem });
 }
 
 why.setupOrders = function(){
 
+  var binItem = function(event, ui) {
+    var order = $(event.srcElement).parents('.order')
+    $(ui.draggable).effect("explode").remove();
+    updateOrders(order);
+  }
+  
   var addItem = function(event, ui) {
     var convertProductToItem = function(order,product){
       $("<li data-product_id='" 
@@ -58,6 +56,7 @@ why.setupOrders = function(){
       var productId =  product.attr('data-product_id');
       var quantity = $(order).find('li[data-product_id=' + productId + '] .quantity').get(0)
       quantity.value = parseInt(quantity.value) + 1;
+      quantity.setAttribute('value', quantity.value);
     }
 
     var itemExists = function(order, product){
@@ -98,6 +97,7 @@ why.setupOrders = function(){
     var order = $(this).parents('.order')
     updateOrders(order);
   });
+  $("#bin").droppable({ drop: binItem });
 }
 
 why.map_slice = function(elems, fn){

@@ -75,14 +75,13 @@ why.setupOrders = function(){
     updateOrders(order);
 
   }
-
-  var updateRegularQuantities = function(input, order){
-    var quantity = $(input).val();
-    var product_id = $(input).parents('li').attr("data-product_id"); 
-    $('.orders .regular ul li[data-product_id=' + product_id + '] .quantity').val(quantity);
-  }
   
   var updateOrders = function(order){
+    
+    var isRegularMaster = function(order){
+      return $(order).parents('.regularOrders').length
+    }
+
     $(order).addClass('updated');
     if(!isRegularMaster(order)){
       $(order).removeClass('regular');
@@ -90,20 +89,14 @@ why.setupOrders = function(){
     why.setupOrders();
   }
 
-  var isRegularMaster = function(order){
-    return $(order).parents('.regularOrders').length
-  }
 
   $('.orders .regular ul').html($('.regularOrders .order ul').html());
   $(".order").droppable({ drop: addItem , accept: '.product'})
   $('.order li').draggable({ revert: 'invalid'});
   $('.quantity').change(function(){ 
+    this.setAttribute('value', this.value);
     var order = $(this).parents('.order')
-    if(isRegularMaster(order)){
-      updateRegularQuantities(this, order);
-    } else {
     updateOrders(order);
-    }
   });
 }
 

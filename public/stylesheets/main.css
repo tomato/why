@@ -65,7 +65,8 @@ legend {
 #logo {
   float: left;
   width: 200px;
-  font-size: 24px; }
+  font-size: 24px;
+  font-family: Georgia; }
 
 #menu {
   float: right; }

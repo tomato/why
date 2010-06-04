@@ -1,8 +1,7 @@
 =content_for :head do
   :javascript
     $(function(){
-      $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order'});
-      $("#bin").droppable({ drop: why.binItem });
+      why.setupProducts();
       why.setupOrders();
       $('#submit').click(function(){ why.createOrder(); return false; })
     })
@@ -26,9 +25,9 @@
           %h3{"data-regular_order_id" => regular.id} Regular Order
           %ul
             -regular.regular_order_items.each do |oi|
-              %li 
+              %li{"data-product_id" => oi.product_id} 
                 %input.quantity{ :value => oi.quantity }
-                %span.product{"data-product_id" => oi.product_id}=oi.product.name
+                %span.product=oi.product.name
   %hr
   %ul.orders
     -@orders.each do |order|
@@ -37,7 +36,7 @@
           %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date.to_s(:short)
           %ul
             -order.order_items.each do |oi|
-              %li 
+              %li{"data-product_id" => oi.product_id} 
                 %input.quantity{ :value => oi.quantity }
-                %span.product{"data-product_id" => oi.product_id}=oi.product.name
+                %span.product=oi.product.name
 

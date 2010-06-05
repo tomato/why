@@ -18,7 +18,7 @@
       %ul
         -if admin_signed_in?
           %li#suppliers_tab=link_to 'Suppliers', suppliers_path
-        -if (supplier_user_signed_in? || admin_signed_in?) && @supplier
+        -if (supplier_user_signed_in? || admin_signed_in?) && @supplier && !@supplier.new_record?
           %li#dashboard_tab=link_to 'Dashboard', supplier_path(@supplier)
           %li#customers_tab=link_to 'Customers', customers_path
           %li#products_tab=link_to 'Products', products_path

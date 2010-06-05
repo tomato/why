@@ -7,6 +7,9 @@ body {
   padding: 0;
   background-color: #FDFEF9; }
 
+html, body {
+  height: 100%; }
+
 p {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -30,7 +33,8 @@ h3 {
   font-weight: normal; }
 
 a {
-  color: #333; }
+  color: #333;
+  text-decoration: underline; }
 
 legend {
   font-size: 16px; }
@@ -60,7 +64,8 @@ legend {
 #content {
   padding: 0 30px;
   border-top: #998299 solid 3px;
-  padding-top: 18px; }
+  padding-top: 18px;
+  height: 100%; }
 
 #logo {
   float: left;
@@ -71,7 +76,31 @@ legend {
 #menu {
   float: right; }
   #menu a {
-    text-decoration: none; }
+    text-decoration: none;
+    cursor: pointer; }
+
+#bin {
+  border: 1px solid #ccc;
+  margin: 10px 10px 10px 0;
+  width: 120px;
+  height: 120px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  display: inline-block; }
+  #bin h3 {
+    text-align: center;
+    padding: 2px;
+    margin: 0;
+    background-color: #ccc; }
+  #bin img {
+    margin: 15px 28px; }
+
+p#instructions {
+  margin: 0 auto 1.5em auto;
+  font-weight: bold;
+  font-size: 12pt;
+  text-align: center;
+  line-height: 2em; }
 
 #navigation {
   border-bottom: solid 5px #333;
@@ -99,25 +128,12 @@ body#dashboard #dashboard_tab a {
 
 div#products {
   float: left;
-  width: 160px; }
+  width: 160px;
+  height: 100%; }
   div#products ul {
     margin-left: 10px; }
     div#products ul li {
       cursor: move; }
-  div#products #bin {
-    border: 1px solid #ccc;
-    margin: 10px 10px 10px 0;
-    width: 120px;
-    height: 120px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px; }
-    div#products #bin h3 {
-      text-align: center;
-      padding: 2px;
-      margin: 0;
-      background-color: #ccc; }
-    div#products #bin img {
-      margin: 15px 28px; }
 
 #deliveries >  ul > li {
   display: inline; }
@@ -155,7 +171,7 @@ div#products {
   border: 2px solid red !Important; }
 
 a#submit {
-  display: block;
+  display: inline;
   text-align: center;
   background-color: #998299;
   width: 200px;
@@ -166,7 +182,13 @@ a#submit {
   color: #fff;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  cursor: pointer; }
+  cursor: pointer;
+  text-decoration: none; }
 
 a#submit:hover {
   text-decoration: underline; }
+
+#movie {
+  display: none;
+  margin: 0 auto;
+  width: 640px; }

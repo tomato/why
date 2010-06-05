@@ -100,5 +100,10 @@ describe Order do
       Order.create_all(@params).should have(0).orders
     end
 
+    it "should create an order with no items" do
+      @params = {"action"=>"create", "orders"=>{"0"=>{"delivery_id"=>"809"}}, "controller"=>"orders", "customer_id"=>"3"}
+      Order.create_all(@params).should have(1).orders
+    end
+
   end
 end

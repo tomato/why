@@ -4,13 +4,23 @@
       why.setupProducts();
       why.setupOrders();
       $('#submit').click(function(){ why.createOrder(); return false; })
+      $('#watch').toggle(
+        function(){ $('#movie').slideDown(); $(this).html('Hide the video'); },
+        function(){ $('#movie').slideUp();  $(this).html('Show the video');})
     })
 
-%a#submit Update Your Order
+%p#instructions
+  Change your orders by dragging products into your orders or into the bin then click 
+  %a#submit Update Your Order
+  Still flumoxed?
+  %a#watch Watch the video
+
+  #movie
+    %object
+      %param{ :name=>"movie", :value=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"505"}
+      %embed{ :src=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"505" }
+        
 #products
-  #bin 
-    %h3 Bin it
-    =image_tag 'bin_empty.png', {:alt => 'bin' }
   %h2 Products
   -@product_categories.each do |category, products| 
     %h3=category
@@ -28,6 +38,10 @@
               %li{"data-product_id" => oi.product_id} 
                 %input.quantity{ :value => oi.quantity }
                 %span.product=oi.product.name
+    %li
+      #bin 
+        %h3 Bin it
+        =image_tag 'bin_empty.png', {:alt => 'bin' }
   %hr
   %ul.orders
     -@orders.each do |order|

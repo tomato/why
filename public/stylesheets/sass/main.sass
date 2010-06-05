@@ -7,6 +7,8 @@ body
   padding: 0
   background-color: #FDFEF9
 
+html, body
+  height: 100%
 
 p
   margin-top: 1.5em
@@ -35,6 +37,7 @@ h3
 
 a
   color: #333
+  text-decoration: underline
 
 
 legend
@@ -71,6 +74,7 @@ legend
   padding: 0 30px
   border-top: #998299 solid 3px
   padding-top: 18px
+  height: 100%
 
 #logo
   float: left
@@ -84,7 +88,32 @@ legend
 
   a
     text-decoration: none
+    cursor: pointer
 
+#bin
+  border: 1px solid #ccc
+  margin: 10px 10px 10px 0
+  width: 120px
+  height: 120px
+  -moz-border-radius: 4px
+  -webkit-border-radius: 4px
+  display: inline-block
+
+  h3
+    text-align: center
+    padding: 2px
+    margin: 0
+    background-color: #ccc
+
+  img
+    margin: 15px 28px
+
+p#instructions
+  margin: 0 auto 1.5em auto
+  font-weight: bold
+  font-size: 12pt
+  text-align: center
+  line-height: 2em
 
 #navigation
   border-bottom: solid 5px #333
@@ -115,6 +144,7 @@ body#dashboard #dashboard_tab a
 div#products
   float: left
   width: 160px
+  height: 100%
 
   ul
     margin-left: 10px
@@ -122,22 +152,6 @@ div#products
     li
       cursor: move
 
-  #bin
-    border: 1px solid #ccc
-    margin: 10px 10px 10px 0
-    width: 120px
-    height: 120px
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-
-    h3
-      text-align: center
-      padding: 2px
-      margin: 0
-      background-color: #ccc
-
-    img
-      margin: 15px 28px
 
 #deliveries >  ul > li
   display: inline
@@ -182,7 +196,7 @@ div#products
   border: 2px solid red !Important
 
 a#submit
-  display: block
+  display: inline
   text-align: center
   background-color: #998299
   width: 200px
@@ -194,6 +208,12 @@ a#submit
   -moz-border-radius: 4px
   -webkit-border-radius: 4px
   cursor: pointer
+  text-decoration: none
 
 a#submit:hover
   text-decoration: underline
+
+#movie
+  display: none
+  margin: 0 auto
+  width: 640px

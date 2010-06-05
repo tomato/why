@@ -192,3 +192,14 @@ a#submit:hover {
   display: none;
   margin: 0 auto;
   width: 640px; }
+
+#notice, #alert {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px; }
+
+#notice {
+  color: green; }
+
+#alert {
+  color: red; }

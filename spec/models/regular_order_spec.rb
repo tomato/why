@@ -56,5 +56,10 @@ describe RegularOrder do
       @params = {"orders"=>{"0"=>{"items"=>{"0"=>{"quantity"=>"1", "product_id"=>"2"}, "1"=>{"quantity"=>"2", "product_id"=>"4"}}, "delivery_id"=>"651"}}, "controller"=>"orders", "customer_id"=>"2"}
       RegularOrder.create_all(@params).should have(0).regular_orders
     end
+
+    it "should not error if the regular order has not items" do
+      @params = {"regular_orders"=>{"0"=>{"regular_order_id"=>"undefined"}}, "action"=>"create", "controller"=>"orders", "customer_id"=>"3"}
+      RegularOrder.create_all(@params).should have(1).regular_orders
+    end
   end
 end

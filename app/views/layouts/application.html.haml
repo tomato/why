@@ -12,8 +12,8 @@
       #menu
         %ul
           %li=link_to 'Sign Out Admin', destroy_admin_session_path if admin_signed_in?
-          %li=link_to 'Sign Out', destroy_supplier_user_session_path if supplier_user_signed_in?
-          %li=link_to 'Users', supplier_users_path
+          %li=link_to 'Sign Out Supplier', destroy_supplier_user_session_path if supplier_user_signed_in?
+          %li=link_to 'Sign Out Customer', destroy_customer_session_path if customer_signed_in?
     #navigation
       %ul
         -if admin_signed_in?
@@ -27,5 +27,5 @@
       -if(flash[:notice])
         #notice=flash[:notice]
       -if(flash[:alert])
-        #notice=flash[:alert]
+        #alert=flash[:alert]
       =yield

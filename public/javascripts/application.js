@@ -1,5 +1,9 @@
 var why = {}
 
+$(function(){
+  $('#notice').delay(2000).fadeOut();
+})
+
 why.createOrder = function()
 {
   var Order = function(order) {
@@ -98,6 +102,12 @@ why.setupOrders = function(){
     updateOrders(order);
   });
   $("#bin").droppable({ drop: binItem });
+}
+
+why.updateResponse = function(msg){
+  $('.updated').removeClass("updated");
+  $('#content #notice').remove();
+  $('#content').prepend('<div id="notice">' + msg + '</div>');
 }
 
 why.map_slice = function(elems, fn){

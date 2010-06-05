@@ -20,6 +20,9 @@ class ApplicationController < ActionController::Base
       end
     elsif resource.is_a?(Admin)
       suppliers_url
+    elsif resource.is_a?(Customer)
+      session[:supplier_id] = current_customer.supplier_id
+      customer_orders_url(current_customer.id)
     else
       super
     end
@@ -40,7 +43,7 @@ class ApplicationController < ActionController::Base
       flash[:notice] = 'You may not access this page, it belongs to another supplier'
       redirect_to home_path
     else
-      authenticate_supplier_user!
+      authenticate_customer!
     end
   end
 

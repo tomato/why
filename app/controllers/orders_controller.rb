@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       msg = "This was an error: #{ e.inspect }"
     end
     render :update do |page|
-      page << "alert(\"#{escape_javascript(msg)}\")"
+      page << "why.updateResponse(\"#{escape_javascript(msg)}\")"
     end
   end
 

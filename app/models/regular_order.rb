@@ -28,8 +28,10 @@ class RegularOrder < ActiveRecord::Base
 
       if(regularOrder.save!)
         regularOrder.regular_order_items.clear
-        v['items'].each do |k,v|
-          regularOrder.regular_order_items << RegularOrderItem.new(v.merge(:regular_order_id => regularOrder.id))
+        if(v['items'])
+          v['items'].each do |k,v|
+            regularOrder.regular_order_items << RegularOrderItem.new(v.merge(:regular_order_id => regularOrder.id))
+          end
         end
       end
 

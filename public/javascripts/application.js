@@ -1,8 +1,12 @@
 var why = {}
 
 $(function(){
-  $('#notice').delay(2000).fadeOut();
+    why.hideFlash();
 })
+
+why.hideFlash = function(){
+  $('#notice').delay(2000).slideUp();
+}
 
 why.createOrder = function()
 {
@@ -108,6 +112,7 @@ why.updateResponse = function(msg){
   $('.updated').removeClass("updated");
   $('#content #notice').remove();
   $('#content').prepend('<div id="notice">' + msg + '</div>');
+  why.hideFlash();
 }
 
 why.map_slice = function(elems, fn){

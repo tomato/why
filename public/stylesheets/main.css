@@ -159,6 +159,8 @@ div#products {
       padding: 5px; }
       #deliveries >  ul > li .order ul li {
         cursor: move; }
+      #deliveries >  ul > li .order ul li.total {
+        margin-left: 32px; }
     #deliveries >  ul > li .order input {
       width: 1em; }
 

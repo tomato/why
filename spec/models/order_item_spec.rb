@@ -39,6 +39,8 @@ describe OrderItem do
       i = OrderItem.new(@valid_attributes)
       i.product_id = nil
       i.should_not be_valid
+      i.product_id = 0
+      i.should_not be_valid
     end
 
     it "should not be valid if order and product already exists" do

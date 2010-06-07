@@ -7,7 +7,6 @@
       $('#watch').toggle(
         function(){ $('#movie').slideDown(); $(this).html('Hide the video'); },
         function(){ $('#movie').slideUp();  $(this).html('Show the video');})
-      why.subTotal();
     })
 
 %p#instructions
@@ -44,9 +43,7 @@
                 %span.product
                   =oi.product.name
                   %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
-            %li 
-              Total:
-              %span.total
+            %li.total
     %li
       #bin 
         %h3 Bin it
@@ -61,8 +58,8 @@
             -order.order_items.each do |oi|
               %li.item{"data-product_id" => oi.product_id} 
                 %input.quantity{ :value => oi.quantity }
-                %span.product=oi.product.name
-            %li 
-              Total:
-              %span.total
+                %span.product
+                  =oi.product.name
+                  %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
+            %li.total
 

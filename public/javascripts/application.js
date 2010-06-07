@@ -12,12 +12,12 @@ why.createOrder = function()
 {
   var Order = function(order) {
     this.delivery_id = order.find('h3').attr('data-delivery_id');
-    this.items = why.map_slice(order.find('li'), function(a){ return new Item(a) });
+    this.items = why.map_slice(order.find('li.item'), function(a){ return new Item(a) });
   };
 
   var RegularOrder = function(order) {
     this.regular_order_id = order.find('h3').attr('data-regular_order_id');
-    this.items = why.map_slice(order.find('li'), function(a){ return new Item(a) });
+    this.items = why.map_slice(order.find('li.item'), function(a){ return new Item(a) });
   };
 
   var Item = function(li) {
@@ -54,9 +54,9 @@ why.setupOrders = function(){
     var convertProductToItem = function(order,product){
       $("<li data-product_id='" 
           + product.attr('data-product_id') +
-          "'><input class='quantity' type='text' value='1'/><span class='product'>"
-          + product.text() + "</span></li>")
-      .appendTo($(order).find("ul"))
+          "' class='item'><input class='quantity' type='text' value='1'/><span class='product'>"
+          + product.html() + "</span></li>")
+      .insertAfter($(order).find('ul li.item:last'))
       .draggable();
     }
 
@@ -97,33 +97,33 @@ why.setupOrders = function(){
   }
 
 
+  var subTotal = function(){
+    $('.order li.item').attr('data-total', 
+        function(){
+          return $('.price', this).attr('data-price') 
+            * $('input.quantity', this).val();
+    })
+    
+    $('.order .total').html(function(index, html) {
+        var order = $(this).parents('.order');
+        var x = 0;
+        why.map_slice($('li.item', order), function(a){ 
+          return x += parseFloat(a.attr('data-total')) });
+        return isNaN(x) ? '' : 'Total: £' + x.toFixed(2);
+    });
+  };
+
   $('.orders .regular ul').html($('.regularOrders .order ul').html());
   $(".order").droppable({ drop: addItem , accept: '.product'})
-  $('.order li').draggable({ revert: 'invalid'});
+  $('.order li.item').draggable({ revert: 'invalid'});
   $('.quantity').change(function(){ 
     this.setAttribute('value', this.value);
     var order = $(this).parents('.order')
     updateOrders(order);
   });
   $("#bin").droppable({ drop: binItem });
+  subTotal()
 }
-
-why.subTotal = function(){
-
-  $('.order li.item').attr('data-total', 
-      function(){
-        return $('.price', this).attr('data-price') 
-          * $('input.quantity', this).val();
-      })
-  
-  $('.order .total').html(function(index, html) {
-      var order = $(this).parents('.order');
-      var x = 0;
-      why.map_slice($('li.item', order), function(a){ 
-        return x += parseFloat(a.attr('data-total')) });
-      return x;
-    });
-  };
 
 why.updateResponse = function(msg){
   $('.updated').removeClass("updated");

@@ -55,6 +55,7 @@ end
 
 SUPPLIER_USER_SIGN_IN_URL = 'http://test.host/supplier_users/sign_in?unauthenticated=true'
 ADMIN_SIGN_IN_URL = 'http://test.host/admins/sign_in?unauthenticated=true'
+CUSTOMER_SIGN_IN_URL = 'http://test.host/customers/sign_in?unauthenticated=true'
 
 class ActionController::TestCase
   include Devise::TestHelpers

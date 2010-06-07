@@ -7,6 +7,7 @@
       $('#watch').toggle(
         function(){ $('#movie').slideDown(); $(this).html('Hide the video'); },
         function(){ $('#movie').slideUp();  $(this).html('Show the video');})
+      why.subTotal();
     })
 
 %p#instructions
@@ -26,7 +27,10 @@
     %h3=category
     %ul
       -products.each do |product|
-        %li.product{"data-product_id" => product.id}=product.name
+        %li.product{"data-product_id" => product.id}
+          =product.name
+          -if(product.price)
+            %span.price{ 'data-price' => product.price }= to_pound(product.price)
 #deliveries
   %ul.regularOrders
     -@regular_orders.each do |regular|
@@ -35,9 +39,14 @@
           %h3{"data-regular_order_id" => regular.id} Regular Order
           %ul
             -regular.regular_order_items.each do |oi|
-              %li{"data-product_id" => oi.product_id} 
+              %li.item{"data-product_id" => oi.product_id} 
                 %input.quantity{ :value => oi.quantity }
-                %span.product=oi.product.name
+                %span.product
+                  =oi.product.name
+                  %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
+            %li 
+              Total:
+              %span.total
     %li
       #bin 
         %h3 Bin it
@@ -50,7 +59,10 @@
           %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date.to_s(:short)
           %ul
             -order.order_items.each do |oi|
-              %li{"data-product_id" => oi.product_id} 
+              %li.item{"data-product_id" => oi.product_id} 
                 %input.quantity{ :value => oi.quantity }
                 %span.product=oi.product.name
+            %li 
+              Total:
+              %span.total
 

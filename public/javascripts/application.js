@@ -108,6 +108,23 @@ why.setupOrders = function(){
   $("#bin").droppable({ drop: binItem });
 }
 
+why.subTotal = function(){
+
+  $('.order li.item').attr('data-total', 
+      function(){
+        return $('.price', this).attr('data-price') 
+          * $('input.quantity', this).val();
+      })
+  
+  $('.order .total').html(function(index, html) {
+      var order = $(this).parents('.order');
+      var x = 0;
+      why.map_slice($('li.item', order), function(a){ 
+        return x += parseFloat(a.attr('data-total')) });
+      return x;
+    });
+  };
+
 why.updateResponse = function(msg){
   $('.updated').removeClass("updated");
   $('#content #notice').remove();

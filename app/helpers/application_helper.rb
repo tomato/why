@@ -19,4 +19,8 @@ module ApplicationHelper
       @controller.controller_name
     end
   end
+
+  def to_pound(num)
+    number_to_currency(num, :unit => "£")
+  end
 end

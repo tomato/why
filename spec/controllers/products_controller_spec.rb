@@ -9,7 +9,7 @@ describe ProductsController do
 
   it "should not allow an annoymous user" do 
     get :show
-    response.should redirect_to SUPPLIER_USER_SIGN_IN_URL
+    response.should redirect_to CUSTOMER_SIGN_IN_URL
   end
 
 end

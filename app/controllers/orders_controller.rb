@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @regular_orders = RegularOrder.find_or_new(@customer)
     @orders = Order.find_candidates(@customer)
-    @products = Product.find_all_by_supplier_id(@supplier)
+    @products = Product.find_all_by_supplier_id(@customer.supplier_id)
     @product_categories = @products.group_by { |p| p.category }
   end
 

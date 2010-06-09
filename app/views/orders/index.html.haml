@@ -4,12 +4,12 @@
       why.setupProducts();
       why.setupOrders();
       $('#submit').click(function(){ why.createOrder(); return false; })
-      $('#watch').toggle(
-        function(){ $('#movie').slideDown(); $(this).html('Hide the video'); },
-        function(){ $('#movie').slideUp();  $(this).html('Show the video');})
+      $('#watch').click( function(){ $('#movie').slideDown();})
+      $('#hide').click(function(){ $('#movie').slideUp(); });
     })
 
 #movie
+  %a#hide Hide the video
   %object
     %param{ :name=>"movie", :value=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"505"}
     %embed{ :src=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"505" }
@@ -33,14 +33,12 @@
     %li To remove a product from either your regular or a specific order <strong>drag</strong> the order from the relevent box to the <strong>bin</strong>
     %li Once you are done making your changes click the <strong>Update Your Order</strong> button and <em>#{ @supplier.name }</em> will be notified
     %li Green boxes are your regular order, purple boxes are orders that differ from your regular order (you might not have any of those yet!)
-    %li 
-      Still flumoxed?  
-      %a#watch Watch the video
 
 #deliveries
   #buttons
     %a#submit Update Your Order
     %a#undo{ :href => customer_orders_path(@customer.id) } Undo Your Changes
+    %a#watch Flumoxed? Watch the video
   %ul.regularOrders
     -@regular_orders.each do |regular|
       %li

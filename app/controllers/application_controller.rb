@@ -47,6 +47,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   def valid_user_for_supplier?(supplier_id)
     current_supplier_user && current_supplier_user.supplier_id == supplier_id.to_i
   end

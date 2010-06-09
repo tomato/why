@@ -1,8 +1,7 @@
 class OrdersController < ApplicationController
+  before_filter :check_access!
   
   def index
-    #todo security
-    @customer = Customer.find(params[:customer_id])
     @regular_orders = RegularOrder.find_or_new(@customer)
     @orders = Order.find_candidates(@customer)
     @products = Product.find_all_by_supplier_id(@customer.supplier_id)
@@ -20,6 +19,18 @@ class OrdersController < ApplicationController
     render :update do |page|
       page << "why.updateResponse(\"#{escape_javascript(msg)}\")"
     end
+  end
+
+  private
+
+  def check_access!()
+    @customer = Customer.first(:conditions => {:id => params[:customer_id]})
+    return if(admin_signed_in?) 
+    return if(customer_signed_in? && current_customer.id == params[:customer_id].to_i) 
+    return if(supplier_user_signed_in? && current_supplier_user.supplier_id == @customer.supplier_id) 
+
+    flash[:alert] = "This is not your page!"
+    redirect_to home_path
   end
 
 end

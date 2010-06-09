@@ -108,13 +108,6 @@ legend
   img
     margin: 15px 28px
 
-p#instructions
-  margin: 0 auto 1.5em auto
-  font-weight: bold
-  font-size: 12pt
-  text-align: center
-  line-height: 2em
-
 #navigation
   border-bottom: solid 5px #333
   padding-left: 20px
@@ -152,7 +145,6 @@ div#products
     li
       cursor: move
 
-
 #deliveries >  ul > li
   display: inline
 
@@ -180,7 +172,7 @@ div#products
     ul
       padding: 5px
 
-      li
+      li.item
         cursor: move
 
       li.total
@@ -198,23 +190,26 @@ div#products
 .updated
   border: 2px solid red !Important
 
-a#submit
-  display: inline
-  text-align: center
-  background-color: #998299
-  width: 200px
-  padding: 5px
-  margin: 0 auto
-  font-size: 16px
-  font-weight: bold
-  color: #fff
-  -moz-border-radius: 4px
-  -webkit-border-radius: 4px
-  cursor: pointer
-  text-decoration: none
+#buttons
+  float: right
 
-a#submit:hover
-  text-decoration: underline
+  a#submit, a#undo
+    display: block
+    text-align: center
+    background-color: #998299
+    width: 200px
+    padding: 5px
+    margin: 10px
+    font-size: 16px
+    font-weight: bold
+    color: #fff
+    -moz-border-radius: 4px
+    -webkit-border-radius: 4px
+    cursor: pointer
+    text-decoration: none
+
+  a#submit:hover, a#undo:hover
+    text-decoration: underline
 
 #movie
   display: none
@@ -231,3 +226,13 @@ a#submit:hover
 
 #alert
   color: red
+
+#help
+  float: right
+  width: 220px
+  height: 100%
+  margin-left: 20px
+
+
+  li
+    margin: 1em 0

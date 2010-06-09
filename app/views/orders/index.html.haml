@@ -9,17 +9,11 @@
         function(){ $('#movie').slideUp();  $(this).html('Show the video');})
     })
 
-%p#instructions
-  Change your orders by dragging products into your orders or into the bin then click 
-  %a#submit Update Your Order
-  Still flumoxed?
-  %a#watch Watch the video
-
-  #movie
-    %object
-      %param{ :name=>"movie", :value=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"505"}
-      %embed{ :src=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"505" }
-        
+#movie
+  %object
+    %param{ :name=>"movie", :value=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"505"}
+    %embed{ :src=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"505" }
+      
 #products
   %h2 Products
   -@product_categories.each do |category, products| 
@@ -30,7 +24,23 @@
           =product.name
           -if(product.price)
             %span.price{ 'data-price' => product.price }= to_pound(product.price)
+#help
+  %h2 Help
+  %ul
+    %li To add a product to your regular order <strong>drag</strong> it from the list on the left into the box titled Regular Order
+    %li To add a product to a specific order <strong>drag</strong> it from the list on the left into the box with the correct delivery date
+    %li You can update the quantity of any product you receive by changing the number to it's left
+    %li To remove a product from either your regular or a specific order <strong>drag</strong> the order from the relevent box to the <strong>bin</strong>
+    %li Once you are done making your changes click the <strong>Update Your Order</strong> button and <em>#{ @supplier.name }</em> will be notified
+    %li Green boxes are your regular order, purple boxes are orders that differ from your regular order (you might not have any of those yet!)
+    %li 
+      Still flumoxed?  
+      %a#watch Watch the video
+
 #deliveries
+  #buttons
+    %a#submit Update Your Order
+    %a#undo{ :href => customer_orders_path(@customer.id) } Undo Your Changes
   %ul.regularOrders
     -@regular_orders.each do |regular|
       %li

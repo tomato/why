@@ -1,8 +1,15 @@
 var why = {}
 
 $(function(){
+    /*why.yourBrowserSucks()*/
     why.hideFlash();
 })
+
+why.yourBrowserSucks = function(){
+  if($.browser.msie && $.browser.version < 8) {
+    window.location = "/ohdear"
+  }
+}
 
 why.hideFlash = function(){
   $('#notice').delay(2000).slideUp();

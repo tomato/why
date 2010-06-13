@@ -79,22 +79,6 @@ legend {
   #menu a {
     text-decoration: none; }
 
-#bin {
-  border: 1px solid #ccc;
-  margin: 10px 10px 10px 0;
-  width: 120px;
-  height: 120px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  display: inline-block; }
-  #bin h3 {
-    text-align: center;
-    padding: 2px;
-    margin: 0;
-    background-color: #ccc; }
-  #bin img {
-    margin: 15px 28px; }
-
 #navigation {
   border-bottom: solid 5px #333;
   padding-left: 20px;
@@ -157,8 +141,6 @@ div#products {
     background-color: #998299; }
   .order ul {
     padding: 5px; }
-    .order ul li.item {
-      cursor: move; }
     .order ul li.total {
       margin-left: 32px; }
   .order input {

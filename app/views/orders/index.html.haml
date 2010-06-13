@@ -30,7 +30,7 @@
     %li To <strong>add a product to your regular order</strong> drag it from the list on the left into the box titled Regular Order
     %li To <strong>add a product to a specific order</strong> drag it from the list on the left into the box with the correct delivery date
     %li You can <strong>update the quantity</strong> of any product you receive by changing the number to it's left
-    %li To <strong>remove a product</strong> from either your regular or a specific order drag the order from the relevent box to the <strong id="bintext">bin</strong>
+    %li To <strong>remove a product</strong> from either your regular or a specific order set the quantity to 0
     %li Once you are done making your changes click the <strong id="updatetext">update Your Order</strong> button and <em>#{ @supplier.name }</em> will be notified
     %li <strong id="greenbox">Green boxes</strong> are your regular order, <strong id="purplebox">Purple boxes</strong> are orders that differ from your regular order (you might not have any of those yet!)
 
@@ -52,10 +52,6 @@
                   =oi.product.name
                   %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
             %li.total
-    %li
-      #bin 
-        %h3 Bin it
-        =image_tag 'bin_empty.png', {:alt => 'bin' }
   %hr
   %ul.orders
     -@orders.each do |order|

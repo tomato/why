@@ -50,12 +50,6 @@ why.setupProducts = function(){
 }
 
 why.setupOrders = function(){
-
-  var binItem = function(event, ui) {
-    var order = $(event.srcElement).parents('.order')
-    $(ui.draggable).effect("explode").remove();
-    updateOrders(order);
-  }
   
   var addItem = function(event, ui) {
     var convertProductToItem = function(order,product){
@@ -122,13 +116,14 @@ why.setupOrders = function(){
 
   $('.orders .regular ul').html($('.regularOrders .order ul').html());
   $(".order").droppable({ drop: addItem , accept: '.product'})
-  $('.order li.item').draggable({ revert: 'invalid'});
   $('.quantity').change(function(){ 
-    this.setAttribute('value', this.value);
     var order = $(this).parents('.order')
+    this.setAttribute('value', this.value);
+    if(parseInt(this.value)===0){
+      $(this).parents('li.item').effect("explode").remove();
+    }
     updateOrders(order);
   });
-  $("#bin").droppable({ drop: binItem });
   subTotal()
 }
 

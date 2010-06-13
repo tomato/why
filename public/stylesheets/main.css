@@ -178,7 +178,7 @@ div#products {
   margin: 0 auto;
   width: 640px; }
 
-#notice, #alert {
+#notice, #alert, #badbrowser{
   font-weight: bold;
   text-align: center;
   font-size: 14px; }

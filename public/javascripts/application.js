@@ -57,7 +57,7 @@ why.setupOrders = function(){
           + product.attr('data-product_id') +
           "' class='item'><input class='quantity' type='text' value='1'/><span class='product'>"
           + product.html() + "</span></li>")
-      .insertAfter($(order).find('ul li.item:last'))
+      .insertBefore($(order).find('ul li.total'))
       .draggable();
     }
 

@@ -91,6 +91,7 @@ why.setupOrders = function(){
     }
 
     $(order).addClass('updated');
+    $('#submit').addClass('updated');
     if(!isRegularMaster(order)){
       $(order).removeClass('regular');
     }

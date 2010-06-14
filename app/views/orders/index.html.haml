@@ -11,9 +11,8 @@
 #movie
   %a#hide Hide the video
   %object
-    %param{ :name=>"movie", :value=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"505"}
-    %embed{ :src=>"http://www.youtube.com/v/BWd54GtnfDk&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"505" }
-      
+    %param{ :name=>"movie", :value=>"http://www.youtube.com/v/QgmvFAPr-i8&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"385"}
+    %embed{ :src=>"http://www.youtube.com/v/QgmvFAPr-i8&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"385" }
 #products
   %h2 Products
   -@product_categories.each do |category, products| 
@@ -21,9 +20,10 @@
     %ul
       -products.each do |product|
         %li.product{"data-product_id" => product.id}
-          =product.name
-          -if(product.price)
-            %span.price{ 'data-price' => product.price }= to_pound(product.price)
+          %span
+            =product.name
+            -if(product.price)
+              %span.price{ 'data-price' => product.price }= to_pound(product.price)
 #help
   %h2 Help
   %ul
@@ -36,8 +36,8 @@
 
 #deliveries
   #buttons
-    %a#submit Update Your Order
-    %a#undo{ :href => customer_orders_path(@customer.id) } Undo Your Changes
+    %a#submit Update My Order
+    %a#undo{ :href => customer_orders_path(@customer.id) } Undo My Changes
     %a#watch Flumoxed? Watch the video
   %ul.regularOrders
     -@regular_orders.each do |regular|

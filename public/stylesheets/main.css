@@ -79,6 +79,22 @@ legend {
   #menu a {
     text-decoration: none; }
 
+#bin {
+  border: 1px solid #ccc;
+  margin: 10px 10px 10px 0;
+  width: 120px;
+  height: 120px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  display: inline-block; }
+  #bin h3 {
+    text-align: center;
+    padding: 2px;
+    margin: 0;
+    background-color: #ccc; }
+  #bin img {
+    margin: 15px 28px; }
+
 #navigation {
   border-bottom: solid 5px #333;
   padding-left: 20px;
@@ -111,6 +127,8 @@ div#products {
     margin-left: 10px; }
     div#products ul li {
       cursor: move; }
+      div#products ul li span {
+        border-bottom: 1px solid #998299; }
 
 #deliveries >  ul > li {
   zoom: 1;
@@ -141,6 +159,8 @@ div#products {
     background-color: #998299; }
   .order ul {
     padding: 5px; }
+    .order ul li.item {
+      cursor: move; }
     .order ul li.total {
       margin-left: 32px; }
   .order input {
@@ -165,6 +185,8 @@ div#products {
     -webkit-border-radius: 4px;
     cursor: pointer;
     text-decoration: none; }
+    #buttons a#submit .updated, #buttons a#undo .updated {
+      border: 2px solid red; }
   #buttons a#submit:hover, #buttons a#undo:hover {
     text-decoration: underline; }
   #buttons a#watch {
@@ -178,7 +200,7 @@ div#products {
   margin: 0 auto;
   width: 640px; }
 
-#notice, #alert, #badbrowser{
+#notice, #alert {
   font-weight: bold;
   text-align: center;
   font-size: 14px; }

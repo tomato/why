@@ -1,7 +1,10 @@
-Hello <%= @resource.email %>!
+Hello <%= (@resource.respond_to?(:name) && @resource.name.present?) ? @resource.name : @resource.email %>!
 
-Someone has invited you to <%= root_url %>, you can accept it through the link below.
+<%= @resource.supplier.name %> has invited you to <%= root_url %>
 
+<%= root_url %> allows you to change your existing and future orders with <%= @resource.supplier.name %> at any time without having to call. 
+
+You can accept the invitation through the link below:
 <%= link_to 'Accept invitation', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %>
 
 If you don't want to accept the invitation, please ignore this email.

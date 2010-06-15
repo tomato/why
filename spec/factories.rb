@@ -6,3 +6,9 @@ Factory.define :customer do |u|
   u.supplier_id 1
 end
 
+Factory.define :supplier_user do |u|
+  u.email 's@t.com'
+  u.password 'ab1234'
+  u.password_confirmation 'ab1234'
+  u.supplier_id 1
+end

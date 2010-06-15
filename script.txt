@@ -1,0 +1,11 @@
+This video shows me changing my order for the fictional Toms Organics supplier, your suppliers products will be different but the principle remains the same
+
+Here are some examples of what you can do:
+
+If I'm going away next week I can cancel my order by setting the quantities to zero
+
+If I want to order extra potatoes for my next order then I drag the potatoes from the product list into the order
+
+If I want to change my regular order I can either drag a new product into it or change the quantity
+
+When I am finished changing my order I need to click the 'Update My Order' button and my supplier will be notified

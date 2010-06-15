@@ -5,7 +5,7 @@ module ApplicationHelper
       if(@supplier)
         @supplier.name
       else
-        "Where's my eggs?"
+        "From Where It's Grown"
       end
     end
   end

@@ -6,5 +6,7 @@
 
 -@product_categories.sort.each do |category, products|
   %h3=category
-  -products.each do |p|
-    =link_to p.name, edit_product_path(p)
+  %ul
+    -products.each do |p|
+      %li
+        =link_to p.name, edit_product_path(p)

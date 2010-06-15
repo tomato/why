@@ -11,7 +11,7 @@ describe RoundsController do
     describe "Annonymous User" do
       it "should redirect to login page" do
         get :show
-        response.should redirect_to 'http://test.host/customers/sign_in?unauthenticated=true'
+        response.should redirect_to home_path
       end
     end
 

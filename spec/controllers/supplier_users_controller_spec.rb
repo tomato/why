@@ -9,12 +9,12 @@ describe SupplierUsersController do
 
   it "should not allow annonymous to go to new" do
     get :new
-    response.should redirect_to CUSTOMER_SIGN_IN_URL
+    response.should redirect_to home_path
   end
   
   it "should not allow annonymous to create a new supplier" do
     put :create
-    response.should redirect_to CUSTOMER_SIGN_IN_URL
+    response.should redirect_to home_path
   end
 
 end

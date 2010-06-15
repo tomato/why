@@ -116,7 +116,8 @@ body#customers #customers_tab a,
 body#rounds #rounds_tab a,
 body#suppliers #suppliers_tab a,
 body#products #products_tab a,
-body#dashboard #dashboard_tab a {
+body#dashboard #dashboard_tab a,
+body#supplier_users #users_tab a {
   background-color: #998299; }
 
 div#products {
@@ -235,3 +236,11 @@ div#products {
 
 #updatetext {
   color: white; }
+
+#signin h1 {
+  text-align: center; }
+#signin .pairs {
+  margin: 30px auto;
+  width: 640px; }
+  #signin .pairs .left, #signin .pairs .right {
+    margin: 1em; }

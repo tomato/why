@@ -9,7 +9,7 @@ describe DeliveriesController do
 
   it "should only be accessable to admin or correct supplier user" do
     get :show
-    response.should redirect_to CUSTOMER_SIGN_IN_URL
+    response.should redirect_to home_path
   end
   
   describe "logged in supplier user" do

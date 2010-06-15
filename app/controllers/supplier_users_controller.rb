@@ -17,4 +17,10 @@ class SupplierUsersController < ApplicationController
     redirect_to supplier_path(session[:supplier_id])
   end
 
+  def destroy
+    @supplier_user = SupplierUser.find(params[:id])
+    @supplier_user.destroy
+    redirect_to :action => :index
+  end
+
 end

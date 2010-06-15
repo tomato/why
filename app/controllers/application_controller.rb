@@ -32,21 +32,24 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     super
   end
+   
+  protected
   
   def authenticate_supplier!(supplier_id = session[:supplier_id])
     #logger.debug "supplier_id=#{ supplier_id}, user_supplier_id=#{current_supplier_user.supplier_id}"  
     #logger.debug "valid_user_for_supplier?=#{ valid_user_for_supplier?(supplier_id)}"
     #logger.debug "supplier_user_signed_in?=#{supplier_user_signed_in? }"
-    if(admin_signed_in? || valid_user_for_supplier?(supplier_id))
+    if(valid_superuser? supplier_id)
       return
     elsif supplier_user_signed_in?
       flash[:notice] = 'You may not access this page, it belongs to another supplier'
-      redirect_to home_path
-    else
-      authenticate_customer!
     end
+    redirect_to home_path
   end
 
+  def valid_superuser?(supplier_id)
+    admin_signed_in? || valid_user_for_supplier?(supplier_id)
+  end
 
   def valid_user_for_supplier?(supplier_id)
     current_supplier_user && current_supplier_user.supplier_id == supplier_id.to_i

@@ -8,7 +8,7 @@ require 'brightbox/passenger'
 set :application, "why"
 
 # Primary domain name of your application. Used in the Apache configs
-set :domain, "why.solittlecode.com"
+set :domain, "fromwhereitsgrown.com"
 
 ## List of servers
 server "tomato-001.vm.brightbox.net", :app, :web, :db, :primary => true
@@ -27,7 +27,7 @@ set :branch, "master"
 
 ### Other options you can set ##
 # Comma separated list of additional domains for Apache
-# set :domain_aliases, "www.example.com,dev.example.com"
+ set :domain_aliases, "www.fromwhereitsgrown.com, why.solittlecode.com"
 
 ## Dependencies
 # Set the commands and gems that your application requires. e.g.

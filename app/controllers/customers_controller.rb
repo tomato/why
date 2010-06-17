@@ -4,10 +4,16 @@ class CustomersController < ApplicationController
   def index
     @customers = Customer.find_all_by_supplier_id(@supplier.id)
   end
+  
+  def edit
+    @customer = Customer.find(params[:id])
+    @rounds = Round.for_supplier(@supplier.id)
+  end
 
   def new
     @customer = Customer.new
     @rounds = Round.for_supplier(@supplier.id)
+    render :action => 'edit'
   end
 
   def create

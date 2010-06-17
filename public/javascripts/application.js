@@ -58,7 +58,6 @@ why.setupOrders = function(){
           "' class='item'><input class='quantity' type='text' value='1'/><span class='product'>"
           + product.html() + "</span></li>")
       .insertBefore($(order).find('ul li.total'))
-      .draggable();
     }
 
     var incrementQuantity = function(order, product){

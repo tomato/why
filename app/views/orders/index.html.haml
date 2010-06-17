@@ -29,7 +29,7 @@
   %ul
     %li To <strong>add a product to your regular order</strong> drag it from the list on the left into the box titled Regular Order
     %li To <strong>add a product to a specific order</strong> drag it from the list on the left into the box with the correct delivery date
-    %li You can <strong>update the quantity</strong> of any product you receive by changing the number to it's left
+    %li You can <strong>update the quantity</strong> of any product you receive by changing the number to its left
     %li To <strong>remove a product</strong> from either your regular or a specific order set the quantity to 0
     %li Once you are done making your changes click the <strong id="updatetext">update Your Order</strong> button and <em>#{ @supplier.name }</em> will be notified
     %li <strong id="greenbox">Green boxes</strong> are your regular order, <strong id="purplebox">Purple boxes</strong> are orders that differ from your regular order (you might not have any of those yet!)
@@ -37,8 +37,8 @@
 #deliveries
   #buttons
     %a#submit Update My Order
-    %a#undo{ :href => customer_orders_path(@customer.id) } Undo My Changes
-    %a#watch Flumoxed? Watch the video
+    %a#undo{ :href => customer_orders_path(@customer.id) } Undo All My Changes
+    %a#watch Flummoxed? Watch the video
   %ul.regularOrders
     -@regular_orders.each do |regular|
       %li

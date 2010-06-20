@@ -6,7 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :suppliers, :deliveries, :products, :supplier_users
   map.resources :rounds, :member => { :past => :get,
                                       :future => :get}
-  map.resources :customers, :has_many => :orders
+  map.resources :customers, :has_many => :orders, 
+    :member => { :invite => :get, :resend => :get}
 
   map.home 'home/', :controller => 'home'
   map.root :controller => "home"

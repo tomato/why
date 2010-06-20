@@ -30,7 +30,9 @@ describe OrdersController do
 
     describe "logged in as correct supplier" do 
       it "should be successful" do
-        @su = Factory.create(:supplier_user)
+        @su = Factory.build(:supplier_user)
+        @su.supplier = @customer.supplier
+        @su.save!
         sign_in @su
         get :index, :customer_id => @customer.id
         response.should be_success
@@ -40,8 +42,8 @@ describe OrdersController do
 
     describe "logger in as wrong supplier" do
       it "should redirect to home" do
-        @su = Factory.create(:supplier_user)
-        @su.supplier_id = 2
+        @su = Factory.build(:supplier_user)
+        @su.supplier_id = @customer.supplier_id + 1
         @su.save!
         sign_in @su
         get :index, :customer_id => @customer.id

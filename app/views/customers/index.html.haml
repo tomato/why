@@ -1,10 +1,14 @@
 %h1 Your Customers
 %p 
   Heres where you can 
-  =link_to 'invite a new customer', new_customer_path
+  =link_to 'create a new customer', new_customer_path
   and view and edit existing ones.
 %ul
   -@customers.each do |c|
     %li
-      =link_to c.email, edit_customer_path(c)
+      =c.email
+      =c.status.to_s.capitalize
+      =link_to 'Edit', edit_customer_path(c)
       =link_to 'orders', customer_orders_path(c)
+      =link_to_invitation(c)
+      delete

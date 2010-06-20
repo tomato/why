@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_filter :authenticate_supplier!
+  before_filter :authenticate_supplier!, :get_rounds
   
   def index
     @customers = Customer.find_all_by_supplier_id(@supplier.id)
@@ -12,17 +12,43 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
-    @rounds = Round.for_supplier(@supplier.id)
-    render :action => 'edit'
   end
 
   def create
     @customer = Customer.new(params[:customer])
-    @customer.password = 'fdjaHjk9099kjflkjl'
+    @customer.password = Customer::DEFAULT_PASSWORD
     @customer.supplier_id = @supplier.id
-    @customer.invite!
+    if(@customer.save)
+      redirect_to customers_path
+    else
+      render :action => :new
+    end
+  end
+
+  def invite
+    Customer.find(params[:id]).invite!
     redirect_to customers_path
   end
 
+  def resend
+    Customer.find(params[:id]).invite!
+    redirect_to customers_path
+  end
+
+  def update
+    @customer = Customer.find(params[:id])
+    if(@customer.update_attributes(params[:customer]))
+       redirect_to customers_path
+    else
+      render :action => :edit
+    end
+
+  end
+  
+  private 
+
+  def get_rounds
+    @rounds = Round.for_supplier(@supplier.id)
+  end
 
 end

@@ -3,12 +3,19 @@
   Heres where you can 
   =link_to 'create a new customer', new_customer_path
   and view and edit existing ones.
-%ul
+%ul.customers
   -@customers.each do |c|
     %li
-      =c.email
-      =c.status.to_s.capitalize
-      =link_to 'Edit', edit_customer_path(c)
-      =link_to 'orders', customer_orders_path(c)
-      =link_to_invitation(c)
-      delete
+      .customer
+        %ul
+          %li=c.name
+          %li=c.email
+          %li=c.address
+          %li=c.postcode
+          %li=c.telephone
+          %li Status: #{ c.status.to_s.capitalize }
+          %li
+            =link_to 'Edit', edit_customer_path(c)
+            =link_to 'Orders', customer_orders_path(c)
+            =link_to_invitation(c)
+            =link_to "Delete", c, :confirm => 'Are you sure you want to delete this customer and all their orders?', :method => :delete 

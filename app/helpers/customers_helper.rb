@@ -5,7 +5,7 @@ module CustomersHelper
     elsif(customer.status == :new)
       link_to 'Invite', invite_customer_path(customer)
     else
-      link_to 'Re-Send Invite', resend_customer_path(customer)
+      link_to 'Re-Send Invite', invite_customer_path(customer)
     end
   end
     

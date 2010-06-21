@@ -26,12 +26,9 @@ class CustomersController < ApplicationController
   end
 
   def invite
-    Customer.find(params[:id]).invite!
-    redirect_to customers_path
-  end
-
-  def resend
-    Customer.find(params[:id]).invite!
+    @customer = Customer.find(params[:id])
+    @customer.invite!
+    flash[:notice] = "Invite sent to #{@customer.email}"
     redirect_to customers_path
   end
 
@@ -42,7 +39,13 @@ class CustomersController < ApplicationController
     else
       render :action => :edit
     end
+  end
 
+  def destroy
+    @customer = Customer.find_by_id_and_supplier_id(params[:id], @supplier.id)
+    @customer.destroy
+    flash[:notice] = "Customer #{@customer.name} has been deleted"
+    redirect_to customers_path
   end
   
   private 

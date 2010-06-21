@@ -1,6 +1,8 @@
 class Customer < ActiveRecord::Base
   include Authable
   belongs_to :supplier
+  has_many :orders, :dependent => :destroy
+  has_many :regular_orders, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable

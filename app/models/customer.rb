@@ -13,6 +13,9 @@ class Customer < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :round_id, :supplier_id, :name, :address, :postcode, :telephone
+  cattr_reader :per_page
+  @@per_page = 10
+  
   
   def status
     if(self.invited?)

@@ -179,7 +179,11 @@ ul.customers > li {
     min-height: 120px;
     margin: 10px;
     vertical-align: top;
-    padding: 10px; }
+    padding: 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px; }
+    ul.customers > li .customer a {
+      margin-right: 0.3em; }
 
 #buttons {
   float: right; }

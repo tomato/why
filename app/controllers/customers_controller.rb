@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   before_filter :authenticate_supplier!, :get_rounds
   
   def index
-    @customers = Customer.find_all_by_supplier_id(@supplier.id)
+    @customers = Customer.paginate_by_supplier_id(@supplier.id,:page => params[:page], :order => 'updated_at DESC' )
   end
   
   def edit

@@ -19,3 +19,5 @@
             =link_to 'Orders', customer_orders_path(c)
             =link_to_invitation(c)
             =link_to "Delete", c, :confirm => 'Are you sure you want to delete this customer and all their orders?', :method => :delete 
+
+=will_paginate @customers

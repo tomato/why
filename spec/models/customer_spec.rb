@@ -24,6 +24,32 @@ describe Customer do
     end
   end
 
+  describe "for_supplier" do
+    it "should return a supplier of the specified id" do
+      c = Factory(:customer)
+      Customer.for_supplier(c.supplier_id).should have(1).customer
+    end
+    
+    it "should not return a supplier from a different id" do
+      c1 = Factory(:customer)
+      c2 = Factory(:customer, :email => 't2@t.com')
+      c1.supplier_id.should_not == c2.supplier_id
+      Customer.for_supplier(c1.supplier_id).should have(1).customer
+    end
+  end
+
+  describe "search" do
+    it "should return a customer containing a name" do
+      c = Factory(:customer, :name => "tommy tuckbox")
+      Customer.with_query('tommy').should have(1).customer
+    end
+
+    it "should work with paginate" do
+      c = Factory(:customer, :name => "tommy tuckbox")
+      Customer.with_query('tommy').paginate(:page => 1).should have(1).customer
+    end
+  end
+
   describe "destroy" do
     it "should destroy orders and orderitems" do
       @customer = Factory(:customer_with_orders)

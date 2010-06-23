@@ -3,6 +3,7 @@ class Customer < ActiveRecord::Base
   belongs_to :supplier
   has_many :orders, :dependent => :destroy
   has_many :regular_orders, :dependent => :destroy
+  acts_as_indexed :fields => [:name, :email, :address, :postcode, :telephone]
 
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable
@@ -14,8 +15,20 @@ class Customer < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :round_id, :supplier_id, :name, :address, :postcode, :telephone
   cattr_reader :per_page
-  @@per_page = 10
+  @@per_page = 8
   
+  named_scope :for_supplier, lambda { |supplier_id| 
+    {:conditions => ['supplier_id = ?', supplier_id],
+      :order => 'updated_at DESC' }
+  }
+
+  def self.search(supplier_id, search)
+    if(search.present?)
+      for_supplier(supplier_id).with_query(search)
+    else
+      for_supplier(supplier_id)
+    end
+  end
   
   def status
     if(self.invited?)

@@ -1,8 +1,24 @@
 %h1 Your Customers
-%p 
-  Heres where you can 
-  =link_to 'create a new customer', new_customer_path
-  and view and edit existing ones.
+
+#help
+  %h2 Tasks
+  %ul
+    %li=link_to 'Create a new customer', new_customer_path
+    %li Invite all new customers
+    %li Import new customers
+  %h2 Help
+  To add a new customer you follow the following steps:
+  %ol
+    %li Click in the 'Create a new customer' link above
+    %li Enter the customer details and select their round
+    %li If the customer has an existing order you can add it by clicking on the 'Orders' link
+    %li Send the customer an invite by clicking on the 'Invite' link
+
+-form_tag customers_path, :method => :get do
+  %p
+    = text_field_tag :search, params[:search], :size => 40
+    = submit_tag "Search", :name => nil 
+
 %ul.customers
   -@customers.each do |c|
     %li

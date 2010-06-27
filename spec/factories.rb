@@ -45,5 +45,10 @@ Factory.define :regular_order_item do |u|
   u.regular_order_id  1
 end
 
+Factory.define :product do |u|
+  u.name 'asparagus'
+  u.supplier_id 1
+end
+
 
   

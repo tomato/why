@@ -1,3 +1,22 @@
+=content_for :head do
+  :javascript
+    $(function(){
+      $('.category').sortable( {
+        axis: 'y', 
+        dropOnEmpty:false, 
+        cursor: 'crosshair',
+        items: 'li',
+        opacity: 0.4,
+        scroll: true,
+        update: function(){
+          $.post("/products/reorder",
+            $(this).sortable('serialize') 
+            )
+          }
+        })
+      })
+    
+
 %h1 Manage your products
 %p 
   Here's where you can 
@@ -6,7 +25,7 @@
 
 -@product_categories.sort.each do |category, products|
   %h3=category
-  %ul
-    -products.each do |p|
-      %li
+  %ul.category
+    -products.sort.each do |p|
+      %li{:id => "product_#{p.id}"}
         =link_to p.name, edit_product_path(p)

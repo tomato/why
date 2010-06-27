@@ -33,4 +33,21 @@ describe Product do
       Product.new.supplier.should be_nil
     end
   end
+
+  describe "update_sequences" do
+    it "should update sequences" do
+      p1 = Factory(:product)
+      p2 = Factory(:product)
+      Product.update_sequences([p2.id, p1.id], 1)
+      p2.reload.sequence.should == 1
+      p1.reload.sequence.should == 2
+    end
+  end
+
+  describe "Sorting" do
+    p1 = Factory(:product)
+    p2 = Factory(:product)
+    Product.update_sequences([p2.id, p1.id], 1)
+    [p1.reload, p2.reload].sort.first.id.should == p2.id
+  end
 end

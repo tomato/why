@@ -3,9 +3,10 @@ ActionController::Routing::Routes.draw do |map|
   map.devise_for :supplier_users
   map.devise_for :admins
 
-  map.resources :suppliers, :deliveries, :products, :supplier_users
+  map.resources :suppliers, :deliveries, :supplier_users
   map.resources :rounds, :member => { :past => :get,
                                       :future => :get}
+  map.resources :products, :member => { :reorder => :post }
   map.resources :customers, :has_many => :orders, 
     :member => { :invite => :get}
 

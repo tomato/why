@@ -36,4 +36,11 @@ class ProductsController < ApplicationController
 
   end
 
+  def reorder
+    Product.update_sequences(params[:product], @supplier.id)
+    render :update do |page|
+      page << "alert('#{escape_javascript(params.inspect)}')"
+    end
+  end
+
 end

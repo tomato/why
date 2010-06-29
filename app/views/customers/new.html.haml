@@ -1,5 +1,7 @@
 %h1 Invite a new customer
-
--form_for @customer do |f|
-  = render :partial => 'customer_fields', :object => f
-  = f.submit 'Create'
+-if(@rounds.blank?)
+  #alert You need to create a round to assign your customer to before you can add customers
+-else
+  -form_for @customer do |f|
+    = render :partial => 'customer_fields', :object => f
+    = f.submit 'Create'

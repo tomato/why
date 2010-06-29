@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   before_filter :authenticate_supplier!
   
   def index
-    @products = Product.find_all_by_supplier_id(@supplier.id)
-    @product_categories = @products.group_by { |c| c.category }
+    @products = Product.find_all_by_supplier_id(@supplier.id).sort
+    @product_categories = @products.group_by { |c| [c.category_sequence, c.category] }
   end
 
   def new
@@ -38,6 +38,7 @@ class ProductsController < ApplicationController
 
   def reorder
     Product.update_sequences(params[:product], @supplier.id)
+    Product.update_category_sequences(params[:category], @supplier.id)
     render :update do |page|
       page << "alert('#{escape_javascript(params.inspect)}')"
     end

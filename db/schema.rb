@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100627220131) do
+ActiveRecord::Schema.define(:version => 20100629213451) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -89,12 +89,13 @@ ActiveRecord::Schema.define(:version => 20100627220131) do
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "price",       :precision => 7, :scale => 2
+    t.decimal  "price",             :precision => 7, :scale => 2
     t.string   "category"
     t.integer  "supplier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sequence",                                  :default => 0, :null => false
+    t.integer  "sequence",                                        :default => 0, :null => false
+    t.integer  "category_sequence",                               :default => 0, :null => false
   end
 
   create_table "regular_order_items", :force => true do |t|

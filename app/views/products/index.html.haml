@@ -14,6 +14,20 @@
             )
           }
         })
+      $('#categories').sortable( {
+        axis: 'y', 
+        dropOnEmpty:false, 
+        cursor: 'crosshair',
+        items: '.category',
+        handle: 'h3',
+        opacity: 0.4,
+        scroll: true,
+        update: function(){
+          $.post("/products/reorder",
+            $(this).sortable('serialize') 
+            )
+          }
+        })
       })
     
 
@@ -22,10 +36,11 @@
   Here's where you can 
   =link_to 'create', new_product_path
   new products, and edit the existing ones below
-
--@product_categories.sort.each do |category, products|
-  %h3=category
-  %ul.category
-    -products.sort.each do |p|
-      %li{:id => "product_#{p.id}"}
-        =link_to p.name, edit_product_path(p)
+#categories
+  -@product_categories.sort.each do |category, products|
+    .category{:id => "category_#{products.first.id}"}
+      %h3=category[1]
+      %ul
+        -products.sort.each do |p|
+          %li{:id => "product_#{p.id}"}
+            =link_to p.name, edit_product_path(p)

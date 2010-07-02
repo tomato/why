@@ -1,4 +1,3 @@
-%h1 Your Customers
 
 #help
   %h2 Tasks
@@ -14,6 +13,7 @@
     %li If the customer has an existing order you can add it by clicking on the 'Orders' link
     %li Send the customer an invite by clicking on the 'Invite' link
 
+%h1 Your Customers
 -form_tag customers_path, :method => :get do
   %p
     = text_field_tag :search, params[:search], :size => 40

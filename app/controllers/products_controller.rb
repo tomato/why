@@ -37,10 +37,15 @@ class ProductsController < ApplicationController
   end
 
   def reorder
-    Product.update_sequences(params[:product], @supplier.id)
-    Product.update_category_sequences(params[:category], @supplier.id)
+    begin
+      Product.update_sequences(params[:product], @supplier.id)
+      Product.update_category_sequences(params[:category], @supplier.id)
+      msg = "We re-ordered your products"
+    rescue Exception => e
+      msg = "This was an error: #{ e.inspect }"
+    end
     render :update do |page|
-      page << "alert('#{escape_javascript(params.inspect)}')"
+      page << "why.updateReorder(\"#{escape_javascript(msg)}\")"
     end
   end
 

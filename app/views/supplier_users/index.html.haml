@@ -1,8 +1,14 @@
+#help
+  %h2 Tasks
+  %ul
+    %li=link_to 'Invite a new user', new_supplier_user_path
+  %h2 Help
+  %ul
+    %li <strong>No!</strong> not your customers these are the other people who can administer your system (create customers, delvieries etc) so don't create them lightly!
+
 %h1 Your Users
-%p <strong>No!</strong> not your customers these are the other people who can administer your system (create customers, delvieries etc) so don't create them lightly!
 %ul
   -@supplier_users.each do |su|
     %li
       =su.email
       =link_to 'Remove', su, :confirm => 'Are you sure?', :method => :delete
-  %li=link_to 'Invite a new user', new_supplier_user_path

@@ -259,3 +259,8 @@ ul.customers > li {
   width: 640px; }
   #signin .pairs .left, #signin .pairs .right {
     margin: 1em; }
+
+#categories li {
+  margin-left: 10px; }
+#categories .handle {
+  cursor: pointer; }

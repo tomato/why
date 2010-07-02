@@ -6,6 +6,7 @@
         dropOnEmpty:false, 
         cursor: 'crosshair',
         items: 'li',
+        handle: '.handle',
         opacity: 0.4,
         scroll: true,
         update: function(){
@@ -19,7 +20,7 @@
         dropOnEmpty:false, 
         cursor: 'crosshair',
         items: '.category',
-        handle: 'h3',
+        handle: '.handle',
         opacity: 0.4,
         scroll: true,
         update: function(){
@@ -29,18 +30,31 @@
           }
         })
       })
+
+      why.updateReorder = function(msg){
+        $('#content').prepend('<div id="notice">' + msg + '</div>');
+        why.hideFlash();
+      }
     
+#help
+  %h2 Tasks
+  %ul
+    %li 
+      =link_to 'Create', new_product_path
+      new products
+    %li Edit your products by clicking on their name
+    %li Reorder the products and categories by dragging the >>
 
 %h1 Manage your products
-%p 
-  Here's where you can 
-  =link_to 'create', new_product_path
-  new products, and edit the existing ones below
+
 #categories
   -@product_categories.sort.each do |category, products|
     .category{:id => "category_#{products.first.id}"}
-      %h3=category[1]
+      %h3 
+        %span.handle >> 
+        =category[1]
       %ul
         -products.sort.each do |p|
           %li{:id => "product_#{p.id}"}
+            %span.handle >> 
             =link_to p.name, edit_product_path(p)

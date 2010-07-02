@@ -1,28 +1,31 @@
+#help
+  %h2 Tasks
+  %ul
+    %li
+      =link_to 'Create', new_round_path
+      and edit new rounds
+    %li Add new delivery dates
+    %li Modify existing dates
+    %li Remove dates
+
 %h1 Manage Your Rounds
-%p
-  Here is where you can manage your rounds
-%ul
-  %li
-    =link_to 'Create', new_round_path
-    and edit new rounds
-  %li Add new delivery dates
-  %li Modify existing dates
-  %li Remove dates
-%p
-  Currently you have the following rounds:
--@rounds.each do |r|
-  .pairs
-    %p.clear
-      .left Name
-      .right=r.name
-    %p.clear
-      .left Area
-      .right=r.area
-    %p.clear
-      .left Schedule
-      .right=r.schedule
-    %p.clear
-      .left
-        =link_to 'Edit this round', edit_round_path(r)
-      .right
-        =link_to 'Add or Edit deliveries', round_path(r)
+#rounds
+  #name
+    %p
+      Currently you have the following rounds:
+    -@rounds.each do |r|
+      .pairs
+        %p.clear
+          .left Name
+          .right=r.name
+        %p.clear
+          .left Area
+          .right=r.area
+        %p.clear
+          .left Schedule
+          .right=r.schedule
+        %p.clear
+          .left
+            =link_to 'Edit this round', edit_round_path(r)
+          .right
+            =link_to 'Add or Edit deliveries', round_path(r)

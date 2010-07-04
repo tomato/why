@@ -170,9 +170,9 @@ div#products {
 .updated {
   border: 2px solid red !Important; }
 
-ul.customers > li {
+ul.boxes > li {
   display: inline; }
-  ul.customers > li .customer {
+  ul.boxes > li .box {
     display: inline-block;
     border: 2px solid #998299;
     width: 220px;
@@ -182,7 +182,7 @@ ul.customers > li {
     padding: 10px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px; }
-    ul.customers > li .customer a {
+    ul.boxes > li .box a {
       margin-right: 0.3em; }
 
 #buttons {

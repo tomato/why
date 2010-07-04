@@ -43,4 +43,17 @@ describe RoundsController do
       end
     end
   end
+
+  describe "destroy" do
+    it "should return a message if the round has customers" do
+      session[:supplier_id] = 1
+      sign_in_supplier_user
+      r = Factory(:round)
+      r.customers << Factory(:customer)
+      delete :destroy, :id => r.id
+      response.should redirect_to(rounds_path)
+      flash[:alert].should == "You can't delete this round whilst there are customers on it"
+    end
+  end
+
 end

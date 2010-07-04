@@ -19,4 +19,20 @@ describe Round do
 
     end
   end
+  
+  describe "destroy" do
+    it "should raise an error if the round has customers" do
+      r = Factory(:round)
+      r.customers << Factory(:customer)
+      lambda{r.destroy}.should raise_error(ActiveRecord::RecordNotDestroyed)
+    end
+
+    it "remove any related deliveries" do
+      r = Factory(:round)
+      r.deliverys << Factory(:delivery, {:round_id => r.id})
+      r.destroy
+      Delivery.all.empty?
+    end
+  end
+  
 end

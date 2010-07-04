@@ -50,5 +50,12 @@ Factory.define :product do |u|
   u.supplier_id 1
 end
 
+Factory.define :round do |u|
+  u.name 'test'
+  u.supplier_id 1
+end
 
+Factory.define :delivery do |u|
+  u.date DateTime.new
+end
   

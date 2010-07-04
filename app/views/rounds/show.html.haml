@@ -1,10 +1,13 @@
+#help
+  %h2 Help
+  %ul
+    %li
+      Here is where you can add and edit delivery dates for
+      =@round.name
+      \. Your schedule is 
+      =@round.schedule
+      \.
 %h1 Deliveries for #{@round.name} Round
-%p
-  Here is where you can add and edit delivery dates for
-  =@round.name
-  \. Your schedule is 
-  =@round.schedule
-  \.
 -form_tag({:action => 'create', :controller => 'deliveries'}) do
   %fieldset
     %legend Add deliveries

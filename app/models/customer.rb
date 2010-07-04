@@ -1,5 +1,6 @@
 class Customer < ActiveRecord::Base
   include Authable
+  belongs_to :round
   belongs_to :supplier
   has_many :orders, :dependent => :destroy
   has_many :regular_orders, :dependent => :destroy

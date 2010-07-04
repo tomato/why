@@ -43,7 +43,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer = Customer.find_by_id_and_supplier_id(params[:id], @supplier.id)
-    @customer.destroy
+    @customer.destroy!
     flash[:notice] = "Customer #{@customer.name} has been deleted"
     redirect_to customers_path
   end

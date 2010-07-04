@@ -1,10 +1,9 @@
+#help
+  %h2 Help
+  %ul
+    %li Here you can change the dates of a delivery
 %h1 Edit a Delivery
-%p Here you can change the dates of a delivery
 -form_for @delivery do |d|
-  .pairs
-    %p.clear
-      .left=d.label :date
-      .right=d.date_select :date
-    %p.clear
-      .left
-      .right=submit_tag 'Update'
+  =d.label :date
+  =d.date_select :date
+  =submit_tag 'Update'

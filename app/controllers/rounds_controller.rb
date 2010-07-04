@@ -25,6 +25,17 @@ class RoundsController < ApplicationController
     redirect_to rounds_path
   end
 
+  def destroy
+    round = Round.find(params[:id])
+    flash[:alert] = "Round removed successfully"
+    begin
+      round.destroy
+    rescue ActiveRecord::RecordNotDestroyed
+      flash[:alert] = "You can't delete this round whilst there are customers on it"
+    end
+    redirect_to rounds_path
+  end
+
   def past
     setup_show 'date < curdate()'
   end

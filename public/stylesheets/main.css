@@ -1,6 +1,6 @@
 body {
   font-family: arial;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5em;
   color: #333;
   margin: 0;
@@ -12,8 +12,7 @@ html, body {
 
 p {
   margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  width: 40em; }
+  margin-bottom: 1.5em; }
 
 ul {
   list-style: none;
@@ -70,7 +69,7 @@ legend {
 
 #logo {
   float: left;
-  width: 200px;
+  width: 300px;
   font-size: 24px;
   font-family: Georgia; }
 
@@ -264,3 +263,13 @@ ul.boxes > li {
   margin-left: 10px; }
 #categories .handle {
   cursor: pointer; }
+
+#pretitle {
+  font-size: 16px;
+  font-style: italic;
+  font-weight: bold; }
+
+#title {
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: bold; }

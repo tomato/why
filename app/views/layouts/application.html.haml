@@ -5,10 +5,17 @@
     %title=yield :title
     =stylesheet_link_tag :all
     =javascript_include_tag 'jquery', 'jquery.autocomplete', 'jquery-ui', 'application'
+    <script type="text/javascript" src="http://use.typekit.com/rjk6gwu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     =yield :head
   %body{ :id => tab_name }
     #header
-      #logo=yield :title
+      #logo
+        -if @supplier
+          =yield :title
+        -else
+          #pretitle We like to buy our food
+          #title FROM WHERE IT'S GROWN
       #menu
         %ul
           %li=link_to 'Sign Out Admin', destroy_admin_session_path if admin_signed_in?

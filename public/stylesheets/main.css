@@ -273,3 +273,9 @@ ul.boxes > li {
   font-size: 36px;
   line-height: 36px;
   font-weight: bold; }
+
+.centertext {
+  text-align: center; }
+
+#strap {
+  font-size: 20px; }

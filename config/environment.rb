@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
              :lib    => "factory_girl",
              :source => "http://gems.github.com"
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
+  config.gem 'simple-rss'
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).

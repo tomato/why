@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       redirect_to suppliers_path
     end
 
-    rss = RSS::Parser.parse(open('http://solittlecode.wordpress.com/category/news/feed/').read, false)
+    rss = SimpleRSS.parse(open('http://solittlecode.wordpress.com/category/news/feed/'))
     @news = rss.items[0..3]
   end
 end

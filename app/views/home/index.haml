@@ -13,15 +13,21 @@
 
 .row
   .column.grid_12.centertext
-    %h2#strap - Order Management Software for Local Food Suppliers -
+    %h2#strap - An Order Management System for Local Food Suppliers -
 .row
   .column.grid_4
     %h2 Suppliers
     %p Stop messing around with scraps of paper and making mistakes with orders, and let your customers change their order online. You can download a list of deliveries you need for a day, a list of produce required or just a list of changes that have been made. The software is hosted by us online so you just need to sign up and set up you products, rounds and customers to get started. It only costs £30 per month for up to 500 customers and you can try it for free for the first month.
+    %p
+      Interested? Questions? Send us a mail to:
+      =link_to 'info@fromwhereitsgrown.com', 'mailto:info@fromwhereitsgrown.com'
 
   .column.grid_4
     %h2 Local Food Lovers
     %p Don't be tempted to abandon your local suppliers because it's a hassle changing you order. With our software you just need to login to add or remove products to your regular or individual orders (We all need extra potatoes sometimes). When you are away on holiday just remove your products for the affected orders and your done. If your local suppliers don't use us yet please tell you them about us and how we can help them compete with the big boys!
+    %p
+      Existing Customer? 
+      =link_to 'Sign In', new_customer_session_path
 
   .column.grid_4
     %h2 Us
@@ -30,15 +36,14 @@
 .row
   .column.grid_2 &nbsp;
   .column.grid_8
+    %h2 Latest Screen Shot
     =image_tag 'screenshot.jpg'
-.row
-  .column.grid_6.centertext
-    %h2 
-      Existing Customer? 
-      =link_to 'Sign In', new_customer_session_path
-  .column.grid_6.centertext
-    %h2
-      Interested? Questions? Send us a mail to:
-      =link_to 'info@fromwhereitsgrown.com', 'mailto:info@fromwhereitsgrown.com'
+.row 
+  %h2 News
+  -@news.each do |article|
+    .row
+      .column.grid_6
+        %h3=article.title
+        %p=article.content_encoded
       
       

@@ -1,3 +1,5 @@
+require 'rss/2.0'
+
 class HomeController < ApplicationController
 
   def index
@@ -8,5 +10,8 @@ class HomeController < ApplicationController
     elsif admin_signed_in?
       redirect_to suppliers_path
     end
+
+    rss = RSS::Parser.parse(open('http://solittlecode.wordpress.com/category/news/feed/').read, false)
+    @news = rss.items[0..3]
   end
 end

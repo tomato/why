@@ -42,7 +42,7 @@
   %h2 News
   -@news.each do |article|
     .row
-      .column.grid_6
+      .column.grid_6.article
         %h3=article.title
         %p=article.content_encoded
       

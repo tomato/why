@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
 
   end
 
-  def self.create_all(params)
+  def self.create_all(params, by_customer = false)
     orders = []
     return orders unless params['orders']
     params['orders'].each do |k,v|
@@ -26,6 +26,8 @@ class Order < ActiveRecord::Base
         order = Order.new(:delivery_id => v['delivery_id'],
                    :customer_id => params['customer_id'])
       end
+      order.pending_update = 1 if by_customer
+
       if(order.save!)
         order.order_items.clear
         if(v['items'])

@@ -12,7 +12,7 @@ class RegularOrder < ActiveRecord::Base
     return ros
   end
 
-  def self.create_all(params)
+  def self.create_all(params, by_customer = false)
     customer_id = params['customer_id']
     regularOrders = []
     
@@ -25,6 +25,7 @@ class RegularOrder < ActiveRecord::Base
       else
         regularOrder = RegularOrder.find(v['regular_order_id'])
       end
+      regularOrder.pending_update = 1 if by_customer
 
       if(regularOrder.save!)
         regularOrder.regular_order_items.clear

@@ -10,8 +10,8 @@ class OrdersController < ApplicationController
 
   def create
     begin
-      RegularOrder.create_all(params)
-      Order.create_all(params)
+      RegularOrder.create_all(params, customer_signed_in?)
+      Order.create_all(params, customer_signed_in?)
       msg = "We updated your order"
     rescue Exception => e
       msg = "This was an error: #{ e.inspect }"

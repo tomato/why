@@ -81,16 +81,22 @@ describe OrdersController do
       end
 
       it "should create a new order for each order updated" do
-        RegularOrder.should_receive(:create_all).with(@params)
-        Order.should_receive(:create_all).with(@params)
+        RegularOrder.should_receive(:create_all).with(@params, true)
+        Order.should_receive(:create_all).with(@params, true)
         post :create, @params
         response.body.should include('We updated your order')
       end
 
       it "should display an error if create fails" do
-        RegularOrder.should_receive(:create_all).with(@params).and_raise(Exception)
+        RegularOrder.should_receive(:create_all).with(@params, true).and_raise(Exception)
         post :create, @params
         response.body.should include('This was an error:')
+      end
+
+      it "should call create_all with by_customer" do
+        RegularOrder.should_receive(:create_all).with(@params, true)
+        Order.should_receive(:create_all).with(@params, true)
+        post :create, @params
       end
     end
 

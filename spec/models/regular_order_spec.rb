@@ -61,5 +61,23 @@ describe RegularOrder do
       @params = {"regular_orders"=>{"0"=>{"regular_order_id"=>"undefined"}}, "action"=>"create", "controller"=>"orders", "customer_id"=>"3"}
       RegularOrder.create_all(@params).should have(1).regular_orders
     end
+
+    it "should set pending_update when an order is created by a customer" do
+      orders = RegularOrder.create_all(@params, true)
+      orders.first.pending_update.should be_true
+    end
+
+    it "should not set pending_update when an order is created by a supplier" do
+      orders = RegularOrder.create_all(@params, false)
+      orders.first.pending_update.should be_false
+    end
+
+    it "should set the pending_update when an order is updated by a customer" do
+      orders = RegularOrder.create_all(@params, true)
+      orders.first.update_attributes(:pending_update => false)
+      orders.first.pending_update.should be_false
+      orders = RegularOrder.create_all(@params, true)
+      orders.first.pending_update.should be_true
+    end
   end
 end

@@ -105,5 +105,23 @@ describe Order do
       Order.create_all(@params).should have(1).orders
     end
 
+    it "should set pending_update when an order is created by a customer" do
+      orders = Order.create_all(@params, true)
+      orders.first.pending_update.should be_true
+    end
+
+    it "should not set pending_update when an order is created by a supplier" do
+      orders = Order.create_all(@params, false)
+      orders.first.pending_update.should be_false
+    end
+
+    it "should set the pending_update when an order is updated by a customer" do
+      orders = Order.create_all(@params, true)
+      orders.first.update_attributes(:pending_update => false)
+      orders.first.pending_update.should be_false
+      orders = Order.create_all(@params, true)
+      orders.first.pending_update.should be_true
+    end
+
   end
 end

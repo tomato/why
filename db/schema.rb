@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629213451) do
+ActiveRecord::Schema.define(:version => 20100709202908) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -78,10 +78,11 @@ ActiveRecord::Schema.define(:version => 20100629213451) do
   add_index "order_items", ["order_id", "product_id"], :name => "index_order_items_on_order_id_and_product_id", :unique => true
 
   create_table "orders", :force => true do |t|
-    t.integer  "delivery_id", :null => false
-    t.integer  "customer_id", :null => false
+    t.integer  "delivery_id",                       :null => false
+    t.integer  "customer_id",                       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "pending_update", :default => false, :null => false
   end
 
   add_index "orders", ["delivery_id", "customer_id"], :name => "index_orders_on_delivery_id_and_customer_id", :unique => true
@@ -109,10 +110,11 @@ ActiveRecord::Schema.define(:version => 20100629213451) do
   add_index "regular_order_items", ["regular_order_id", "product_id"], :name => "index_regular_order_items_on_regular_order_id_and_product_id", :unique => true
 
   create_table "regular_orders", :force => true do |t|
-    t.integer  "customer_id",                          :null => false
-    t.integer  "occurs_every_x_orders", :default => 1, :null => false
+    t.integer  "customer_id",                              :null => false
+    t.integer  "occurs_every_x_orders", :default => 1,     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "pending_update",        :default => false, :null => false
   end
 
   create_table "rounds", :force => true do |t|

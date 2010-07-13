@@ -4,12 +4,22 @@ class RegularOrder < ActiveRecord::Base
 
   validates_presence_of :customer_id
 
+  def items
+    regular_order_items
+  end
+
   def self.find_or_new(customer)
     ros = RegularOrder.find_all_by_customer_id(customer.id) 
     if(ros.empty?)
       ros << RegularOrder.new(:customer_id => customer.id)
     end
     return ros
+  end
+  
+  def self.find_pending_updates(supplier_id)
+    RegularOrder.all(:joins => :customer,
+              :conditions =>
+      ["supplier_id = ? and pending_update = 1", supplier_id])
   end
 
   def self.create_all(params, by_customer = false)
@@ -25,7 +35,7 @@ class RegularOrder < ActiveRecord::Base
       else
         regularOrder = RegularOrder.find(v['regular_order_id'])
       end
-      regularOrder.pending_update = 1 if by_customer
+      regularOrder.pending_update = 1 #if by_customer
 
       if(regularOrder.save!)
         regularOrder.regular_order_items.clear

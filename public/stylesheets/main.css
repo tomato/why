@@ -282,3 +282,6 @@ ul.boxes > li {
 
 .article a[rel~="nofollow"] {
   display: none; }
+
+.customer_details {
+  display: inline; }

@@ -1,21 +1,21 @@
 %h1 
-  Welcome
-  =@supplier.name
-%p This is where you can manage your rounds, deliveries, products and customers and users
-
-%h2 Your Rounds and Deliveries
-%ul
-  %li=link_to 'Rounds', rounds_path
-
-%h2 Your Products
-%ul
-  %li=link_to 'Products', products_path
-
-%h2 Your Customers
-%ul
-  %li=link_to 'Customers', customers_path
-
-%h2 Your Users
-%ul
-  %li=link_to 'Users', suppliers_path
-
+  Customer Order Changes
+#deliveries
+  -@pending.each do |c, orders|
+    =check_box_tag 'reset[]'
+    %h3.customer_details=[c.name ,c.email ,c.address ,c.postcode ,c.telephone].reject{|a| a.blank?}.join(', ')
+    %ul
+      -orders.each do |order|
+        %li
+          .order
+            -if order.respond_to?(:delivery)
+              %h3=order.delivery.date.to_s(:short)
+            -else
+              %h3 Regular Order
+            %ul
+              -order.items.each do |item|
+                %li
+                  =item.quantity
+                  =' x '
+                  =item.product.name
+              

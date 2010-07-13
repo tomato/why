@@ -19,6 +19,7 @@ class SuppliersController < ApplicationController
     authenticate_supplier! params[:id]
     set_supplier_session params[:id]
     set_supplier
+    @pending = OrderFactory.pending_customers params[:id]
   end
 
   private

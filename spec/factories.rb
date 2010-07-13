@@ -1,6 +1,10 @@
+Factory.sequence :email do |n|
+  "person#{n}@example.com"
+end
+
 Factory.define :customer do |u|
   u.round_id 1
-  u.email 't@t.com'
+  u.email {Factory.next(:email)}
   u.password 'ab1234'
   u.password_confirmation 'ab1234'
   u.association :supplier

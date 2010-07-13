@@ -67,10 +67,10 @@ describe RegularOrder do
       orders.first.pending_update.should be_true
     end
 
-    it "should not set pending_update when an order is created by a supplier" do
-      orders = RegularOrder.create_all(@params, false)
-      orders.first.pending_update.should be_false
-    end
+ #    it "should not set pending_update when an order is created by a supplier" do
+ #      orders = RegularOrder.create_all(@params, false)
+ #      orders.first.pending_update.should be_false
+ #    end
 
     it "should set the pending_update when an order is updated by a customer" do
       orders = RegularOrder.create_all(@params, true)
@@ -78,6 +78,19 @@ describe RegularOrder do
       orders.first.pending_update.should be_false
       orders = RegularOrder.create_all(@params, true)
       orders.first.pending_update.should be_true
+    end
+  end
+  
+  describe "pending updates" do
+    it "should not return non pending orders" do
+      Factory(:customer_with_orders)
+      RegularOrder.find_pending_updates(1).should have(0).orders
+    end
+
+    it "should return pending orders" do
+      c = Factory(:customer_with_orders)
+      RegularOrder.first.update_attributes(:pending_update => 1)
+      RegularOrder.find_pending_updates(c.supplier_id).should have(1).regular_orders
     end
   end
 end

@@ -1,3 +1,5 @@
+require 'rss/2.0'
+
 class HomeController < ApplicationController
 
   def index

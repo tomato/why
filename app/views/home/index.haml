@@ -40,10 +40,9 @@
     =image_tag 'screenshot.jpg'
 .row 
   %h2 News
-  -@news.each do |article|
-    .row
+-@news.in_groups_of(2, false) do |article_row|
+  .row
+    -article_row.each do |article|
       .column.grid_6.article
         %h3=article.title
         %p=article.content_encoded
-      
-      

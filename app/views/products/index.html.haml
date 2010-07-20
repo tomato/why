@@ -60,3 +60,5 @@
           %li{:id => "product_#{p.id}"}
             %span.handle >> 
             =link_to p.name, edit_product_path(p)
+            -if(p.price)
+              %span.price= to_pound(p.price)

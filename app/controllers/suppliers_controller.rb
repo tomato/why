@@ -22,6 +22,12 @@ class SuppliersController < ApplicationController
     @pending = OrderFactory.pending_customers params[:id]
   end
 
+  def accept
+    Customer.accept_updates(params[:accept])
+    flash[:notice] = "Customer changes have been accepted"
+    redirect_to supplier_path(params[:id])
+  end
+
   private
 
   def set_supplier_session(id)

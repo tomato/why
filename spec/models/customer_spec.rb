@@ -73,4 +73,26 @@ describe Customer do
       RegularOrderItem.find_all_by_regular_order_id(regular_order_id).should have(0).regular_order_item
     end
   end
+
+  describe "accept_changes" do
+    it "should clear all pending order updates" do
+      c = Factory(:customer_with_orders)
+      o = c.orders.first
+      o.update_attributes(:pending_update => 1)
+      o.pending_update.should be_true
+      Customer.accept_updates([c.id])
+      o.reload
+      o.pending_update.should be_false
+    end
+    
+    it "should clear all pending order updates" do
+      c = Factory(:customer_with_orders)
+      o = c.regular_orders.first
+      o.update_attributes(:pending_update => 1)
+      o.pending_update.should be_true
+      Customer.accept_updates([c.id])
+      o.reload
+      o.pending_update.should be_false
+    end
+  end
 end

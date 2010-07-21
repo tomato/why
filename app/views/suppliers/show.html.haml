@@ -1,21 +1,24 @@
 %h1 
   Customer Order Changes
 #deliveries
-  -@pending.each do |c, orders|
-    =check_box_tag 'reset[]'
-    %h3.customer_details=[c.name ,c.email ,c.address ,c.postcode ,c.telephone].reject{|a| a.blank?}.join(', ')
-    %ul
-      -orders.each do |order|
-        %li
-          .order
-            -if order.respond_to?(:delivery)
-              %h3=order.delivery.date.to_s(:short)
-            -else
-              %h3 Regular Order
-            %ul
-              -order.items.each do |item|
-                %li
-                  =item.quantity
-                  =' x '
-                  =item.product.name
+  -form_tag accept_supplier_path do
+    =submit_tag 'clear updates'
+    .customer
+      -@pending.each do |c, orders|
+        =check_box_tag 'accept[]', c.id
+        %h3.customer_details=[c.name ,c.email ,c.address ,c.postcode ,c.telephone].reject{|a| a.blank?}.join(', ')
+        %ul
+          -orders.each do |order|
+            %li
+              .order
+                -if order.respond_to?(:delivery)
+                  %h3=order.delivery.date.to_s(:short)
+                -else
+                  %h3 Regular Order
+                %ul
+                  -order.items.each do |item|
+                    %li
+                      =item.quantity
+                      =' x '
+                      =item.product.name
               

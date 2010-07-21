@@ -30,6 +30,17 @@ class Customer < ActiveRecord::Base
       for_supplier(supplier_id)
     end
   end
+
+  def self.accept_updates(customer_ids)
+    customer_ids.each do |c|
+      Customer.find(c).orders.each do |o|
+        o.update_attributes(:pending_update => false)
+      end
+      Customer.find(c).regular_orders.each do |o|
+        o.update_attributes(:pending_update => false)
+      end
+    end
+  end
   
   def status
     if(self.invited?)

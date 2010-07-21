@@ -130,10 +130,10 @@ div#products {
       div#products ul li span {
         border-bottom: 1px solid #998299; }
 
-#deliveries >  ul > li {
+#deliveries >  ul > li, #deliveries form .customer > ul > li {
   zoom: 1;
   display: inline; }
-  #deliveries >  ul > li .quantity {
+  #deliveries >  ul > li .quantity, #deliveries form .customer > ul > li .quantity {
     margin-right: 1em; }
 
 #deliveries .regularOrders .order, #deliveries .orders .regular {
@@ -216,7 +216,8 @@ ul.boxes > li {
   width: 640px; }
 
 #home #movie {
-  display: block; }
+  display: block;
+  margin-top: 1.5em; }
 
 #notice, #alert {
   font-weight: bold;

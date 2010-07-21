@@ -8,8 +8,9 @@
 .row
   .column.grid_12
     %h1
-      #pretitle We like to buy our food
-      #title FROM WHERE IT'S GROWN
+      %span.pretitle We like to buy our food
+      %br
+      %span.title FROM WHERE IT'S GROWN
 
 .row
   .column.grid_12.centertext
@@ -54,9 +55,7 @@
     As a customer, you will receive and invitation email from your producer/supplier. Follow the link and you will be able to create a password for your account. Once this is done you are free to change your order whenever you want. Watch the video below to see how. (sorry about the dodgy voice-over!)
   .column.grid_9
     #movie
-      %object
-        %param{ :name=>"movie", :value=>"http://www.youtube.com/v/v/ytnJlDBwnO8&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"385"}
-        %embed{ :src=>"http://www.youtube.com/v/ytnJlDBwnO8&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"385" }
+      <object type="application/x-shockwave-flash" data="http://www.youtube.com/v/ytnJlDBwnO8" width="640" height="385"> <param name="movie" value="http://www.youtube.com/v/J_DV9b0x7v4"> </object>
 
 .row 
   %h2 News
@@ -64,5 +63,5 @@
   .row
     -article_row.each do |article|
       .column.grid_6.article
-        %h3=article.title
-        %p=article.content_encoded
+        %h3=article[:title]
+        .article=article[:content_encoded]

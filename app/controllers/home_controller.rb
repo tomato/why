@@ -1,4 +1,5 @@
 require 'rss/2.0'
+require 'hpricot'
 
 class HomeController < ApplicationController
 
@@ -11,7 +12,19 @@ class HomeController < ApplicationController
       redirect_to suppliers_path
     end
 
+    @news = get_feed
+  end
+
+  private
+
+  def get_feed
     rss = SimpleRSS.parse(open('http://solittlecode.wordpress.com/category/news/feed/'))
-    @news = rss.items[0..3]
+    rss.items[0..3].map do |item|
+      hpricot = Hpricot(item.content_encoded)
+      hpricot.search("a[@rel='nofollow']").remove
+      hpricot.search("img[@src*='wordpress']").remove
+      {:title => item.title,
+       :content_encoded => hpricot.html}
+    end
   end
 end

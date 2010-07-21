@@ -34,10 +34,30 @@
     %p We believe that small business can be more efficient than big business if they are willing to share tools and collaborate in the creation of those tools. We are a self funded startup with no-one to answer to but our customers. We love good food from small producers and want to help those producers focus on producing not on paperwork. We love to keep things personal so contact us and tell us what you think. 
 
 .row
-  .column.grid_2 &nbsp;
-  .column.grid_8
-    %h2 Latest Screen Shot
-    =image_tag 'screenshot.jpg'
+  %h2 Suppliers - How it works
+.row.steps
+  .column.grid_3
+    %h3 Add you products
+  .column.grid_3
+    %h3 Create your rounds
+  .column.grid_3
+    %h3 Add the delivery dates 
+  .column.grid_3
+    %h3 Invite your customers
+.row
+  =image_tag 'supplier_steps.gif'
+
+.row
+  %h2 Customers - Heres a video showing how you can change your order
+.row
+  .column.grid_3
+    As a customer, you will receive and invitation email from your producer/supplier. Follow the link and you will be able to create a password for your account. Once this is done you are free to change your order whenever you want. Watch the video below to see how. (sorry about the dodgy voice-over!)
+  .column.grid_9
+    #movie
+      %object
+        %param{ :name=>"movie", :value=>"http://www.youtube.com/v/v/ytnJlDBwnO8&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"385"}
+        %embed{ :src=>"http://www.youtube.com/v/ytnJlDBwnO8&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"385" }
+
 .row 
   %h2 News
 -@news.in_groups_of(2, false) do |article_row|

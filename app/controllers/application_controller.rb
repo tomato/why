@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
         new_supplier_user_session
       end
     elsif resource.is_a?(Admin)
-      redirect_to home_path
+       home_url
     elsif resource.is_a?(Customer)
       session[:supplier_id] = current_customer.supplier_id
       customer_orders_url(current_customer.id)

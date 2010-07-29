@@ -28,6 +28,7 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'simple-rss'
   config.gem 'hpricot'
+  config.gem 'fastercsv'
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).

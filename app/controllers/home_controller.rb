@@ -18,13 +18,17 @@ class HomeController < ApplicationController
   private
 
   def get_feed
-    rss = SimpleRSS.parse(open('http://solittlecode.wordpress.com/category/news/feed/'))
-    rss.items[0..3].map do |item|
-      hpricot = Hpricot(item.content_encoded)
-      hpricot.search("a[@rel='nofollow']").remove
-      hpricot.search("img[@src*='wordpress']").remove
-      {:title => item.title,
-       :content_encoded => hpricot.html}
+    begin
+      rss = SimpleRSS.parse(open('http://solittlecode.wordpress.com/category/news/feed/'))
+      rss.items[0..3].map do |item|
+        hpricot = Hpricot(item.content_encoded)
+        hpricot.search("a[@rel='nofollow']").remove
+        hpricot.search("img[@src*='wordpress']").remove
+        {:title => item.title,
+         :content_encoded => hpricot.html}
+      end
+    rescue
+      return []
     end
   end
 end

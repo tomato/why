@@ -56,4 +56,27 @@ describe Delivery do
       Delivery.days[0].should == [ 1, "Monday"]
     end
   end
+
+  describe "next_10" do
+    before(:each) do
+      @r1 = Factory(:round)
+      Delivery.create_all(@r1.id, Date.new(2010,4,16), Date.new(2010, 5, 16), [5]).should == 5
+      @r2 = Factory(:round)
+      Delivery.create_all(@r2.id, Date.new(2010,4,16), Date.new(2010, 5, 30), [5,6,1,2,3]).should == 32
+    end
+
+    it "should return the next ten delivery dates for this supplier" do
+      Delivery.next_10(1).should have(10).deliveries
+    end
+
+    it "should return them with the next first" do
+      Delivery.next_10(1).first.date.should == Date.new(2010, 4, 16)
+    end
+
+    describe "if there are multiple rounds on a delviery day" do
+      it "should only show the delivery date once" do
+        Delivery.next_10(1).find_all{ |d| d.date == Date.new(2010,4,16)}.should have(1).delivery
+      end
+    end
+  end
 end

@@ -17,4 +17,13 @@ class Delivery < ActiveRecord::Base
   def self.days
     [[1 , "Monday"], [2 , "Tuesday"], [3 , "Wednesday"], [4 , "Thursday"], [5 , "Friday"], [6 , "Saturday"], [0 , "Sunday"]]
   end
+
+  def self.next_10(supplier_id)
+    Delivery.find(:all,
+                  :select => 'DISTINCT(date)',
+                  :conditions => ['supplier_id = ? ', supplier_id],
+                  :joins => ' inner join rounds on deliveries.round_id = rounds.id',
+                  :limit => 10,
+                  :order => 'date ')
+  end
 end

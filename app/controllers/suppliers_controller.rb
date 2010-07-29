@@ -20,6 +20,7 @@ class SuppliersController < ApplicationController
     set_supplier_session params[:id]
     set_supplier
     @pending = OrderFactory.pending_customers params[:id]
+    @delivery_dates = Delivery.next_10(params[:id]).map { |d| [d.date.to_s(:short), d.date] }
   end
 
   def accept

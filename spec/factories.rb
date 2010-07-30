@@ -4,6 +4,10 @@ end
 
 Factory.define :customer do |u|
   u.round_id 1
+  u.name 'tom'
+  u.address '42 East End Road'
+  u.postcode 'gl53 8qe'
+  u.telephone '01242 523607'
   u.email {Factory.next(:email)}
   u.password 'ab1234'
   u.password_confirmation 'ab1234'
@@ -32,19 +36,23 @@ Factory.define :order do |u|
   u.order_items {|a| [a.association(:order_item)] }
 end
 
+Factory.define :order_with_real_customer, :parent => :order do |u|
+  u.customer {|a| a.association(:customer) }
+end
+
 Factory.define :regular_order do |u|
   u.customer_id 1
   u.regular_order_items {|a| [a.association(:regular_order_item)] }
 end
 
 Factory.define :order_item do |u|
-  u.product_id 1
+  u.product {|a| a.association(:product) }
   u.quantity 1
   u.order_id  1
 end
 
 Factory.define :regular_order_item do |u|
-  u.product_id 1
+  u.product {|a| a.association(:product) }
   u.quantity 1
   u.regular_order_id  1
 end
@@ -52,6 +60,7 @@ end
 Factory.define :product do |u|
   u.name 'asparagus'
   u.supplier_id 1
+  u.price 1.32
 end
 
 Factory.define :round do |u|

@@ -8,9 +8,6 @@ describe Order do
     }
   end
 
-  it "should create a new instance given valid attributes" do
-    Order.create!(@valid_attributes)
-  end
 
   describe "associations" do
     it "should have a customer" do
@@ -148,6 +145,14 @@ describe Order do
       o = Order.new
       o.items << OrderItem.new
       o.order_items.should have(1).item
+    end
+  end
+
+  describe :export_fields do
+    it "should contain the quantity" do
+      o = Factory(:order)
+      o.export_fields.should eql([1, 'asparagus', "1.32"])
+      o.export_fields.should be_a(Array)
     end
   end
 end

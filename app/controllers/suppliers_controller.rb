@@ -20,13 +20,20 @@ class SuppliersController < ApplicationController
     set_supplier_session params[:id]
     set_supplier
     @pending = OrderFactory.pending_customers params[:id]
-    @delivery_dates = Delivery.next_10(params[:id]).map { |d| [d.date.to_s(:short), d.date] }
+    @delivery_dates = Delivery.next_10_dates(params[:id]).map { |d| [d[0].to_s(:short), d[1].join(',')] }
   end
 
   def accept
     Customer.accept_updates(params[:accept])
     flash[:notice] = "Customer changes have been accepted"
     redirect_to supplier_path(params[:id])
+  end
+
+  def download
+    send_data Delivery.all_orders_csv(params[:deliveries]),
+      :filename => 'deliveries.csv',
+      :type => 'text/csv',
+      :disposition => 'attachment'
   end
 
   private

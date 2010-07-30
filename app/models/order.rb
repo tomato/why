@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  include Orderable
+
   belongs_to :customer
   belongs_to :delivery
   has_many :order_items, :dependent => :delete_all
@@ -50,4 +52,5 @@ class Order < ActiveRecord::Base
     end
     return orders
   end
+
 end

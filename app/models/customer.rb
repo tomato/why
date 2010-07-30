@@ -51,4 +51,8 @@ class Customer < ActiveRecord::Base
       :active
     end
   end
+
+  def export_fields
+    [name, address, postcode, telephone]
+  end
 end

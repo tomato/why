@@ -1,4 +1,6 @@
 class RegularOrder < ActiveRecord::Base
+  include Orderable
+
   belongs_to :customer
   has_many :regular_order_items, :dependent => :delete_all
 

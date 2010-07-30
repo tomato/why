@@ -95,4 +95,11 @@ describe Customer do
       o.pending_update.should be_false
     end
   end
+
+  describe :export_fields do
+    it "should return the correct fields" do
+      c = Factory(:customer)
+      c.export_fields.should eql([c.name, c.address, c.postcode, c.telephone])
+    end
+  end
 end

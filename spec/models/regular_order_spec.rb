@@ -93,4 +93,11 @@ describe RegularOrder do
       RegularOrder.find_pending_updates(c.supplier_id).should have(1).regular_orders
     end
   end
+
+  describe :to_csv do
+    it "should return csv for an order" do
+      csv = Factory(:order_with_real_customer).to_csv
+      csv.should == "tom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\n"
+    end
+  end
 end

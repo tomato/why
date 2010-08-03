@@ -8,6 +8,10 @@ class Delivery < ActiveRecord::Base
         c.regular_orders.first
     end).compact.reject{|o| o.items.empty?}
   end
+  
+  def self.all_orders(delivery_ids)
+    Delivery.find(delivery_ids.split(',')).map {|d| d.all_orders}.flatten
+  end
 
   def all_orders_csv
     all_orders.map{|o| o.to_csv}.join

@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'simple-rss'
   config.gem 'hpricot'
   config.gem 'fastercsv'
+  config.gem 'pdf-writer'
   
 
   # Only load the plugins named here, in the order given (default is alphabetical).

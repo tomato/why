@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :products, :member => { :reorder => :post }
   map.resources :customers, :has_many => :orders, 
     :member => { :invite => :get}
-  map.resources :suppliers, :member => { :accept => :post, :download => :post }
+  map.resources :suppliers, :member => { :accept => :post, :download => :post, :labels => :post }
 
   map.home 'home/', :controller => 'home'
   map.root :controller => "home"

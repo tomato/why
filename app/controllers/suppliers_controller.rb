@@ -30,9 +30,18 @@ class SuppliersController < ApplicationController
   end
 
   def download
+    return labels() if params['format'] == 'labels'
     send_data Delivery.all_orders_csv(params[:deliveries]),
       :filename => 'deliveries.csv',
       :type => 'text/csv',
+      :disposition => 'attachment'
+  end
+
+  def labels
+    pdf = PdfLabelMaker.avery_labels(Delivery.all_orders(params[:deliveries]))
+    send_data pdf.render, 
+      :filename => 'labels.pdf', 
+      :type => 'application/pdf',
       :disposition => 'attachment'
   end
 

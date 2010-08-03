@@ -3,8 +3,8 @@
 #help
   %h2 Download
   -form_tag download_supplier_path do
-    =submit_tag 'Produce'
-    =submit_tag 'Deliveries'
+    =submit_tag 'Deliveries', {:name => 'format', :value => 'csv' }
+    =submit_tag 'labels', {:name => 'format', :value => 'labels' }
     =select nil,'deliveries', @delivery_dates
 #deliveries
   -form_tag accept_supplier_path do

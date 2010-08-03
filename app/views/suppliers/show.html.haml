@@ -1,5 +1,11 @@
 %h1 
   Customer Order Changes
+#help
+  %h2 Download
+  -form_tag download_supplier_path do
+    =submit_tag 'Produce'
+    =submit_tag 'Deliveries'
+    =select nil,'deliveries', @delivery_dates
 #deliveries
   -form_tag accept_supplier_path do
     =submit_tag 'clear updates'
@@ -21,10 +27,4 @@
                       =item.quantity
                       =' x '
                       =item.product.name
-#help
-  %h2 Download
-  -form_tag download_supplier_path do
-    =submit_tag 'Produce'
-    =submit_tag 'Deliveries'
-    =select nil,'deliveries', @delivery_dates
               

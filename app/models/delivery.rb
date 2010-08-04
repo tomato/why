@@ -41,7 +41,7 @@ class Delivery < ActiveRecord::Base
   def self.next_10_dates(supplier_id)
     Delivery.all( :conditions => ['supplier_id = ? and date >= curdate()', supplier_id],
                   :joins => ' inner join rounds on deliveries.round_id = rounds.id',
-                  :order => 'date ').group_by(&:date).first(10).map do |d|
+                  :order => 'date ').group_by(&:date).to_a.first(10).map do |d|
                     [d[0], d[1].map{|d| d.id}]
                   end 
   end

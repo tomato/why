@@ -105,13 +105,25 @@ describe Delivery do
       @delivery.all_orders.should have(0).orders
     end
 
+    it "should return nothing for orders with no items but other orders should still be included" do
+      @order = Factory(:order, {:customer_id => @customer.id, :delivery_id => @delivery.id })
+      @customer2 = Factory(:customer, {:round_id => @round.id })
+      @order2 = Factory(:order, {:customer_id => @customer2.id, :delivery_id => @delivery.id })
+      @order2.items.clear
+      @order2.save!
+      @order2.items.should be_empty
+      p @order.inspect
+      p @order2.inspect
+      p @delivery.all_orders.inspect
+      @delivery.all_orders.should have(1).orders
+    end
+
     describe :all_orders_csv do
       it "should return a single string" do
         @customer2 = Factory(:customer, {:round_id => @round.id })
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer.id})
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer2.id})
-        @delivery.all_orders.should have(2).orders
-        p csv = @delivery.all_orders_csv
+        @delivery.all_orders_csv.should == "tom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\ntom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\n"
       end
     end
   end

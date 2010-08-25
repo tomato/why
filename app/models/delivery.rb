@@ -4,7 +4,7 @@ class Delivery < ActiveRecord::Base
 
   def all_orders
     (round.customers.map do |c|
-      orders.first{|o| o.customer_id = c.id} ||
+      orders.find(:first, :conditions => ["customer_id = ?", c.id]) ||
         c.regular_orders.first
     end).compact.reject{|o| o.items.empty?}
   end
@@ -19,6 +19,19 @@ class Delivery < ActiveRecord::Base
 
   def self.all_orders_csv(delivery_ids)
     Delivery.find(delivery_ids.split(',')).map {|d| d.all_orders_csv }.join
+  end
+
+  def all_produce
+    items = all_orders.inject([]){|s,o| s << o.items }.flatten
+    produce = []
+    round.supplier.products.each do |p|
+      product_items = items.find_all{|i| i.product_id == p.id}
+      total_quantity =  product_items.inject(0) do |t,i|
+        t += i.quantity    
+      end
+      produce << [p.id, total_quantity]
+    end
+    return produce
   end
 
   def self.create_all(round_id, from, to, days)

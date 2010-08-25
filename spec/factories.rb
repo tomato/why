@@ -21,6 +21,7 @@ end
 
 Factory.define :supplier do |u|
   u.name 'Test Supplier'
+  u.products {|a| [a.association(:product)]}
 end
 
 Factory.define :supplier_user do |u|
@@ -65,7 +66,7 @@ end
 
 Factory.define :round do |u|
   u.name 'test'
-  u.supplier_id 1
+  u.supplier {|a| a.association(:supplier)}
 end
 
 Factory.define :delivery do |u|

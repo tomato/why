@@ -29,9 +29,17 @@ class Delivery < ActiveRecord::Base
       total_quantity =  product_items.inject(0) do |t,i|
         t += i.quantity    
       end
-      produce << [p.id, total_quantity]
+      produce << [p.id,p.name, p.price, total_quantity] unless total_quantity == 0
     end
     return produce
+  end
+
+  def all_produce_csv
+    all_produce.map{|o| o.to_csv}.join
+  end
+
+  def self.all_produce_csv(delivery_ids)
+    Delivery.find(delivery_ids.split(',')).map {|d| d.all_produce_csv }.join
   end
 
   def self.create_all(round_id, from, to, days)

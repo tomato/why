@@ -32,6 +32,7 @@ class Customer < ActiveRecord::Base
   end
 
   def self.accept_updates(customer_ids)
+    return unless customer_ids
     customer_ids.each do |c|
       Customer.find(c).orders.each do |o|
         o.update_attributes(:pending_update => false)

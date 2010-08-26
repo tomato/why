@@ -30,9 +30,18 @@ class SuppliersController < ApplicationController
   end
 
   def download
-    return labels() if params['format'] == 'labels'
+    return labels() if params['format'] == 'Labels'
+    return produce() if params['format'] == 'Produce'
+
     send_data Delivery.all_orders_csv(params[:deliveries]),
       :filename => 'deliveries.csv',
+      :type => 'text/csv',
+      :disposition => 'attachment'
+  end
+
+  def produce
+    send_data Delivery.all_produce_csv(params[:deliveries]),
+      :filename => 'produce.csv',
       :type => 'text/csv',
       :disposition => 'attachment'
   end

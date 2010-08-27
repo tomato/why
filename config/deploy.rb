@@ -27,7 +27,7 @@ set :branch, "master"
 
 ### Other options you can set ##
 # Comma separated list of additional domains for Apache
- set :domain_aliases, "www.fromwhereitsgrown.com, why.solittlecode.com"
+ set :domain_aliases, "www.fromwhereitsgrown.com,why.solittlecode.com,*.fromwhereitsgrown.com"
 
 ## Dependencies
 # Set the commands and gems that your application requires. e.g.

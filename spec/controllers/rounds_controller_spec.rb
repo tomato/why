@@ -10,7 +10,7 @@ describe RoundsController do
   describe "show" do
     describe "Annonymous User" do
       it "should redirect to login page" do
-        get :show
+        get :show, :id => 1
         response.should redirect_to home_path
       end
     end
@@ -30,7 +30,7 @@ describe RoundsController do
             Delivery.new(:date => Date.new(2009,12,3))]
           Delivery.stub!(:find_all_by_round_id).and_return(deliveries)
 
-          get :show
+          get :show ,:id => 1
           response.should render_template(:show)
           dm = assigns[:delivery_months]
 

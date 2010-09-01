@@ -1,22 +1,39 @@
-Why::Application.routes.draw do |map|
+Why::Application.routes.draw do
   devise_for :customers
   devise_for :supplier_users
   devise_for :admins
 
-  map.resources  :deliveries, :supplier_users
-  map.resources :rounds, :member => { :past => :get,
-                                      :future => :get}
-  map.resources :products, :member => { :reorder => :post }
-  map.resources :customers, :has_many => :orders, 
-    :member => { :invite => :get}
-  map.resources :suppliers, :member => { :accept => :post, :download => :post, :labels => :post }
+  resources  :deliveries, :supplier_users
+  resources :rounds do 
+    member do
+      get :past
+      get :future
+    end
+  end
+  resources :products do
+    member do 
+      post :reorder
+    end
+  end
+  resources :customers do
+    member do
+      get :invite
+    end
+    resources :orders
+  end
 
-  map.home 'home/', :controller => 'home'
-  map.root :controller => "home"
-  map.test 'test/', :controller => 'JavaScriptTests', :action => 'order'
+  resources :suppliers do
+    member do
+      post :accept
+      post :download
+      post :labels
+    end
+  end
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  root :to => "home#index"
+  match 'home/' => "home#index", :as => "home"
+  match 'test/' => 'java_script_tests#order'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

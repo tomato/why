@@ -2,7 +2,7 @@ class Round < ActiveRecord::Base
   belongs_to :supplier
   has_many :customers
   has_many :deliverys, :dependent => :destroy
-  named_scope :for_supplier, lambda { |supplier_id|
+  scope :for_supplier, lambda { |supplier_id|
     {:conditions => ["supplier_id = ?", supplier_id]}}
 
   before_destroy do |entry| 

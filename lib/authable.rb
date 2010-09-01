@@ -3,7 +3,7 @@ module Authable
   def invite!
     generate_invitation_token
     save!
-    send_invitation
+    self.class.send_invitation(email)
   end
 
 end

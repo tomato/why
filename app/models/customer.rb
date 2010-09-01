@@ -18,7 +18,7 @@ class Customer < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 8
   
-  named_scope :for_supplier, lambda { |supplier_id| 
+  scope :for_supplier, lambda { |supplier_id| 
     {:conditions => ['supplier_id = ?', supplier_id],
       :order => 'updated_at DESC' }
   }

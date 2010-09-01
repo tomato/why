@@ -8,7 +8,7 @@ describe ProductsController do
   end
 
   it "should not allow an annoymous user" do 
-    get :show
+    get :index
     response.should redirect_to home_path
   end
 

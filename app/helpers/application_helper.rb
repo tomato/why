@@ -13,10 +13,10 @@ module ApplicationHelper
   def tab_name
     if current_page?(:controller => :suppliers, :action => :show)
        "dashboard"
-    elsif @controller.controller_name == "orders"
+    elsif controller.controller_name == "orders"
       "customers"
     else
-      @controller.controller_name
+      controller.controller_name
     end
   end
 

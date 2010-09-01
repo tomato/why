@@ -14,7 +14,7 @@
     %li Send the customer an invite by clicking on the 'Invite' link
 
 %h1 Your Customers
--form_tag customers_path, :method => :get do
+=form_tag customers_path, :method => :get do
   %p
     = text_field_tag :search, params[:search], :size => 40
     = submit_tag "Search", :name => nil 

@@ -8,7 +8,7 @@ describe DeliveriesController do
   end
 
   it "should only be accessable to admin or correct supplier user" do
-    get :show
+    post :create
     response.should redirect_to home_path
   end
   

@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def tab_name
-    if current_page?(:controller => :suppliers, :action => :show)
+    if controller.controller_name == "suppliers" && controller.action_name == "show"
        "dashboard"
     elsif controller.controller_name == "orders"
       "customers"

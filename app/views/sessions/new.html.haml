@@ -4,7 +4,7 @@
   -else
     %h1 #{ resource_name.to_s.titleize  } Sign in 
 
-  -form_for resource_name, resource, :url => session_path(resource_name) do |f| 
+  =form_for resource_name, resource, :url => session_path(resource_name) do |f| 
     .pairs
       %p.clear
         .left=f.label :email

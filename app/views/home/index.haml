@@ -66,4 +66,4 @@
     -article_row.each do |article|
       .column.grid_6.article
         %h3=article[:title]
-        .article=article[:content_encoded]
+        .article=raw article[:content_encoded]

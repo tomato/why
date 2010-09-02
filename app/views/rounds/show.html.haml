@@ -10,7 +10,7 @@
     %li
       We recomend you create deliveries for the rest of the year. Select the days for the round and the dates you want the deliveries to run to and hit the 'create delvieries' button. Once the dates are created you can edit them if they change for bank holidays and the like.
 %h1 Deliveries for #{@round.name} Round
--form_tag({:action => 'create', :controller => 'deliveries'}) do
+=form_tag({:action => 'create', :controller => 'deliveries'}) do
   %fieldset
     %legend Add deliveries
     =hidden_field_tag :round, @round.id

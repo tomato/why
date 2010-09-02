@@ -2,7 +2,7 @@
   Customer Order Changes
 #help
   %h2 Download
-  -form_tag download_supplier_path do
+  =form_tag download_supplier_path do
     =submit_tag 'Deliveries', {:name => 'format', :value => 'Deliveries' }
     =submit_tag 'Produce', {:name => 'format', :value => 'Produce' }
     or
@@ -10,7 +10,7 @@
     for deliveries on 
     =select nil,'deliveries', @delivery_dates
 #deliveries
-  -form_tag accept_supplier_path do
+  =form_tag accept_supplier_path do
     =submit_tag 'clear updates'
     .customer
       -@pending.each do |c, orders|

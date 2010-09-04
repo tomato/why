@@ -1,4 +1,5 @@
-=customer_fields.error_messages
+-@customer.errors.each do |e|
+  %p=e
 .pairs
   %p.clear
     .left=customer_fields.label :email

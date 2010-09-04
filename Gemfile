@@ -16,6 +16,7 @@ gem 'simple-rss'
 gem 'hpricot'
 gem 'fastercsv'
 gem 'pdf-writer', :require => "pdf/writer"
+gem 'acts_as_indexed'
 
 group :test, :development do
   gem "rspec-rails", ">= 2.0.0.beta.19"

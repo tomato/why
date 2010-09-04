@@ -37,6 +37,7 @@ GEM
       activemodel (= 3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
+    acts_as_indexed (0.6.6)
     arel (1.0.1)
       activesupport (~> 3.0.0)
     autotest (4.3.2)
@@ -135,6 +136,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_indexed
   autotest
   autotest-notification
   autotest-rails

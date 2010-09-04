@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe Customer do
 
+  describe "invite!" do
+    it "should send an email on invite" do
+      c = Factory(:customer)
+      c.invite!
+      ActionMailer::Base.deliveries.should_not be_empty
+    end
+  end
+
   describe "status" do
     before(:each) do
       @customer = Factory(:customer)
@@ -19,7 +27,7 @@ describe Customer do
 
     it "should return :active for a confirmed user" do
       @customer.invite!
-      @customer.accept_invitation!
+      @customer.accept_invitation
       @customer.status.should == :active
     end
   end

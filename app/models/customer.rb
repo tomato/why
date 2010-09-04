@@ -25,7 +25,7 @@ class Customer < ActiveRecord::Base
 
   def self.search(supplier_id, search)
     if(search.present?)
-      for_supplier(supplier_id).with_query(search)
+      for_supplier(supplier_id).with_query('^' + search)
     else
       for_supplier(supplier_id)
     end

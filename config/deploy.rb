@@ -23,7 +23,7 @@ set(:deploy_to) { File.join("", "home", user, application) }
 #set :deploy_via, :copy
 set :repository, "git@github.com:tomato/why.git"
 set :scm, :git
-set :branch, "master"
+set :branch, "rails3"
 
 ### Other options you can set ##
 # Comma separated list of additional domains for Apache

@@ -23,6 +23,7 @@ group :test, :development do
   gem 'autotest-rails'
   gem 'autotest'
   gem 'autotest-notification'
+  gem 'ruby_parser'
 end
 
 

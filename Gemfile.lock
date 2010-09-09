@@ -119,8 +119,11 @@ GEM
     rspec-mocks (2.0.0.beta.20)
     rspec-rails (2.0.0.beta.20)
       rspec (= 2.0.0.beta.20)
+    ruby_parser (2.0.5)
+      sexp_processor (~> 3.0)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
+    sexp_processor (3.0.5)
     simple-rss (1.2.3)
     thor (0.14.0)
     transaction-simple (1.4.0)
@@ -151,6 +154,7 @@ DEPENDENCIES
   pdf-writer
   rails (= 3.0.0)
   rspec-rails (>= 2.0.0.beta.19)
+  ruby_parser
   simple-rss
   warden
   will_paginate (~> 3.0.pre2)

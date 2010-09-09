@@ -1,9 +1,5 @@
 #signin
-  -if resource_name == :supplier_user
-    %h1 Welcome Supplier, you can sign in here!
-  -else
-    %h1 #{ resource_name.to_s.titleize  } Sign in 
-
+  %h1=welcome_text resource_name
   =form_for resource_name, resource, :url => session_path(resource_name) do |f| 
     .pairs
       %p.clear
@@ -26,6 +22,6 @@
       %p.clear
         .left
         .right
-          = render :partial => "shared/devise_links" 
+          = render :partial => "devise/shared/links" 
           -if resource_name == :customer
             =link_to "I'm a supplier get me out of here!", new_supplier_user_session_path

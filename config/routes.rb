@@ -30,6 +30,10 @@ Why::Application.routes.draw do
     end
   end
 
+  constraints(Subdomain) do  
+    match '/', :to => redirect("/customers/sign_in") 
+  end  
+  
   root :to => "home#index"
   match 'home/' => "home#index", :as => "home"
   match 'test/' => 'java_script_tests#order'

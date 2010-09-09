@@ -23,4 +23,12 @@ module ApplicationHelper
   def to_pound(num)
     number_to_currency(num, :unit => "£")
   end
+
+  def welcome_text(resource_name)
+    if resource_name == :supplier_user
+      "Welcome Supplier, you can sign in here!"
+    else
+      "#{ resource_name.to_s.titleize  } Sign in x" 
+    end
+  end
 end

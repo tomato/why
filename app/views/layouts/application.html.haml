@@ -4,12 +4,13 @@
   %head
     %title=yield :title
     =stylesheet_link_tag :all
-    =javascript_include_tag 'jquery', 'jquery.autocomplete', 'jquery-ui', 'application'
+    =javascript_include_tag :defaults, 'jquery.autocomplete', 'jquery-ui'
     <script type="text/javascript" src="http://use.typekit.com/rjk6gwu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <meta name="keywords" content="food, producer, orders, delivery, organic, application, supplier" />
     <meta name="description" content="An Order Management System for Local Food Suppliers"/>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    = csrf_meta_tag
     =yield :head
   %body{ :id => tab_name }
     #header

@@ -39,11 +39,14 @@ describe SuppliersController do
   end
 
   it "should allow supplier user to view their own supplier" do
-    Supplier.stub!(:find).and_return(nil)
-    @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => 1)
+    @request.host = "t.example.com"
+    s = Factory(:supplier, :name => 't')
+    @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => s.id)
+
+    s.friendly_id.should == 't'
     @su.save.should be_true
     sign_in(@su).should be_true
-    get :show, {:id => 1}
+    get :show, {:id => 't'}
     response.should render_template("show")
   end
 

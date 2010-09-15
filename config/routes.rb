@@ -24,6 +24,7 @@ Why::Application.routes.draw do
 
   resources :suppliers do
     member do
+      get :switch
       post :accept
       post :download
       post :labels

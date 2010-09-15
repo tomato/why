@@ -25,10 +25,10 @@ module ApplicationHelper
   end
 
   def welcome_text(resource_name)
-    if resource_name == :supplier_user
-      "Welcome Supplier, you can sign in here!"
+    if @supplier
+      "Welcome to #{ @supplier.name }'s Ordering System"
     else
-      "#{ resource_name.to_s.titleize  } Sign in x" 
+      "Welcome"
     end
   end
 end

@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
+  include UrlHelper
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :set_supplier
+  before_filter :set_mailer_url_options
+
 
   protected
 
@@ -29,11 +32,8 @@ class ApplicationController < ActionController::Base
    
   protected
   
-  def authenticate_supplier!(supplier_id = session[:supplier_id])
-    #logger.debug "supplier_id=#{ supplier_id}, user_supplier_id=#{current_supplier_user.supplier_id}"  
-    #logger.debug "valid_user_for_supplier?=#{ valid_user_for_supplier?(supplier_id)}"
-    #logger.debug "supplier_user_signed_in?=#{supplier_user_signed_in? }"
-    if(valid_superuser? supplier_id)
+  def authenticate_supplier!
+    if(valid_superuser?)
       return
     elsif supplier_user_signed_in?
       flash[:notice] = 'You may not access this page, it belongs to another supplier'
@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
     redirect_to home_path
   end
 
-  def valid_superuser?(supplier_id)
-    admin_signed_in? || valid_user_for_supplier?(supplier_id)
+  def valid_superuser?()
+    admin_signed_in? || (@supplier && valid_user_for_supplier?(@supplier.id))
   end
 
   def valid_user_for_supplier?(supplier_id)
@@ -50,7 +50,13 @@ class ApplicationController < ActionController::Base
   end
 
   def set_supplier
-    logger.debug "set_supplier: supplier_id=#{ session[:supplier_id]}"
-    @supplier = Supplier.first(:conditions => ["id = ?", session[:supplier_id]])
+    begin
+      if(request.subdomain.present?)
+        @supplier = Supplier.find(request.subdomain)
+        logger.info "Supplier=#{@supplier.name}"
+      end
+    rescue
+      logger.error "Invalid Subdomain #{ request.subdomain }"
+    end
   end
 end

@@ -10,7 +10,8 @@ module SignIns
   end
   
   def sign_in_supplier_user
-    @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => 1)
+    s = Factory(:supplier, :name => 't')
+    @su = SupplierUser.new(:email => 'tom@tomhowett.com', :password => 'fishfry', :supplier_id => s.id)
     @su.save.should be_true
     sign_in(@su).should be_true
   end

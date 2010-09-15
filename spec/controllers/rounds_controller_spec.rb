@@ -17,7 +17,7 @@ describe RoundsController do
 
     describe "logged in a supplier user" do
       before(:each) do
-        session[:supplier_id] = 1
+        @request.host = "t.example.com"
         sign_in_supplier_user
       end
 
@@ -46,7 +46,7 @@ describe RoundsController do
 
   describe "destroy" do
     it "should return a message if the round has customers" do
-      session[:supplier_id] = 1
+      @request.host = "t.example.com"
       sign_in_supplier_user
       r = Factory(:round)
       r.customers << Factory(:customer)

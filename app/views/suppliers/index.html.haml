@@ -1,5 +1,5 @@
 %ol
   -@suppliers.each do |s|
     %li
-      =link_to s.name, supplier_path(s)
+      =link_to s.name, switch_supplier_path(s)
   %li=link_to 'New', new_supplier_path

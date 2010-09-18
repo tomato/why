@@ -3,7 +3,11 @@ module ApplicationHelper
   def title
     content_for :title do 
       if(@supplier)
-        @supplier.name
+        if(@supplier.logo)
+          image_tag @supplier.logo.url, :height => '70px'
+        else
+          @supplier.name
+        end
       else
         "From Where It's Grown"
       end
@@ -15,6 +19,8 @@ module ApplicationHelper
        "dashboard"
     elsif controller.controller_name == "orders"
       "customers"
+    elsif controller.controller_name == "suppliers" && controller.action_name == "edit"
+      "settings"
     else
       controller.controller_name
     end

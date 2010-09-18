@@ -146,20 +146,3 @@ default_run_options[:pty] = true
 # :soft uses the standard touch tmp/restart.txt which leaves database connections
 # lingering until the workers time out
 # set :passenger_restart_strategy, :hard
-
-
-namespace :bundler do
-  task :create_symlink, :roles => :app do
-    shared_dir = File.join(shared_path, 'bundle')
-    release_dir = File.join(current_release, '.bundle')
-    run("mkdir -p #{shared_dir} && ln -s #{shared_dir} #{release_dir}")
-  end
- 
-  task :bundle_new_release, :roles => :app do
-    bundler.create_symlink
-    run "cd #{release_path} && sudo bundle install --without test"
-  end
-end
- 
-after 'deploy:update_code', 'bundler:bundle_new_release'
-

@@ -35,6 +35,7 @@
           %li#products_tab=link_to 'Products', products_path, { :accesskey => 3}
           %li#rounds_tab=link_to 'Rounds', rounds_path, { :accesskey => 4}
           %li#users_tab=link_to 'Team', supplier_users_path, { :accesskey => 5}
+          %li#settings_tab=link_to 'Settings', edit_supplier_path(@supplier), { :accesskey => 6}
     #content
       -if(flash[:notice])
         #notice=flash[:notice]

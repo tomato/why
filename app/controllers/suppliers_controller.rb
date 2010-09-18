@@ -10,9 +10,17 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new
     render :action => 'edit'
   end
-   
+
+  def edit
+  end
+
   def create
     Supplier.create(params[:supplier])
+    redirect_to :action => 'index'
+  end
+
+  def update
+    @supplier.update_attributes(params[:supplier])
     redirect_to :action => 'index'
   end
 

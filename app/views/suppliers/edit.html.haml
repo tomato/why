@@ -1,5 +1,13 @@
-=form_for @supplier do |f|
-  =f.label :name
-  =f.text_field :name 
-  =submit_tag
+%h1 Update your settings
+=form_for @supplier, :html => { :multipart => true } do |f|
+  .pairs
+    %p.clear
+      .left=f.label :name
+      .right=f.text_field :name
+    %p.clear
+      .left=f.label :logo
+      .right=f.file_field :logo
+    %p.clear
+      .left
+      .right=submit_tag
   

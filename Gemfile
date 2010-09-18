@@ -18,6 +18,7 @@ gem 'fastercsv'
 gem 'pdf-writer', :require => "pdf/writer"
 gem 'acts_as_indexed'
 gem "friendly_id", "~> 3.1"
+gem "paperclip"
 
 group :test, :development do
   gem "rspec-rails", ">= 2.0.0.beta.19"

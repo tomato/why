@@ -83,4 +83,55 @@ describe Product do
       products.sort.last.id.should == p1.id
     end
   end
+
+  describe "set_category_sequence" do
+
+    before(:each) do
+      products = [
+        @p1 = Factory(:product, :category => "a"),
+        @p2 = Factory(:product, :category => "b"),
+        @p3 = Factory(:product, :category => "b")
+      ]
+      Product.update_category_sequences([@p2.id,@p1.id], 1)
+      Product.update_sequences([@p3.id, @p2.id], 1)
+      products.each{ |p| p.reload }
+
+      @p1.category_sequence.should == 2
+      @p2.category_sequence.should == 1
+      @p3.category_sequence.should == 1
+    end
+
+    it "should update the sequence id when sequence is changed to existing" do
+      @p2.category = @p1.category
+      @p2.save!
+      @p2.category_sequence.should == @p1.category_sequence
+    end
+
+    it "should set a new category sequence to 0" do
+      @p2.category = "c"
+      @p2.save!
+      @p2.category_sequence.should == 0
+    end
+  end
+
+  describe "destroy" do
+    it "should remove order items" do 
+      o = Factory(:order)
+      o.should have(1).order_items
+      p = o.order_items.first.product
+      p.destroy
+      o.reload
+      o.should have(0).order_items
+    end
+
+    it "should remove reqular order items" do
+      o = Factory(:regular_order)
+      o.should have(1).regular_order_items
+      p = o.regular_order_items.first.product
+      p.destroy
+      o.reload
+      o.should have(0).regular_order_items
+    end
+  end
+
 end

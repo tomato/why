@@ -3,8 +3,15 @@ module ApplicationHelper
   def title
     content_for :title do 
       if(@supplier)
+        @supplier.name
+      else
+        "From Where It's Grown"
+      end
+    end
+    content_for :logo do 
+      if(@supplier)
         if(@supplier.logo)
-          image_tag @supplier.logo.url, :height => '70px'
+          image_tag @supplier.logo.url, :height => '40px'
         else
           @supplier.name
         end

@@ -1,7 +1,10 @@
 class Product < ActiveRecord::Base
   belongs_to :supplier
+  has_many :order_items, :dependent => :destroy
+  has_many :regular_order_items, :dependent => :destroy
   validates_presence_of :name
   validates_numericality_of :price, :allow_blank => true
+  before_update :set_category_sequence
 
   def self.update_sequences(ids, supplier_id)
     return unless ids
@@ -27,6 +30,13 @@ class Product < ActiveRecord::Base
           product.save!
         end
       end
+    end
+  end
+
+  def set_category_sequence
+    if(self.category_changed?)
+      s = Product.where(:category => self.category).first
+      self.category_sequence = s ? s.category_sequence : 0
     end
   end
 

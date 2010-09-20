@@ -62,3 +62,4 @@
             =link_to p.name, edit_product_path(p)
             -if(p.price)
               %span.price= to_pound(p.price)
+            =link_to("x",p , :method => :delete, :confirm => "Are you sure? Any customers with this product in their order will have the item removed")

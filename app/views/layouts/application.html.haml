@@ -3,6 +3,7 @@
 %html
   %head
     %title=yield :title
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
     =stylesheet_link_tag :all
     =javascript_include_tag :defaults, 'jquery.autocomplete', 'jquery-ui'
     <script type="text/javascript" src="http://use.typekit.com/rjk6gwu.js"></script>
@@ -15,11 +16,7 @@
   %body{ :id => tab_name }
     #header
       #logo
-        -if @supplier
-          =yield :logo
-        -else
-          #pretitle We like to buy our food
-          #title FROM WHERE IT'S GROWN
+        =yield :logo
       #menu
         %ul
           %li=link_to 'Sign Out Admin', destroy_admin_session_path if admin_signed_in?

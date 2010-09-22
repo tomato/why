@@ -1,21 +1,22 @@
 -@customer.errors.each do |e|
-  %p=e
-.pairs
-  %p.clear
-    .left=customer_fields.label :email
-    .right=customer_fields.text_field :email
-  %p.clear
-    .left=customer_fields.label :name
-    .right=customer_fields.text_field :name
-  %p.clear
-    .left=customer_fields.label :address
-    .right=customer_fields.text_area :address, :rows => 3
-  %p.clear
-    .left=customer_fields.label :postcode
-    .right=customer_fields.text_field :postcode
-  %p.clear
-    .left=customer_fields.label :telephone
-    .right=customer_fields.text_field :telephone
-  %p.clear
-    .left=customer_fields.label :round_id
-    .right=customer_fields.collection_select(:round_id, @rounds, :id, :name)
+  %li
+    %p=e
+%li
+  =customer_fields.label :email
+  =customer_fields.text_field :email
+%li
+  =customer_fields.label :name
+  =customer_fields.text_field :name
+%li
+  =customer_fields.label :address
+  =customer_fields.text_area :address, :rows => 3
+%li
+  =customer_fields.label :postcode
+  =customer_fields.text_field :postcode
+%li
+  =customer_fields.label :telephone
+  =customer_fields.text_field :telephone
+%li
+  =customer_fields.label :round_id
+  =customer_fields.collection_select(:round_id, @rounds, :id, :name)
+

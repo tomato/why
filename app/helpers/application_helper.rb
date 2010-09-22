@@ -16,7 +16,7 @@ module ApplicationHelper
           @supplier.name
         end
       else
-        "From Where It's Grown"
+        image_tag 'logo.gif', :height => '40px'
       end
     end
   end

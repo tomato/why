@@ -10,6 +10,8 @@ class HomeController < ApplicationController
       redirect_to  new_supplier_user_session_path
     elsif admin_signed_in?
       redirect_to suppliers_path
+    elsif @supplier
+      redirect_to new_customer_session_path
     end
 
     @news = get_feed

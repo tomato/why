@@ -1,13 +1,17 @@
 %h1 Update your settings
 =form_for @supplier, :html => { :multipart => true } do |f|
-  .pairs
-    %p.clear
-      .left=f.label :name
-      .right=f.text_field :name
-    %p.clear
-      .left=f.label :logo
-      .right=f.file_field :logo
-    %p.clear
-      .left
-      .right=submit_tag
+  %fieldset
+    %ul
+      %li
+        =f.label :name
+        =f.text_field :name
+      %li
+        =f.label :logo
+        =f.file_field :logo
+      %li
+        =f.label :info
+        =f.text_area :info
+      %li
+        =label_tag ''
+        =submit_tag
   

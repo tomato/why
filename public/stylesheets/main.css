@@ -34,6 +34,12 @@ h3 {
   font-size: 14px;
   font-weight: bold; }
 
+strong {
+  font-weight: bold; }
+
+em {
+  font-style: italic; }
+
 a {
   color: #333333;
   text-decoration: underline;
@@ -41,18 +47,21 @@ a {
 
 fieldset {
   border-style: none;
-  margin: 50px auto 0 0;
-  width: 50%; }
+  margin: 50px auto 0 0; }
   fieldset h2 {
     text-align: center; }
   fieldset ul li {
     list-style: none;
-    margin: 1em 0; }
+    margin: 1.5em 0; }
     fieldset ul li Label {
-      width: 33%;
+      width: 120px;
       display: inline-block;
       text-align: right;
-      margin-right: 20px; }
+      margin-right: 20px;
+      vertical-align: top; }
+    fieldset ul li textarea, fieldset ul li .wym_box {
+      width: 45%;
+      display: inline-block; }
 
 #header {
   height: 30px;

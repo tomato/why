@@ -20,8 +20,10 @@ class SuppliersController < ApplicationController
   end
 
   def update
-    @supplier.update_attributes(params[:supplier])
-    redirect_to :action => 'index'
+    if(@supplier.update_attributes(params[:supplier]))
+      flash[:notice] = "Your settings have been updated"
+      redirect_to supplier_path(@supplier)
+    end
   end
 
   def show

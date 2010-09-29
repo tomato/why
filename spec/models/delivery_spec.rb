@@ -12,13 +12,13 @@ describe Delivery do
   end
   describe "create_all" do
     it "should create delieries on specified days if delivery days are saturday (17th) and monday (19th)" do
-      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 23), [6,1])
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 23), [6,1], LastOrdersDuration.new(0,0))
       Delivery.all.should have(3).deliveries
     end
 
 
     it "should create deliveries on the from and to date if it falls on a delivery day" do
-      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1])
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1], LastOrdersDuration.new(0,0))
       Delivery.all.should have(1).deliveries
       delivery = Delivery.find_by_date(Date.new(2210,4,16))
       delivery.should be_a(Delivery)
@@ -26,22 +26,35 @@ describe Delivery do
     end
 
     it "should create no deliveries in to date is before from date" do
-      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 15), [5,1])
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 15), [5,1], LastOrdersDuration.new(0,0))
       Delivery.all.should have(0).deliveries
     end
 
     it "should not create a delivery for the same date on the same round twice" do
-      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1])
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1], LastOrdersDuration.new(0,0))
       Delivery.all.should have(1).deliveries
-      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1])
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1], LastOrdersDuration.new(0,0))
       Delivery.all.should have(1).deliveries
     end
 
     it "should create no dates if no days are selected" do
-      Delivery.create_all(1, Date.new(2000,4,16), Date.new(2210, 4, 16), [])
+      Delivery.create_all(1, Date.new(2000,4,16), Date.new(2210, 4, 16), [], LastOrdersDuration.new(0,0))
       Delivery.all.should have(0).delvieries
     end
 
+    it "should create last_order date the same as delivery date if last_order_duration is 0" do
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1], LastOrdersDuration.new(0,0))
+      ds = Delivery.all
+      ds.should have(1).deliveries
+      ds.first.last_order.should === ds.first.date
+    end
+
+    it "should create last_order date different to delivery date if last_order_duration is 1 day 1 hour" do
+      Delivery.create_all(1, Date.new(2210,4,16), Date.new(2210, 4, 16), [5,1], LastOrdersDuration.new(1,1))
+      ds = Delivery.all
+      ds.should have(1).deliveries
+      ds.first.last_order.should === ds.first.date - 82800.seconds
+    end
   end
   
   describe "Days" do
@@ -55,9 +68,9 @@ describe Delivery do
     before(:each) do
       @supplier = Factory(:supplier)
       @r1 = Factory(:round, :supplier => @supplier)
-      Delivery.create_all(@r1.id, Date.new(2210,4,16), Date.new(2210, 5, 16), [1]).should == 5
+      Delivery.create_all(@r1.id, Date.new(2210,4,16), Date.new(2210, 5, 16), [1], LastOrdersDuration.new(0,0)).should == 5
       @r2 = Factory(:round, :supplier => @supplier)
-      Delivery.create_all(@r2.id, Date.new(2210,4,16), Date.new(2210, 5, 30), [4,5,6,1,2,3]).should == 39
+      Delivery.create_all(@r2.id, Date.new(2210,4,16), Date.new(2210, 5, 30), [4,5,6,1,2,3], LastOrdersDuration.new(0,0)).should == 39
     end
 
     it "should return the next ten delivery dates for this supplier" do

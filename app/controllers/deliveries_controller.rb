@@ -14,10 +14,14 @@ class DeliveriesController < ApplicationController
   def create
     problems = validate()
     if(problems.length == 0)
-      set_count_notice(Delivery.create_all(params[:round].to_i, 
+      set_count_notice(Delivery.create_all(
+        params[:round].to_i, 
         convert_to_date(params[:from]),
         convert_to_date(params[:to]),
-        params[:day].collect{|i| i.to_i}))
+        params[:day].collect{|i| i.to_i},
+        LastOrdersDuration.new(params[:last_order][:day].to_i,
+                              params[:last_order][:hour].to_i)
+      ))
     else
       flash[:notice] = problems.join('<br/>')
     end

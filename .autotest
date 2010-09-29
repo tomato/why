@@ -1,0 +1,13 @@
+# ~.autotest
+require 'autotest_notification'
+SPEAKING = false
+DOOM_EDITION = false
+BUUF = false
+PENDING = false
+STICKY = false
+SUCCESS_SOUND = ''
+FAILURE_SOUND = ''
+
+Autotest.add_hook :initialize do |at|
+  %w{.git vendor rerun.txt index log}.each {|exception| at.add_exception(exception)}
+end

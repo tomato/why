@@ -5,6 +5,15 @@
       %li Here you can change the dates of a delivery
 %h1 Edit a Delivery
 =form_for @delivery do |d|
-  =d.label :date
-  =d.date_select :date
-  =submit_tag 'Update'
+  %fieldset
+    %ul
+      %li
+        =d.label :date
+        =d.date_select :date
+      %li
+        =d.label :last_order
+        =@delivery.last_order
+    %ul
+      %li
+        %label
+        =submit_tag 'Update'

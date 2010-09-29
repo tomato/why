@@ -42,12 +42,12 @@ class Delivery < ActiveRecord::Base
     Delivery.find(delivery_ids.split(',')).map {|d| d.all_produce_csv }.join
   end
 
-  def self.create_all(round_id, from, to, days)
+  def self.create_all(round_id, from, to, days, last_orders_duration)
     count = 0
     existing_dates = Delivery.find_all_by_round_id(round_id).collect{|i| i.date}
     (from..to).each do |date|
       if(days.include?(date.wday) && !existing_dates.include?(date))
-        if(Delivery.create(:date => date, :round_id => round_id))
+        if(Delivery.create(:date => date, :round_id => round_id, :last_order => date - last_orders_duration.to_i.seconds))
           count+=1
         end
       end

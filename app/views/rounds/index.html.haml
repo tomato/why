@@ -14,10 +14,10 @@
     %li
       .box
         %ul
-          %li=r.name
+          %li
+            %h3=r.name
           %li=r.area
           %li=r.schedule
-          %li
-            =link_to 'Edit this round', edit_round_path(r)
-            =link_to 'Add or Edit deliveries', round_path(r)
-            =link_to 'Delete', r, :confirm => 'Are you sure you want to delete this round and all its deliveries. The round will not be deleted if it is used by any customers', :method => :delete
+          %li=link_to 'Edit this round', edit_round_path(r)
+          %li=link_to 'Add or Edit deliveries', round_path(r)
+          %li=link_to 'Delete', r, :confirm => 'Are you sure you want to delete this round and all its deliveries. The round will not be deleted if it is used by any customers', :method => :delete

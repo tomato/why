@@ -1,14 +1,19 @@
+#help
+  %h2 Tasks
+  =form_tag download_supplier_path do
+    %ul
+      %li
+        Download your
+        %br
+        =submit_tag 'Deliveries', {:name => 'format', :value => 'Deliveries' }
+        =submit_tag 'Produce', {:name => 'format', :value => 'Produce' }
+        or
+        =submit_tag 'Labels', {:name => 'format', :value => 'Labels' }
+        %br
+        for deliveries on 
+        =select nil,'deliveries', @delivery_dates
 %h1 
   Customer Order Changes
-#help
-  %h2 Download
-  =form_tag download_supplier_path do
-    =submit_tag 'Deliveries', {:name => 'format', :value => 'Deliveries' }
-    =submit_tag 'Produce', {:name => 'format', :value => 'Produce' }
-    or
-    =submit_tag 'Labels', {:name => 'format', :value => 'Labels' }
-    for deliveries on 
-    =select nil,'deliveries', @delivery_dates
 #deliveries
   =form_tag accept_supplier_path do
     =submit_tag 'clear updates'

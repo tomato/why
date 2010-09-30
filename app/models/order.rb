@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
 
   def self.find_candidates(customer)
     Delivery.all(:conditions => 
-      ["round_id = ? and date >= curdate()", customer.round_id], :limit => 12
+      ["round_id = ? and last_order >= curdate()", customer.round_id], :limit => 12
     ).map do |d| 
       Order.find_by_delivery_id_and_customer_id(d.id, customer.id) || Order.new({
         :customer => customer, 

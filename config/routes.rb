@@ -37,6 +37,7 @@ Why::Application.routes.draw do
   
   root :to => "home#index"
   match 'home/' => "home#index", :as => "home"
+  match 'home2/' => "home#index2"
   match 'test/' => 'java_script_tests#order'
 
   # The priority is based upon order of creation:

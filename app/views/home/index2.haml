@@ -1,0 +1,33 @@
+=content_for :head do
+  :javascript
+    $(function(){
+      $('#header').css('height', '20px').css('padding','0');
+      $('#logo').css('display','none');
+    })
+  :css
+    .inner { max-width: 1024px; margin: 0 auto; }
+    h1 { text-align:center; }
+    img.logo { display: block; margin: 0 auto 1.5em auto;  }
+    .news { clear: both }
+    img.comic { border: #998299 solid 2px; margin-bottom: 1.5em; }
+    @media screen and (min-width: 50em) {
+      .intro { width : 33%; float: left; }
+      img.comic { float: right; width: 66%; } 
+      .article { display: inline-block; max-width: 40%; vertical-align: top; margin-right: 9%;}
+    }
+  
+.inner
+  =image_tag 'logo.gif', { :class => 'logo' }
+  %h1#strap - Simple Order Management for Small Food Producers -
+  .intro
+    %h2 From Where It's Grown is an order management system for local food producers and veg box schemes. It allows customers to update their orders online and producers to download the information they need. It's all online so there is nothing to install. You can create your own login page and url so your customers know its you they are dealing with.
+    %p
+      Interested? Questions? Send us a mail to:
+      =link_to 'info@fromwhereitsgrown.com', 'mailto:info@fromwhereitsgrown.com'
+  =image_tag 'comic.jpg', { :class => 'comic' }
+  .news 
+    %h2 News
+    -@news.each do |article|
+      .article
+        %h3=raw article[:title]
+        .text=raw article[:content_encoded]

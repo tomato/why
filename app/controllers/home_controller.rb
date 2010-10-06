@@ -17,6 +17,10 @@ class HomeController < ApplicationController
     @news = get_feed
   end
 
+  def index2
+    @news = get_feed
+  end
+
   private
 
   def get_feed

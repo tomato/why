@@ -30,7 +30,7 @@ h1 img {
   float: right; }
 
 h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: normal; }
 
 h3 {
@@ -47,6 +47,9 @@ a {
   color: #333333;
   text-decoration: underline;
   cursor: pointer; }
+
+img {
+  max-width: 100%; }
 
 fieldset {
   border-style: none;
@@ -72,9 +75,8 @@ fieldset {
   padding: 10px 10px 20px 10px; }
 
 #content {
-  padding: 0 30px;
+  padding: 1.5em;
   border-top: #998299 solid 3px;
-  padding-top: 18px;
   height: 100%; }
 
 #logo {
@@ -300,15 +302,11 @@ ul.boxes > li {
 #strap {
   font-size: 20px; }
 
-.article a[rel~="nofollow"] {
+.article .text a[rel~="nofollow"] {
   display: none; }
 
 .customer_details {
   display: inline; }
-
-#home img {
-  padding: 0;
-  margin: 0; }
 
 .steps h3 {
   text-align: center;

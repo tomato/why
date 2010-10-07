@@ -1,15 +1,8 @@
 var why = {}
 
 $(function(){
-    why.yourBrowserSucks()
     why.hideFlash();
 })
-
-why.yourBrowserSucks = function(){
-  if($.browser.msie && $.browser.version < 8) {
-    $('#content').prepend('<div id="badbrowser" >Your are running an old version of Internet Explorer which does not correctly support modern web standards this will cause the site to look a bit odd in places although hopefully it will be useable</div>');
-  }
-}
 
 why.hideFlash = function(){
   $('#notice').delay(5000).slideUp();

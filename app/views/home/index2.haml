@@ -9,13 +9,18 @@
     h1 { text-align:center; }
     img.logo { display: block; margin: 0 auto 1.5em auto;  }
     .news { clear: both }
-    img.comic { border: #998299 solid 2px; margin-bottom: 1.5em; }
+    img.comic { border: #998299 solid 2px; margin: 0 0 1.5em 0; }
     @media screen and (min-width: 50em) {
-      .intro { width : 33%; float: left; }
-      img.comic { float: right; width: 66%; } 
+      .intro { width : 30%; float: left; }
+      img.comic { float: right; width: 66%; margin-left: 1.5em } 
       .article { display: inline-block; max-width: 40%; vertical-align: top; margin-right: 9%;}
     }
-  
+  /[if lte IE 9]  
+    :css
+      .intro { width : 30%; float: left; }
+      img.comic { float: right; width: 66%; margin-left: 1.5em } 
+      .article { display: inline-block; max-width: 40%; vertical-align: top; margin-right: 9%;}
+      
 .inner
   =image_tag 'logo.gif', { :class => 'logo' }
   %h1#strap - Simple Order Management for Small Food Producers -

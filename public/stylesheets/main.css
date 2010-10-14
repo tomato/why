@@ -125,13 +125,22 @@ fieldset {
       -moz-border-radius-topright: 4px;
       -webkit-border-top-right-radius: 4px; }
 
+.promo #navigation {
+  padding-top: 10px;
+  text-align: right; }
+
 body#customers #customers_tab a,
 body#rounds #rounds_tab a,
 body#suppliers #suppliers_tab a,
 body#products #products_tab a,
 body#dashboard #dashboard_tab a,
 body#supplier_users #users_tab a,
-body#settings #settings_tab a {
+body#settings #settings_tab a,
+body#index #home_tab a,
+body#how #how_tab a,
+body#contact #contact_tab a,
+body#price #price_tab a,
+body#about #about_tab a {
   background-color: #998299; }
 
 div#products {
@@ -231,7 +240,7 @@ ul.boxes > li {
   margin: 0 auto;
   width: 640px; }
 
-#home #movie {
+.promo #movie {
   display: block;
   margin-top: 1.5em; }
 
@@ -323,3 +332,36 @@ fieldset.doubledecker {
     margin: 0; }
   fieldset.doubledecker label.main {
     display: block; }
+
+#footer {
+  size: 0.8em;
+  text-align: center;
+  margin-top: 1em; }
+
+.promo .inner {
+  max-width: 1024px;
+  margin: 0 auto; }
+.promo h1 {
+  text-align: center; }
+.promo img.logo {
+  display: block;
+  margin: 0 auto 1.5em auto; }
+.promo .news {
+  clear: both; }
+.promo img.comic {
+  border: #998299 solid 2px;
+  margin: 0 0 1.5em 0; }
+
+@media screen and (min-width: 50em) {
+  .promo .intro {
+    width: 30%;
+    float: left; }
+  .promo img.comic {
+    float: right;
+    width: 66%;
+    margin-left: 1.5em; }
+  .promo .article {
+    display: inline-block;
+    max-width: 40%;
+    vertical-align: top;
+    margin-right: 9%; } }

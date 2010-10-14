@@ -1,69 +1,23 @@
 =content_for :head do
-  :javascript
-    $(function(){
-      $('#header').css('height', '3px').css('padding','0');
-      $('#logo').css('display','none');
-    })
-  
-.row
-  .column.grid_12
-    %h1
-      =image_tag 'logo.gif'
-      %span.pretitle We like to buy our food
-      %br
-      %span.title FROM WHERE IT'S GROWN
-
-.row
-  .column.grid_12.centertext
-    %h2#strap - An Order Management System for Local Food Suppliers -
-.row.roles
-  .column.grid_4
-    %h2 Suppliers
-    %p Stop messing around with scraps of paper and making mistakes with orders, and let your customers change their order online. You can download a list of deliveries you need for a day, a list of produce required or just a list of changes that have been made. The software is hosted by us online so you just need to sign up and set up you products, rounds and customers to get started. It only costs £30 per month for up to 500 customers and you can try it for free for the first month.
+  /[if lte IE 9]  
+    :css
+      .intro { width : 30%; float: left; }
+      img.comic { float: right; width: 66%; margin-left: 1.5em } 
+      .article { display: inline-block; max-width: 40%; vertical-align: top; margin-right: 9%;}
+      
+.inner
+  =image_tag 'logo.gif', { :class => 'logo' }
+  %h1#strap - Simple Order Management for Small Food Producers -
+  .intro
+    %h2 From Where It's Grown is an order management system for local food producers and veg box schemes. It allows customers to update their orders online and producers to download the information they need. It's all online so there is nothing to install. You can create your own login page and url so your customers know its you they are dealing with.
     %p
       Interested? Questions? Send us a mail to:
       =link_to 'info@fromwhereitsgrown.com', 'mailto:info@fromwhereitsgrown.com'
-
-  .column.grid_4
-    %h2 Local Food Lovers
-    %p Don't be tempted to abandon your local suppliers because it's a hassle changing you order. With our software you just need to login to add or remove products to your regular or individual orders (We all need extra potatoes sometimes). When you are away on holiday just remove your products for the affected orders and your done. If your local suppliers don't use us yet please tell you them about us and how we can help them compete with the big boys!
-    %p
-      Existing Customer? 
-      =link_to 'Sign In', new_customer_session_path
-
-  .column.grid_4
-    %h2 Us
-    %p We believe that small business can be more efficient than big business if they are willing to share tools and collaborate in the creation of those tools. We are a self funded startup with no-one to answer to but our customers. We love good food from small producers and want to help those producers focus on producing not on paperwork. We love to keep things personal so contact us and tell us what you think. 
-
-.row
-  %h2 Suppliers - How it works
-.row.steps
-  .column.grid_3
-    %h3 Add you products
-  .column.grid_3
-    %h3 Create your rounds
-  .column.grid_3
-    %h3 Add the delivery dates 
-  .column.grid_3
-    %h3 Invite your customers
-.row
-  =image_tag 'supplier_steps.gif'
-
-.row
-  %h2 Customers - Heres a video showing how you can change your order
-.row
-  .column.grid_3
-    %p
-      As a customer, you will receive an <strong>invitation email</strong> from your producer/supplier. Follow the link and you will be able to create a password for your account. Once this is done you are free to change your order whenever you want. Watch the video to see how. (Sorry about the dodgy voice-over!)
-  .column.grid_9
-    #movie
-      <object type="application/x-shockwave-flash" data="http://www.youtube.com/v/ytnJlDBwnO8" width="640" height="385"> <param name="movie" value="http://www.youtube.com/v/J_DV9b0x7v4"> </object>
-
-.row 
-  %h2 News
--@news.in_groups_of(2, false) do |article_row|
-  .row
-    -article_row.each do |article|
-      .column.grid_6.article
+  =image_tag 'comic.jpg', { :class => 'comic' }
+  .news 
+    %h2 News
+    -@news.each do |article|
+      .article
         %h3=raw article[:title]
-        .article=raw article[:content_encoded]
+        .text=raw article[:content_encoded]
+    

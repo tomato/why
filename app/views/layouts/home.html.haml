@@ -1,0 +1,34 @@
+!!! 5
+%html
+  %head
+    %title We like our food to come - From Where It's Grown
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
+    =stylesheet_link_tag :all
+    <script type="text/javascript" src="http://use.typekit.com/rjk6gwu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <meta name="keywords" content="food, producer, orders, delivery, organic, application, supplier" />
+    <meta name="description" content="An Order Management System for Local Food Suppliers"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    = csrf_meta_tag
+    =yield :head
+  %body.promo{ :id => tab_name }
+    #navigation
+      %ul
+        %li#home_tab=link_to 'Home', home_path
+        %li#how_tab=link_to 'How it works', how_path
+        %li#about_tab=link_to 'About us', about_path
+        %li#price_tab=link_to 'Pricing', price_path
+        %li#contact_tab=link_to 'Contact Us', contact_path
+    #content
+      /[if lte IE 8]
+        #badbrowser Your are running an old version of Internet Explorer which does not correctly support modern web standards this will cause the site to look a bit odd in places although hopefully it will be useable
+      -if(flash[:notice])
+        #notice=flash[:notice]
+      -if(flash[:alert])
+        #alert=flash[:alert]
+      =yield
+      #footer 
+        Design by
+        %a{ :href => 'mailto:tom@fromwhereitsgrown.com'} Tom
+        Cartoon by
+        %a{ :href => 'mailto:sammyborras@gmail.com'} Sammy Borras

@@ -31,13 +31,20 @@ Why::Application.routes.draw do
     end
   end
 
+  scope :path => '/home', :controller => :home do 
+    match '/index'	=> :index, :as => "home" 
+    match '/index2'	=> :index2 
+    match '/how' => :how, :as => "how"
+    match '/about' => :about, :as => "about"
+    match '/price' => :price, :as => "price"
+    match '/contact' => :contact, :as => "contact"
+  end
+  
   constraints(Subdomain) do  
     match '/', :to => redirect("/customers/sign_in") 
   end  
   
   root :to => "home#index"
-  match 'home/' => "home#index", :as => "home"
-  match 'home2/' => "home#index2"
   match 'test/' => 'java_script_tests#order'
 
   # The priority is based upon order of creation:

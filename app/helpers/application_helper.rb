@@ -28,6 +28,8 @@ module ApplicationHelper
       "customers"
     elsif controller.controller_name == "suppliers" && controller.action_name == "edit"
       "settings"
+    elsif controller.controller_name == "home"
+      controller.action_name
     else
       controller.controller_name
     end

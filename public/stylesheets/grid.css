@@ -23,7 +23,7 @@
 }
 .row {
 	width: 960px;
-	margin: 0 auto;
+	margin: 0 auto 1.5em;
 	overflow: hidden;
 }
 .row .row {

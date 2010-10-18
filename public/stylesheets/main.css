@@ -30,11 +30,11 @@ h1 img {
   float: right; }
 
 h2 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: normal; }
 
 h3 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold; }
 
 strong {
@@ -125,9 +125,16 @@ fieldset {
       -moz-border-radius-topright: 4px;
       -webkit-border-top-right-radius: 4px; }
 
-.promo #navigation {
+.promo #navigation ul {
   padding-top: 10px;
   text-align: right; }
+  .promo #navigation ul a {
+    background-color: transparent;
+    color: black; }
+
+.promo #navigation img {
+  float: left;
+  height: 30px; }
 
 body#customers #customers_tab a,
 body#rounds #rounds_tab a,
@@ -142,6 +149,21 @@ body#contact #contact_tab a,
 body#price #price_tab a,
 body#about #about_tab a {
   background-color: #998299; }
+
+body#customers.promo #customers_tab a,
+body#rounds.promo #rounds_tab a,
+body#suppliers.promo #suppliers_tab a,
+body#products.promo #products_tab a,
+body#dashboard.promo #dashboard_tab a,
+body#supplier_users.promo #users_tab a,
+body#settings.promo #settings_tab a,
+body#index.promo #home_tab a,
+body#how.promo #how_tab a,
+body#contact.promo #contact_tab a,
+body#price.promo #price_tab a,
+body#about.promo #about_tab a {
+  border-top: solid 3px #998299;
+  background-color: transparent; }
 
 div#products {
   float: left;
@@ -309,7 +331,7 @@ ul.boxes > li {
   text-align: center; }
 
 #strap {
-  font-size: 20px; }
+  font-size: 40px; }
 
 .article .text a[rel~="nofollow"] {
   display: none; }
@@ -317,9 +339,9 @@ ul.boxes > li {
 .customer_details {
   display: inline; }
 
-.steps h3 {
+.steps {
   text-align: center;
-  margin: 0;
+  margin: 0 0 3em 0;
   padding: 0; }
 
 fieldset.doubledecker {
@@ -365,3 +387,9 @@ fieldset.doubledecker {
     max-width: 40%;
     vertical-align: top;
     margin-right: 9%; } }
+
+#what img {
+  float: right; }
+
+#download img {
+  margin-left: 130px; }

@@ -13,11 +13,13 @@
     =yield :head
   %body.promo{ :id => tab_name }
     #navigation
+      -if tab_name != 'index' then
+        =image_tag 'logo.gif'
       %ul
         %li#home_tab=link_to 'Home', home_path
-        %li#how_tab=link_to 'How it works', how_path
-        %li#about_tab=link_to 'About us', about_path
+        %li#how_tab=link_to 'More...', how_path
         %li#price_tab=link_to 'Pricing', price_path
+        %li#about_tab=link_to 'About us', about_path
         %li#contact_tab=link_to 'Contact Us', contact_path
     #content
       /[if lte IE 8]

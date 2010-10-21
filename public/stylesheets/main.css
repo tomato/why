@@ -331,7 +331,8 @@ ul.boxes > li {
   text-align: center; }
 
 #strap {
-  font-size: 40px; }
+  font-size: 40px;
+  line-height: 50px; }
 
 .article .text a[rel~="nofollow"] {
   display: none; }
@@ -393,3 +394,12 @@ fieldset.doubledecker {
 
 #download img {
   margin-left: 130px; }
+
+#price .price {
+  margin: 3em auto; }
+  #price .price h1 {
+    font-size: 100px;
+    text-align: center;
+    margin: 0; }
+  #price .price h2 {
+    text-align: center; }

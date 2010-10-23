@@ -400,6 +400,7 @@ fieldset.doubledecker {
   #price .price h1 {
     font-size: 100px;
     text-align: center;
-    margin: 0; }
+    margin: 0;
+    line-height: 80px; }
   #price .price h2 {
     text-align: center; }

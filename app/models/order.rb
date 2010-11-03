@@ -13,13 +13,26 @@ class Order < ActiveRecord::Base
 
   def self.find_candidates(customer)
     Delivery.all(:conditions => 
-      ["round_id = ? and last_order >= curdate()", customer.round_id], :limit => 12
+      ["round_id = ? and last_order >= curdate()", customer.round_id], 
+        :limit => 12, :order => "date asc"
     ).map do |d| 
-      Order.find_by_delivery_id_and_customer_id(d.id, customer.id) || Order.new({
+      Order.find_by_delivery_id_and_customer_id(d.id, customer.id) || 
+      Order.new({
         :customer => customer, 
         :delivery => d})
     end
+  end
 
+  def self.new_for_delivery(customer, delivery)
+    o = Order.new(:customer => customer,
+                  :delivery => delivery)
+    ro = RegularOrder.where(:customer_id => customer.id).first
+    ro.items.each do |i|
+      if i.is_required_for_delivery delivery then
+        o.items << OrderItem.new(:product => i.product, :quantity => i.quantity)
+      end
+    end
+    return o
   end
 
   def self.find_pending_updates(supplier_id)

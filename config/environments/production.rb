@@ -50,7 +50,7 @@ Why::Application.configure do
 ActionMailer::Base.smtp_settings = {
   :address  => "smtp-relay.brightbox.net",
   :port  => 25, 
-  :domain  => "brightbox.net"
+  :domain  => "brightbox.net",
   :enable_starttls_auto => false
 }
   

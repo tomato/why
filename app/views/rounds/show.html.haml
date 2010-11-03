@@ -27,7 +27,7 @@
         =select_date Time.now,:prefix => 'to', :order => [:day, :month, :year]
       %li
         %label.main Last orders may be made up to:
-        =select "last_order", "day", 1..10
+        =select "last_order", "day", 0..10
         day(s) before delivery at
         =select_hour 12, :field_name => 'last_order[hour]', :prefix => ''
         \:00

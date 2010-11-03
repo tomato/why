@@ -46,4 +46,12 @@ Why::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+ActionMailer::Base.smtp_settings = {
+  :address  => "smtp-relay.brightbox.net",
+  :port  => 25, 
+  :domain  => "brightbox.net"
+  :enable_starttls_auto => false
+}
+  
 end

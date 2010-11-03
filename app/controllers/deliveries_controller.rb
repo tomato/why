@@ -45,8 +45,8 @@ class DeliveriesController < ApplicationController
       return problems
     end
 
-    if(convert_to_date(params[:from]) >= convert_to_date(params[:to]))
-      problems << "Your 'to' date needs to be after or on your 'from' date"
+    if(convert_to_date(params[:from])> convert_to_date(params[:to]))
+      problems << "Your 'to' date needs to be after your 'from' date"
     end
     return problems
   end

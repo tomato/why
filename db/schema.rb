@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100928050916) do
+ActiveRecord::Schema.define(:version => 20101026191052) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -102,21 +102,22 @@ ActiveRecord::Schema.define(:version => 20100928050916) do
   end
 
   create_table "regular_order_items", :force => true do |t|
-    t.integer  "regular_order_id", :null => false
-    t.integer  "product_id",       :null => false
-    t.integer  "quantity",         :null => false
+    t.integer  "regular_order_id",                              :null => false
+    t.integer  "product_id",                                    :null => false
+    t.integer  "quantity",                                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "frequency",           :default => 1
+    t.date     "first_delivery_date", :default => '2010-11-02'
   end
 
   add_index "regular_order_items", ["regular_order_id", "product_id"], :name => "index_regular_order_items_on_regular_order_id_and_product_id", :unique => true
 
   create_table "regular_orders", :force => true do |t|
-    t.integer  "customer_id",                              :null => false
-    t.integer  "occurs_every_x_orders", :default => 1,     :null => false
+    t.integer  "customer_id",                       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "pending_update",        :default => false, :null => false
+    t.boolean  "pending_update", :default => false, :null => false
   end
 
   create_table "rounds", :force => true do |t|

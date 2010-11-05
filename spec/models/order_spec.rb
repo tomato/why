@@ -155,6 +155,22 @@ describe Order do
     end
   end
 
+  describe "new_for_delivery" do
+    it "should return a copy of a regular order" do
+      r = Factory(:round)
+      Delivery.create_all(r.id, DateTime.now, DateTime.now + 365.days, [0],LastOrdersDuration.new(0,0)).should be_>(1)
+      c = Factory(:customer)
+      r = Factory(:regular_order, :customer_id => c.id)
+      o = Order.new_for_delivery(c, Delivery.first)
+      o.should_not be_nil
+      o.customer.should == c
+      o.should have(1).item
+
+    end
+
+    it "should only contain items that a valid for that delivery"
+  end
+
   describe :export_fields do
     it "should contain the quantity" do
       o = Factory(:order)

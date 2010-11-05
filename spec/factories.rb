@@ -56,6 +56,8 @@ Factory.define :regular_order_item do |u|
   u.product {|a| a.association(:product) }
   u.quantity 1
   u.regular_order_id  1
+  u.frequency 1
+  u.first_delivery_date DateTime.now
 end
 
 Factory.define :product do |u|
@@ -70,6 +72,6 @@ Factory.define :round do |u|
 end
 
 Factory.define :delivery do |u|
-  u.date DateTime.new
+  u.date DateTime.now
 end
   

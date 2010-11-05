@@ -1,6 +1,10 @@
 class RegularOrder < ActiveRecord::Base
   include Orderable
-
+  
+  # 1,2,4,8 week
+  # what if delivery is multiple times of week
+  # options of day then select every n weeks
+  #this should be in regular order item
   belongs_to :customer
   has_many :regular_order_items, :dependent => :delete_all
 

@@ -18,11 +18,6 @@ describe DeliveriesController do
     end
 
     describe "Create" do
-      it "should send message to delivery" do
-        Delivery.should_receive(:create_all).with(7, Date.new(2010,4,14), Date.new(2011,4,14),[1,3,4])
-        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2011"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["1","3","4"],"round"=>"7"}
-      end
-
       it "should return a warning if no days are selected" do
         Delivery.should_not_receive(:create_all)
         post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2011"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>[],"round"=>"7"}
@@ -49,19 +44,19 @@ describe DeliveriesController do
 
       it "should return a notice if 1 new delivery was added" do
         Delivery.should_receive(:create_all).and_return(1)
-        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["3"],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["3"],"round"=>"7", "last_order"=>{"day" => 1,  "hours" => 2}}
         flash[:notice].should == "1 new delivery was added"
       end
 
       it "should return a notice if 3 new delivery was added" do
         Delivery.should_receive(:create_all).and_return(3)
-        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["3"],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["3"],"round"=>"7", "last_order"=>{"day" => 1,  "hours" => 2}}
         flash[:notice].should == "3 new deliveries were added"
       end
 
       it "should return a notice if no new delivery was added" do
         Delivery.should_receive(:create_all).and_return(0)
-        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["3"],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["3"],"round"=>"7", "last_order"=>{"day" => 1,  "hours" => 2}}
         flash[:notice].should == "No new deliveries were added"
       end
     end

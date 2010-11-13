@@ -71,5 +71,6 @@ end
 
 Factory.define :delivery do |u|
   u.date DateTime.new
+  u.round {|a| a.association(:round)}
 end
   

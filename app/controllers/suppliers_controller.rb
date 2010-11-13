@@ -28,7 +28,7 @@ class SuppliersController < ApplicationController
 
   def show
     @pending = OrderFactory.pending_customers @supplier.id
-    @delivery_dates = Delivery.next_10_dates(@supplier.id).map { |d| [d[0].to_s(:short), d[1].join(',')] }
+    @delivery_dates = [['(select)','']] + Delivery.next_10_dates(@supplier.id).map { |d| [d] } 
   end
 
   def switch
@@ -42,24 +42,38 @@ class SuppliersController < ApplicationController
   end
 
   def download
-    return labels() if params['format'] == 'Labels'
-    return produce() if params['format'] == 'Produce'
+    delivery_ids = Delivery.ids_for_dates(@supplier, 
+                                          p_d(params[:one_date]), 
+                                          p_d(params[:from_date]), 
+                                          p_d(params[:to_date]))
+    return labels(delivery_ids) if params['format'] == 'Labels'
+    return produce(delivery_ids) if params['format'] == 'Produce'
+    return deliveries(delivery_ids)
+  end
 
-    send_data Delivery.all_orders_csv(params[:deliveries]),
+  private
+
+  def p_d(d)
+    return d unless d.present?
+    Date.strptime(d, "%Y-%m-%d")
+  end
+
+  def deliveries(delivery_ids)
+    send_data Delivery.all_orders_csv(delivery_ids),
       :filename => 'deliveries.csv',
       :type => 'text/csv',
       :disposition => 'attachment'
   end
 
-  def produce
-    send_data Delivery.all_produce_csv(params[:deliveries]),
+  def produce(delivery_ids)
+    send_data Delivery.all_produce_csv(delivery_ids),
       :filename => 'produce.csv',
       :type => 'text/csv',
       :disposition => 'attachment'
   end
 
-  def labels
-    pdf = PdfLabelMaker.avery_labels(Delivery.all_orders(params[:deliveries]))
+  def labels(delivery_ids)
+    pdf = PdfLabelMaker.avery_labels(Delivery.all_orders(delivery_ids))
     send_data pdf.render, 
       :filename => 'labels.pdf', 
       :type => 'application/pdf',

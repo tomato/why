@@ -3,15 +3,22 @@
   =form_tag download_supplier_path do
     %ul
       %li
-        Download your
+        For deliveries on 
+        =select nil,'one_date', @delivery_dates
+      %li
+        or between
+        %br
+        =select nil,'from_date', @delivery_dates
+        and 
+        =select nil,'to_date', @delivery_dates
+      %li
+        download your
         %br
         =submit_tag 'Deliveries', {:name => 'format', :value => 'Deliveries' }
         =submit_tag 'Produce', {:name => 'format', :value => 'Produce' }
         or
         =submit_tag 'Labels', {:name => 'format', :value => 'Labels' }
-        %br
-        for deliveries on 
-        =select nil,'deliveries', @delivery_dates
+
 %h1 
   Customer Order Changes
 #deliveries

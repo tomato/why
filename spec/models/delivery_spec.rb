@@ -78,17 +78,12 @@ describe Delivery do
     end
 
     it "should return them with the next first" do
-      Delivery.next_10_dates(@supplier.id).first[0].should == Date.new(2210, 4, 16)
+      Delivery.next_10_dates(@supplier.id).first.should == Date.new(2210, 4, 16)
     end
 
     describe "if there are multiple rounds on a delviery day" do
       it "should only show the delivery date once" do
-        Delivery.next_10_dates(@supplier.id).find_all{ |d| d[0] == Date.new(2210,4,16)}.should have(1).delivery
-      end
-
-      it "should contain the round_ids for the date" do
-        (Delivery.next_10_dates(@supplier.id).find_all{ |d| d[0] == Date.new(2210,4,16)}
-          ).first[1].should have(2).ids
+        Delivery.next_10_dates(@supplier.id).find_all{ |d| d == Date.new(2210,4,16)}.should have(1).delivery
       end
     end
   end
@@ -157,6 +152,48 @@ describe Delivery do
         p[0][3].should == 1
       end
 
+    end
+
+    describe :for_supplier do
+      it "should return a supplier by friendly_id" do
+        d = Factory(:delivery)
+        Delivery.for_supplier(d.round.supplier).first.should_not be_nil
+      end
+    end
+
+    describe "ids_for_dates" do 
+      before(:each) do
+        date = Date.new(2010,1,1)
+        @supplier = Factory(:supplier)
+        @round = Factory(:round, :supplier => @supplier)
+        @delivery1 = Factory(:delivery, {:round_id => @round.id, :date => date })
+        @delivery2 = Factory(:delivery, {:round_id => @round.id, :date => date + 1.day})
+        @delivery3 = Factory(:delivery, {:round_id => @round.id, :date => date + 2.day})
+      end
+
+      it "should return one date if present" do
+        ids = Delivery.ids_for_dates(@supplier, @delivery1.date, nil, nil)
+        ids.should_not be_nil
+        ids.should have(1).items
+      end
+
+      it "should return range of dates start and end date are present" do
+        ids = Delivery.ids_for_dates(@supplier, nil, @delivery1.date, @delivery3.date)
+        ids.should_not be_nil
+        ids.should have(3).items
+      end
+
+      it "should return no ids if only a start date is present" do
+        ids = Delivery.ids_for_dates(@supplier, nil, @delivery1.date, nil)
+        ids.should_not be_nil
+        ids.should have(0).items
+      end
+
+      it "should return no ids if only a end date is present" do
+        ids = Delivery.ids_for_dates(@supplier, nil, nil, @delivery1.date)
+        ids.should_not be_nil
+        ids.should have(0).items
+      end
     end
   end
 end

@@ -1,6 +1,7 @@
 class Delivery < ActiveRecord::Base
   belongs_to :round
   has_many :orders
+  scope :for_supplier, lambda { |supplier| where('supplier_id = ?', supplier.id).joins(' inner join rounds on deliveries.round_id = rounds.id')}
 
   def all_orders
     (round.customers.map do |c|
@@ -63,7 +64,18 @@ class Delivery < ActiveRecord::Base
     Delivery.all( :conditions => ['supplier_id = ? and date >= curdate()', supplier_id],
                   :joins => ' inner join rounds on deliveries.round_id = rounds.id',
                   :order => 'date ').group_by(&:date).to_a.first(10).map do |d|
-                    [d[0], d[1].map{|d| d.id}]
+                    d[0]
                   end 
+  end
+
+  def self.ids_for_dates(supplier, one_date, start_date, end_date)
+    if one_date.present? then
+      d = Delivery.for_supplier(supplier).where('date = ?', one_date)
+    elsif start_date.present? && end_date.present? then
+      d = Delivery.for_supplier(supplier).where('date between ? and ?', start_date, end_date)
+    else
+      d = []
+    end
+    return d.map{|a| a.id}
   end
 end

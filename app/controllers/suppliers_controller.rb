@@ -46,9 +46,13 @@ class SuppliersController < ApplicationController
                                           p_d(params[:one_date]), 
                                           p_d(params[:from_date]), 
                                           p_d(params[:to_date]))
-    return labels(delivery_ids) if params['format'] == 'Labels'
-    return produce(delivery_ids) if params['format'] == 'Produce'
-    return deliveries(delivery_ids)
+    if delivery_ids.any? then
+      return labels(delivery_ids) if params['format'] == 'Labels'
+      return produce(delivery_ids) if params['format'] == 'Produce'
+      return deliveries(delivery_ids)
+    else
+      redirect_to supplier_path(@supplier)
+    end
   end
 
   private

@@ -139,6 +139,8 @@ describe Delivery do
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer2.id})
         @delivery.all_orders_csv.should == "tom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\ntom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\n"
       end
+
+      it "should return an empty string if no id's are passed"
     end
 
     describe :all_produce do
@@ -191,6 +193,12 @@ describe Delivery do
 
       it "should return no ids if only a end date is present" do
         ids = Delivery.ids_for_dates(@supplier, nil, nil, @delivery1.date)
+        ids.should_not be_nil
+        ids.should have(0).items
+      end
+
+      it "should return no ids if only a end date is before start date" do
+        ids = Delivery.ids_for_dates(@supplier, nil, @delivery2.date, @delivery1.date)
         ids.should_not be_nil
         ids.should have(0).items
       end

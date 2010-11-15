@@ -61,7 +61,7 @@ describe SuppliersController do
 
     it "should call method with the deliveries specified if one_date is passed" do
       Delivery.should_receive(:all_orders_csv).and_return("")
-      Delivery.should_receive(:ids_for_dates).with(@supplier, Date.new(2010,11,11), "", "").and_return(nil)
+      Delivery.should_receive(:ids_for_dates).with(@supplier, Date.new(2010,11,11), "", "").and_return([1])
       post :download,  {"authenticity_token"=>"u8YvtfsAUSwqM79DIHhlo2VKDuHBkDqthFNItsKAY7Q=", "utf8"=>"\342\234\223", "from_date"=>"", "id"=>"toms-organics", "to_date"=>"", "one_date"=>"2010-11-11"}
     end
     

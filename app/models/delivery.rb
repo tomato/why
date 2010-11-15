@@ -15,7 +15,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def all_orders_csv
-    all_orders.map{|o| o.to_csv}.join
+    all_orders.map{|o| date.to_date.to_s(:short) + ',' + o.to_csv}.join
   end
 
   def self.all_orders_csv(delivery_ids)
@@ -60,10 +60,10 @@ class Delivery < ActiveRecord::Base
     [[1 , "Monday"], [2 , "Tuesday"], [3 , "Wednesday"], [4 , "Thursday"], [5 , "Friday"], [6 , "Saturday"], [0 , "Sunday"]]
   end
 
-  def self.next_10_dates(supplier_id)
+  def self.next_dates(supplier_id)
     Delivery.all( :conditions => ['supplier_id = ? and date >= curdate()', supplier_id],
                   :joins => ' inner join rounds on deliveries.round_id = rounds.id',
-                  :order => 'date ').group_by(&:date).to_a.first(10).map do |d|
+                  :order => 'date ').group_by(&:date).to_a.first(30).map do |d|
                     d[0]
                   end 
   end

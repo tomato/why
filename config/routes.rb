@@ -11,7 +11,7 @@ Why::Application.routes.draw do
     end
   end
   resources :products do
-    member do 
+    collection do 
       post :reorder
     end
   end

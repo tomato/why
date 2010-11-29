@@ -37,6 +37,7 @@ class RegularOrder < ActiveRecord::Base
       else
         regularOrder = RegularOrder.find(v['regular_order_id'])
       end
+      regularOrder.note = v['note']
       regularOrder.pending_update = 1 #if by_customer
 
       if(regularOrder.save!)

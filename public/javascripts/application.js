@@ -12,11 +12,13 @@ why.createOrder = function()
 {
   var Order = function(order) {
     this.delivery_id = order.find('h3').attr('data-delivery_id');
+    this.note = $('textarea',order).val();
     this.items = why.map_slice(order.find('li.item'), function(a){ return new Item(a) });
   };
 
   var RegularOrder = function(order) {
     this.regular_order_id = order.find('h3').attr('data-regular_order_id');
+    this.note = $('textarea',order).val();
     this.items = why.map_slice(order.find('li.item'), function(a){ return new Item(a) });
   };
 
@@ -107,7 +109,20 @@ why.setupOrders = function(){
     });
   };
 
+  var openNote = function(order){
+    $('.editNote', order).fadeIn(); 
+  }
+
+  var closeNote = function(order){
+    $('.editNote', order).fadeOut(); 
+  }
+
+  var updateNote = function(order){
+    updateOrders(order) ; 
+  }
+
   $('.orders .regular ul').html($('.regularOrders .order ul').html());
+  $('.orders .regular textarea').val($('.regularOrders .order textarea').val());
   $(".order").droppable({ drop: addItem , accept: '.product'})
   $('.quantity').change(function(){ 
     var order = $(this).parents('.order')
@@ -117,6 +132,9 @@ why.setupOrders = function(){
     }
     updateOrders(order);
   });
+  $('.note a').click(function(){ openNote($(this).parents('.order')); return false;} )
+  $('.editNote a').click(function(){ closeNote($(this).parents('.order')); return false});
+  $('.editNote textarea').change(function(){ updateNote($(this).parents('.order')); });
   subTotal()
 }
 

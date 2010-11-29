@@ -51,6 +51,7 @@ class Order < ActiveRecord::Base
         order = Order.new(:delivery_id => v['delivery_id'],
                    :customer_id => params['customer_id'])
       end
+      order.note = v['note']
       order.pending_update = 1 #if by_customer
 
       if(order.save!)

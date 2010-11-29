@@ -43,6 +43,8 @@
     -@regular_orders.each do |regular|
       %li
         .order
+          .note 
+            =link_to 'add note', ''
           %h3{"data-regular_order_id" => regular.id} Regular Order
           %ul
             -regular.regular_order_items.each do |oi|
@@ -52,12 +54,23 @@
                   =oi.product.name
                   %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
             %li.total
+          .editNote
+            %h3 
+              Notes for Reqular Order
+              \:
+            %textarea{ :rows => 14, :cols => 40 }
+              =regular.note
+            %br
+            =link_to 'close',''
   %hr
   %ul.orders
     -@orders.each do |order|
       %li
         %div{:class => order.new_record? ? "order regular" : "order"}  
-          %h3{"data-delivery_id" => order.delivery.id}=order.delivery.date.to_s(:short)
+          .note 
+            =link_to 'add note', ''
+          %h3{"data-delivery_id" => order.delivery.id}
+            =order.delivery.date.to_s(:short)
           %ul
             -order.order_items.each do |oi|
               %li.item{"data-product_id" => oi.product_id} 
@@ -66,4 +79,13 @@
                   =oi.product.name
                   %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
             %li.total
+          .editNote
+            %h3 
+              Notes for
+              =order.delivery.date.to_s(:short)
+              \:
+            %textarea{ :rows => 14, :cols => 40 }
+              =order.note
+            %br
+            =link_to 'close',''
 

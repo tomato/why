@@ -199,12 +199,15 @@ div#products {
   zoom: 1;
   *display: inline; }
   .order h3 {
-    text-align: center;
     padding: 2px;
     margin: 0;
     background-color: #998299; }
+  .order .note {
+    width: 60px;
+    float: right;
+    margin-right: 10px; }
   .order ul {
-    margin: 1.5em 0;
+    margin: 0.5em 0;
     padding: 5px; }
     .order ul li.item {
       cursor: move; }
@@ -213,8 +216,22 @@ div#products {
   .order input {
     width: 1em; }
 
+.editNote {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  height: 300px;
+  width: 300px;
+  border: 1px solid black;
+  background-color: white;
+  z-index: 100;
+  display: none; }
+  .editNote textarea {
+    width: 90%;
+    margin: 10px; }
+
 .updated {
-  border: 2px solid red; }
+  border: 2px solid red !important; }
 
 ul.boxes > li {
   display: inline; }

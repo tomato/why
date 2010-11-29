@@ -215,13 +215,17 @@ div#products
   *display: inline
 
   h3
-    text-align: center
     padding: 2px
     margin: 0
     background-color: #998299
 
+  .note
+    width: 60px
+    float: right
+    margin-right: 10px
+
   ul
-    margin: 1.5em 0
+    margin: 0.5em 0
     padding: 5px
 
     li.item
@@ -233,9 +237,23 @@ div#products
   input
     width: 1em
 
+.editNote
+  position: absolute
+  top: 30%
+  left: 30%
+  height: 300px
+  width: 300px
+  border: 1px solid black
+  background-color: white
+  z-index: 100
+  display: none
+
+  textarea
+    width: 90%
+    margin: 10px 
 
 .updated
-  border: 2px solid red 
+  border: 2px solid red !important
 
 ul.boxes > li
   display: inline

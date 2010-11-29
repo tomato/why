@@ -42,6 +42,14 @@ why.createOrder = function()
 
 why.setupProducts = function(){
   $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order'});
+  $("#products ul").hide();
+  $("#products h3").toggle(function(){
+    $('.catselector',this).html('-');
+    $(this).next('ul').slideDown();
+  },function(){
+    $('.catselector',this).html('+');
+    $(this).next('ul').slideUp();
+  })
 }
 
 why.setupOrders = function(){

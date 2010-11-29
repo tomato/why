@@ -169,6 +169,9 @@ div#products {
   float: left;
   width: 160px;
   height: 100%; }
+  div#products h3 {
+    cursor: pointer;
+    margin-bottom: 0.5em; }
   div#products ul {
     margin-left: 10px; }
     div#products ul li {

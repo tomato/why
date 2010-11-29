@@ -16,7 +16,9 @@
 #products
   %h2 Products
   -@product_categories.each do |category, products| 
-    %h3=category
+    %h3
+      %span.catselector +
+      =category
     %ul
       -products.each do |product|
         %li.product{"data-product_id" => product.id}
@@ -27,6 +29,7 @@
 #help
   %h2 Help
   %ul
+    %li Click on a Product Category to see the items within it
     %li To <strong>add a product to your regular order</strong> drag it from the list on the left into the box titled Regular Order
     %li To <strong>add a product to a specific order</strong> drag it from the list on the left into the box with the correct delivery date
     %li You can <strong>update the quantity</strong> of any product you receive by changing the number to its left

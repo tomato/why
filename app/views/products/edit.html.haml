@@ -1,6 +1,8 @@
 %script
+  $(function(){
   ="var data = '#{@category_list}'.split(',');"
   $("#product_category").autocomplete(data);
+  })
   
 %h1="#{controller.action_name.capitalize} Product"
 =form_for @product do |p|

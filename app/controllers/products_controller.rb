@@ -8,12 +8,13 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @category_list = Product.find_all_by_supplier_id(
-      @supplier.id, :group => 'category').join(',')
+    cat_list()
+      
     render :action => 'edit'
   end
 
   def edit
+    cat_list()
     @product = Product.find(params[:id])
   end
 
@@ -52,6 +53,12 @@ class ProductsController < ApplicationController
     render :update do |page|
       page << "why.updateReorder(\"#{escape_javascript(msg)}\")"
     end
+  end
+
+  private
+
+  def cat_list
+    @category_list = Product.select('category').where(:supplier_id => @supplier.id).group('category').map{|p| p.category}.join(',')
   end
 
 end

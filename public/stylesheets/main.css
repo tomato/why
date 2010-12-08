@@ -130,7 +130,8 @@ fieldset {
   text-align: right; }
   .promo #navigation ul a {
     background-color: transparent;
-    color: black; }
+    color: black;
+    font-size: 16px; }
 
 .promo #navigation img {
   float: left;
@@ -190,6 +191,9 @@ div#products {
   #deliveries .regularOrders .order h3, #deliveries .orders .regular h3 {
     background-color: #dde3c1; }
 
+.regularOrders .order {
+  width: 480px; }
+
 .order {
   border: 2px solid #998299;
   width: 160px;
@@ -212,8 +216,6 @@ div#products {
   .order ul {
     margin: 0.5em 0;
     padding: 5px; }
-    .order ul li.item {
-      cursor: move; }
     .order ul li.total {
       margin-left: 32px; }
   .order input {

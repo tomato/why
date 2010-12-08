@@ -74,16 +74,16 @@ describe Delivery do
     end
 
     it "should return the next ten delivery dates for this supplier" do
-      Delivery.next_dates(@supplier.id).should have(30).dates
+      Delivery.next_dates(@supplier.id, 10).should have(10).dates
     end
 
     it "should return them with the next first" do
-      Delivery.next_dates(@supplier.id).first.should == Date.new(2210, 4, 16)
+      Delivery.next_dates(@supplier.id, 10).first.should == Date.new(2210, 4, 16)
     end
 
     describe "if there are multiple rounds on a delviery day" do
       it "should only show the delivery date once" do
-        Delivery.next_dates(@supplier.id).find_all{ |d| d == Date.new(2210,4,16)}.should have(1).delivery
+        Delivery.next_dates(@supplier.id, 10).find_all{ |d| d == Date.new(2210,4,16)}.should have(1).delivery
       end
     end
   end
@@ -137,7 +137,7 @@ describe Delivery do
       it "should return a single string" do
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer.id})
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer2.id})
-        @delivery.all_orders_csv.should == " 1 Jan,tom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\n 1 Jan,tom,42 East End Road,gl53 8qe,01242 523607,1,asparagus,1.32\n"
+        @delivery.all_orders_csv.should == " 1 Jan,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n 1 Jan,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n"
       end
 
       it "should return an empty string if no id's are passed" do

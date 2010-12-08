@@ -20,25 +20,31 @@ describe DeliveriesController do
     describe "Create" do
       it "should return a warning if no days are selected" do
         Delivery.should_not_receive(:create_all)
-        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2011"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>[],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2011"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>[],"round"=>"7",  "last_order"=>{"hour"=>"12", "day"=>"1"}}
         flash[:notice].should == "You need to select the day(s) your round is on"
       end
         
-      it "should return a warning if the to date is not on or after the from date" do 
+      it "should return a warning if the to date is not after the from date" do 
         Delivery.should_not_receive(:create_all)
-        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2011"},  "day"=>["0"],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2011"},  "day"=>["0"],"round"=>"7",  "last_order"=>{"hour"=>"12", "day"=>"1"}}
         flash[:notice].should == "Your 'to' date needs to be after your 'from' date"
+      end
+      
+      it "should not return a warning if the to date is on the from date" do 
+        Delivery.should_receive(:create_all).and_return(1)
+        post :create, { "to"=>{"month"=>"4", "day"=>"14", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2010"},  "day"=>["0","1","2","3","4","5","6"],"round"=>"7",  "last_order"=>{"hour"=>"12", "day"=>"1"}}
+        flash[:notice].should == "1 new delivery was added"
       end
       
       it "should return a warning if the to date is not valid" do 
         Delivery.should_not_receive(:create_all)
-        post :create, { "to"=>{"month"=>"2", "day"=>"31", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2008"},  "day"=>["0"],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"2", "day"=>"31", "year"=>"2010"}, "from"=>{"month"=>"4", "day"=>"14", "year"=>"2008"},  "day"=>["0"],"round"=>"7",  "last_order"=>{"hour"=>"12", "day"=>"1"}}
         flash[:notice].should == "Your 'to' date is not a valid"
       end
 
       it "should return a warning if the from date is not valid" do 
         Delivery.should_not_receive(:create_all)
-        post :create, { "to"=>{"month"=>"2", "day"=>"3", "year"=>"2010"}, "from"=>{"month"=>"2", "day"=>"31", "year"=>"2008"},  "day"=>["0"],"round"=>"7"}
+        post :create, { "to"=>{"month"=>"2", "day"=>"3", "year"=>"2010"}, "from"=>{"month"=>"2", "day"=>"31", "year"=>"2008"},  "day"=>["0"],"round"=>"7",  "last_order"=>{"hour"=>"12", "day"=>"1"}}
         flash[:notice].should == "Your 'from' date is not a valid"
       end
 

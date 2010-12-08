@@ -56,6 +56,13 @@ Factory.define :regular_order_item do |u|
   u.product {|a| a.association(:product) }
   u.quantity 1
   u.regular_order_id  1
+  u.frequency 1
+  u.first_delivery_date DateTime.now
+end
+
+Factory.define :biweekly_regular_order_item, :parent => :regular_order_item do |u|
+  u.frequency 2
+  u.first_delivery_date DateTime.now
 end
 
 Factory.define :product do |u|

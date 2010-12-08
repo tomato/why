@@ -155,10 +155,46 @@ describe Order do
     end
   end
 
+  describe "new_for_delivery" do
+    it "should return a copy of a regular order" do
+      r = Factory(:round)
+      Delivery.create_all(r.id, DateTime.now, DateTime.now + 365.days, [0],LastOrdersDuration.new(0,0)).should be_>(1)
+      c = Factory(:customer)
+      r = Factory(:regular_order, :customer_id => c.id)
+      o = Order.new_for_delivery(c, Delivery.first)
+      o.should_not be_nil
+      o.customer.should == c
+      o.should have(1).item
+
+    end
+
+    it "should only contain items that a valid for that delivery" do
+      r = Factory(:round)
+      Delivery.create_all(r.id, DateTime.now, DateTime.now + 365.days, [0],LastOrdersDuration.new(0,0)).should be_>(1)
+      c = Factory(:customer)
+      r = Factory(:regular_order, :customer_id => c.id)
+      r.items << Factory(:biweekly_regular_order_item)
+      Order.new_for_delivery(c, Delivery.first).should have(2).item
+      Order.new_for_delivery(c, Delivery.all[1]).should have(1).item
+      Order.new_for_delivery(c, Delivery.all[2]).should have(2).item
+    end
+
+    it "should only include items after the start date" do
+      r = Factory(:round)
+      Delivery.create_all(r.id, DateTime.now, DateTime.now + 365.days, [0],LastOrdersDuration.new(0,0)).should be_>(1)
+      c = Factory(:customer)
+      r = Factory(:regular_order, :customer_id => c.id)
+      r.items << Factory(:biweekly_regular_order_item, :first_delivery_date => DateTime.now + 7.days)
+      Order.new_for_delivery(c, Delivery.first).should have(1).item
+      Order.new_for_delivery(c, Delivery.all[1]).should have(2).item
+      Order.new_for_delivery(c, Delivery.all[2]).should have(1).item
+    end
+  end
+
   describe :export_fields do
     it "should contain the quantity" do
       o = Factory(:order)
-      o.export_fields.should eql([1, 'asparagus', "1.32"])
+      o.export_fields.should eql([nil, 1, 'asparagus', "1.32"])
       o.export_fields.should be_a(Array)
     end
   end

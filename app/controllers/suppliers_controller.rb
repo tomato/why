@@ -28,7 +28,7 @@ class SuppliersController < ApplicationController
 
   def show
     @pending = OrderFactory.pending_customers @supplier.id
-    @delivery_dates = [['(select)','']] + Delivery.next_dates(@supplier.id).map { |d| [d] } 
+    @delivery_dates = [['(select)','']] + Delivery.next_dates(@supplier.id, 30).map { |d| [d] } 
   end
 
   def switch

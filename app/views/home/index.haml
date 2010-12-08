@@ -14,7 +14,7 @@
     =link_to 'info@fromwhereitsgrown.com', 'mailto:info@fromwhereitsgrown.com'
 =image_tag 'comic.jpg', { :class => 'comic' }
 .news 
-  %h2 News
+  %h2=link_to 'News', 'http://solittlecode.wordpress.com/'
   -@news.each do |article|
     .article
       %h3=raw article[:title]

@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
     @orders = Order.find_candidates(@customer)
     @products = Product.find_all_by_supplier_id(@customer.supplier_id)
     @product_categories = @products.group_by { |p| p.category }
+    @deliveries = Delivery.next_dates(@supplier.id, 10).map{|d| [d.to_s(:short), d]}
   end
 
   def create

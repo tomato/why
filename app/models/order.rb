@@ -17,9 +17,7 @@ class Order < ActiveRecord::Base
         :limit => 12, :order => "date asc"
     ).map do |d| 
       Order.find_by_delivery_id_and_customer_id(d.id, customer.id) || 
-      Order.new({
-        :customer => customer, 
-        :delivery => d})
+      Order.new_for_delivery(customer, d)
     end
   end
 
@@ -27,9 +25,11 @@ class Order < ActiveRecord::Base
     o = Order.new(:customer => customer,
                   :delivery => delivery)
     ro = RegularOrder.where(:customer_id => customer.id).first
-    ro.items.each do |i|
-      if i.is_required_for_delivery delivery then
-        o.items << OrderItem.new(:product => i.product, :quantity => i.quantity)
+    if(ro) then
+      ro.items.each do |i|
+        if i.is_required_for_delivery delivery then
+          o.items << OrderItem.new(:product => i.product, :quantity => i.quantity)
+        end
       end
     end
     return o

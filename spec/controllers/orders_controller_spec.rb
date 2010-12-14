@@ -4,6 +4,8 @@ describe OrdersController do
 
   before(:each) do
     @customer = Factory(:customer)
+    @supplier = Factory(:supplier)
+    @request.host = "#{@supplier.friendly_id}.example.com"
   end
 
   #Delete this example and add some real ones
@@ -84,13 +86,13 @@ describe OrdersController do
         RegularOrder.should_receive(:create_all).with(@params, true)
         Order.should_receive(:create_all).with(@params, true)
         post :create, @params
-        response.body.should include('We updated your order')
+        assigns[:msg].should include('We updated your order')
       end
 
       it "should display an error if create fails" do
         RegularOrder.should_receive(:create_all).with(@params, true).and_raise(Exception)
         post :create, @params
-        response.body.should include('This was an error:')
+        assigns[:msg].should include('This was an error:') 
       end
 
       it "should call create_all with by_customer" do

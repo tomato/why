@@ -42,10 +42,23 @@ why.createOrder = function()
     return new Order(e); 
   }) || [];
 
-  $.post($(location).attr('href'), { orders: orders, regular_orders: regularOrders});
+  $.post($(location).attr('href'), 
+      { orders: orders, regular_orders: regularOrders},
+      function(data){
+        $('#deliveries').html(data)
+        why.setupOrders();
+        why.displayMessage($('#hidden_msg').html());
+      });
 
   return false;
 };
+
+why.displayMessage = function(msg)
+{
+  $('#content #notice').remove();
+  $('#content').prepend('<div id="notice">' + msg + '</div>');
+  why.hideFlash();
+}
 
 why.setupProducts = function(){
   $("#products li").draggable({ helper: "clone",revert: 'invalid', accept: '.order'});
@@ -94,17 +107,8 @@ why.setupOrders = function(){
   }
   
   var updateOrders = function(order){
-    
-    var isRegularMaster = function(order){
-      return $(order).parents('.regularOrders').length
-    }
-
     $(order).addClass('updated');
-    $('#submit').addClass('updated');
-    if(!isRegularMaster(order)){
-      $(order).removeClass('regular');
-    }
-    why.setupOrders();
+    why.createOrder();
   }
 
 
@@ -136,8 +140,6 @@ why.setupOrders = function(){
     updateOrders(order) ; 
   }
 
-  //$('.orders .regular ul').html($('.regularOrders .order ul .copyable').html()); //This is going to have to be a bit more sophisticated!
-  $('.orders .regular textarea').val($('.regularOrders .order textarea').val());
   $(".order").droppable({ drop: addItem , accept: '.product'})
   $('.quantity').change(function(){ 
     var order = $(this).parents('.order')
@@ -150,15 +152,8 @@ why.setupOrders = function(){
   $('.note a').click(function(){ openNote($(this).parents('.order')); return false;} )
   $('.editNote a').click(function(){ closeNote($(this).parents('.order')); return false});
   $('.editNote textarea').change(function(){ updateNote($(this).parents('.order')); });
-  $('.frequency, .first').change(function(){ updateOrders($(this).parents('.order')); });
+  $('.frequency, .start').change(function(){ updateOrders($(this).parents('.order')); });
   subTotal()
-}
-
-why.updateResponse = function(msg){
-  $('.updated').removeClass("updated");
-  $('#content #notice').remove();
-  $('#content').prepend('<div id="notice">' + msg + '</div>');
-  why.hideFlash();
 }
 
 why.map_slice = function(elems, fn){

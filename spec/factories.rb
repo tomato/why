@@ -57,7 +57,7 @@ Factory.define :regular_order_item do |u|
   u.quantity 1
   u.regular_order_id  1
   u.frequency 1
-  u.first_delivery_date DateTime.now
+  u.first_delivery_date DateTime.new(2010,1,1)
 end
 
 Factory.define :biweekly_regular_order_item, :parent => :regular_order_item do |u|

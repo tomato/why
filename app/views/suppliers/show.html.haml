@@ -31,7 +31,7 @@
         %ul
           -orders.each do |order|
             %li
-              .order
+              .order{:class =>  order.respond_to?(:delivery) ? '':'regularOrder'}
                 -if order.respond_to?(:delivery)
                   %h3=order.delivery.date.to_s(:short)
                 -else
@@ -42,6 +42,11 @@
                       =item.quantity
                       =' x '
                       =item.product.name
+                      -if item.respond_to?(:frequency)
+                        every
+                        =item.frequency
+                        week(s) from
+                        =item.first_delivery_date.to_s(:short)
                   %li
                     =order.note
               

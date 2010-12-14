@@ -91,17 +91,30 @@ describe Delivery do
   describe :all_orders_for do
     before(:each) do
       @round = Factory(:round)
-      @delivery = Factory(:delivery, {:round_id => @round.id })
+      @delivery = Factory(:delivery, {:round_id => @round.id, :date => DateTime.new(2010,1,1) })
       @customer = Factory(:customer, {:round_id => @round.id })
       @customer2 = Factory(:customer, {:round_id => @round.id })
     end
 
     it "should return a regular order if no order exists" do
       @regular_order = Factory(:regular_order, {:customer_id => @customer.id})
+      RegularOrder.first.items.any?{|i| i.is_required_for_delivery @delivery}.should be_true
       orders = @delivery.all_orders
-      orders.should have(1).regular_order
-      orders.first.should be_a(RegularOrder)
+      orders.should have(1).order
+      orders.first.should be_a(Order)
     end
+
+    it "should return a regular order with valid items" do
+      @regular_order = Factory(:regular_order, {:customer_id => @customer.id})
+      @regular_order.items << Factory(:regular_order_item, :first_delivery_date => DateTime.new(2011,1,1))
+      @regular_order.should have(2).items
+      RegularOrder.first.items.select{|i| i.is_required_for_delivery @delivery}.should have(1).item
+      RegularOrder.first.items.select{|i| !i.is_required_for_delivery @delivery}.should have(1).item
+      orders = @delivery.all_orders
+      orders.should have(1).order
+      orders.first.should have(1).item
+    end
+
 
     it "should return an order if it exists" do
       @regular_order = Factory(:regular_order, {:customer_id => @customer.id})

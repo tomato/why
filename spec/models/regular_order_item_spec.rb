@@ -50,13 +50,32 @@ describe RegularOrderItem do
       i.is_required_for_delivery(@deliveries[18]).should be_false
     end
 
+    it "should be true for deliveries 1,4,7,10 if frequency is 3" do
+      i = RegularOrderItem.new  :frequency => 3, :first_delivery_date => @deliveries[1].date
+      i.is_required_for_delivery(@deliveries[0]).should be_false
+      i.is_required_for_delivery(@deliveries[1]).should be_true
+      i.is_required_for_delivery(@deliveries[2]).should be_false
+      i.is_required_for_delivery(@deliveries[3]).should be_false
+      i.is_required_for_delivery(@deliveries[4]).should be_true
+      i.is_required_for_delivery(@deliveries[5]).should be_false
+      i.is_required_for_delivery(@deliveries[6]).should be_false
+      i.is_required_for_delivery(@deliveries[7]).should be_true
+      i.is_required_for_delivery(@deliveries[8]).should be_false
+      i.is_required_for_delivery(@deliveries[9]).should be_false
+      i.is_required_for_delivery(@deliveries[10]).should be_true
+    end
+
     it "should be able to add deliveris in any order (use date not id!!!!!)" do
       r = Factory(:round)
       Delivery.create_all(r.id, DateTime.now, DateTime.now + 60.days, [0],LastOrdersDuration.new(0,0)).should be_>(1)
-      Delivery.create_all(r.id, DateTime.now - 60.days, DateTime.now, [0],LastOrdersDuration.new(0,0)).should be_>(1)
-      @deliveries = Delivery.where :round_id => r.id
-      i = RegularOrderItem.new  :frequency => 2, :first_delivery_date => @deliveries[1].date
-      i.is_required_for_delivery(@deliveries[5]).should be_true
+      Delivery.create_all(r.id, DateTime.now, DateTime.now + 60.days, [1],LastOrdersDuration.new(0,0)).should be_>(1)
+      @deliveries = Delivery.where(:round_id => r.id).order(:date)
+      i = RegularOrderItem.new  :frequency => 3, :first_delivery_date => @deliveries[1].date
+      i.is_required_for_delivery(@deliveries[1]).should be_true
+      i.is_required_for_delivery(@deliveries[2]).should be_false
+      i.is_required_for_delivery(@deliveries[3]).should be_false
+      i.is_required_for_delivery(@deliveries[4]).should be_true
+      i.is_required_for_delivery(@deliveries[5]).should be_false
     end
   end
 end

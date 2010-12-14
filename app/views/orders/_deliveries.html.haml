@@ -1,0 +1,64 @@
+#hidden_msg=@msg
+#buttons
+  %a#watch Flummoxed? Watch the video
+%ul.regularOrders
+  -@regular_orders.each do |regular|
+    %li
+      .order
+        .note 
+          =link_to 'add note', ''
+        %h3{"data-regular_order_id" => regular.id} Regular Order
+        %ul
+          -regular.regular_order_items.each do |oi|
+            %li.item{"data-product_id" => oi.product_id} 
+              %span.copyable
+                %input.quantity{ :value => oi.quantity }
+                %span.product
+                  =oi.product.name
+                  %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
+              = select_tag "frequency", options_for_select([ ["every delivery",1],
+                ["every 2 deliveries",2],
+                ["every 3 deliveries",3],
+                ["every 4 deliveries",4],
+                ["every 5 deliveries",5],
+                ["every 6 deliveries",6],
+                ["every 7 deliveries",7],
+                ["every 8 deliveries",8]],oi.frequency), :class => 'frequency' 
+              from
+              = select_tag "start", options_for_select(@deliveries, oi.first_delivery_date), :class => "start"
+          %li.total
+        .editNote
+          %h3 
+            Notes for Reqular Order
+            \:
+          %textarea{ :rows => 14, :cols => 40 }
+            =regular.note
+          %br
+          =link_to 'close',''
+%hr
+%ul.orders
+  -@orders.each do |order|
+    %li
+      %div{:class => order.new_record? ? "order regular" : "order"}  
+        .note 
+          =link_to 'add note', ''
+        %h3{"data-delivery_id" => order.delivery.id}
+          =order.delivery.date.to_s(:short)
+        %ul
+          -order.order_items.each do |oi|
+            %li.item{"data-product_id" => oi.product_id} 
+              %input.quantity{ :value => oi.quantity }
+              %span.product
+                =oi.product.name
+                %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
+          %li.total
+        .editNote
+          %h3 
+            Notes for
+            =order.delivery.date.to_s(:short)
+            \:
+          %textarea{ :rows => 14, :cols => 40 }
+            =order.note
+          %br
+          =link_to 'close',''
+

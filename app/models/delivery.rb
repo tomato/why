@@ -6,7 +6,7 @@ class Delivery < ActiveRecord::Base
   def all_orders
     (round.customers.map do |c|
       orders.find(:first, :conditions => ["customer_id = ?", c.id]) ||
-        c.regular_orders.first
+        Order.new_for_delivery(c, self)
     end).compact.reject{|o| o.items.empty?}
   end
   

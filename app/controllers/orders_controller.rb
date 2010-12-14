@@ -2,24 +2,21 @@ class OrdersController < ApplicationController
   before_filter :check_access!
   
   def index
-    @regular_orders = RegularOrder.find_or_new(@customer)
-    @orders = Order.find_candidates(@customer)
+    get_deliveries_and_orders
     @products = Product.find_all_by_supplier_id(@customer.supplier_id)
     @product_categories = @products.group_by { |p| p.category }
-    @deliveries = Delivery.next_dates(@supplier.id, 10).map{|d| [d.to_s(:short), d]}
   end
 
   def create
     begin
       RegularOrder.create_all(params, customer_signed_in?)
       Order.create_all(params, customer_signed_in?)
-      msg = "We updated your order"
+      @msg = "We updated your order"
     rescue Exception => e
-      msg = "This was an error: #{ e.inspect }"
+      @msg = "This was an error: #{ e.inspect }"
     end
-    render :update do |page|
-      page << "why.updateResponse(\"#{escape_javascript(msg)}\")"
-    end
+    get_deliveries_and_orders
+    render 'deliveries' , :layout => nil
   end
 
   private
@@ -32,6 +29,12 @@ class OrdersController < ApplicationController
 
     flash[:alert] = "This is not your page!"
     redirect_to home_path
+  end
+  
+  def get_deliveries_and_orders
+    @regular_orders = RegularOrder.find_or_new(@customer)
+    @orders = Order.find_candidates(@customer)
+    @deliveries = Delivery.next_dates(@supplier.id, 10).map{|d| [d.to_s(:short), d]}
   end
 
 end

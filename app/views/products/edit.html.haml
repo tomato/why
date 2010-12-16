@@ -21,5 +21,8 @@
         =p.text_field :price
         £
       %li
+        =p.label :description
+        =p.text_area :description, :class => 'editor'
+      %li
         =label_tag ''
-        =submit_tag
+        =submit_tag 'Update', :class => 'wymupdate'

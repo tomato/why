@@ -40,7 +40,7 @@ module Why
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails application)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails )
 
     config.generators do |g|
       g.template_engine :haml

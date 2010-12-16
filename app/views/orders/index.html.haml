@@ -5,6 +5,10 @@
       why.setupOrders();
       $('#watch').click( function(){ $('#movie').slideDown();})
       $('#hide').click(function(){ $('#movie').slideUp(); });
+      $('.more').hover(
+        function(){ $(this).next('.description').fadeIn(); },
+        function(){ $(this).next('.description').fadeOut(); }
+      );
     })
 
 #movie
@@ -21,10 +25,13 @@
     %ul
       -products.each do |product|
         %li.product{"data-product_id" => product.id}
-          %span
+          %span.prodname
             =product.name
             -if(product.price)
               %span.price{ 'data-price' => product.price }= to_pound(product.price)
+          -if product.description.present?
+            %span.more ?
+            .description=raw product.description
 #help
   %h2 Help
   %ul

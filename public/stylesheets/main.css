@@ -175,10 +175,11 @@ div#products {
     margin-bottom: 0.5em; }
   div#products ul {
     margin-left: 10px; }
-    div#products ul li {
+    div#products ul .prodname {
+      border-bottom: 1px solid #998299;
       cursor: move; }
-      div#products ul li span {
-        border-bottom: 1px solid #998299; }
+    div#products ul .more {
+      cursor: pointer; }
 
 #deliveries > ul > li, #deliveries form .customer > ul > li {
   zoom: 1;
@@ -221,7 +222,7 @@ div#products {
 .regularOrders .order, .regularOrder {
   width: 480px; }
 
-.editNote {
+.editNote, .description {
   position: absolute;
   top: 30%;
   left: 30%;
@@ -231,9 +232,13 @@ div#products {
   background-color: white;
   z-index: 100;
   display: none; }
-  .editNote textarea {
+  .editNote textarea, .description textarea {
     width: 90%;
     margin: 10px; }
+
+.description {
+  padding: 10px;
+  background-color: #fdfef9; }
 
 .updated {
   border: 2px solid red !important; }

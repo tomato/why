@@ -38,6 +38,7 @@ Why::Application.routes.draw do
     match '/about' => :about, :as => "about"
     match '/price' => :price, :as => "price"
     match '/contact' => :contact, :as => "contact"
+    match '/blog' => :blog, :as => "blog"
   end
   
   constraints(Subdomain) do  

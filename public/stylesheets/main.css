@@ -137,32 +137,10 @@ fieldset {
   float: left;
   height: 30px; }
 
-body#customers #customers_tab a,
-body#rounds #rounds_tab a,
-body#suppliers #suppliers_tab a,
-body#products #products_tab a,
-body#dashboard #dashboard_tab a,
-body#supplier_users #users_tab a,
-body#settings #settings_tab a,
-body#index #home_tab a,
-body#how #how_tab a,
-body#contact #contact_tab a,
-body#price #price_tab a,
-body#about #about_tab a {
+body#blog #blog_tab a {
   background-color: #998299; }
 
-body#customers.promo #customers_tab a,
-body#rounds.promo #rounds_tab a,
-body#suppliers.promo #suppliers_tab a,
-body#products.promo #products_tab a,
-body#dashboard.promo #dashboard_tab a,
-body#supplier_users.promo #users_tab a,
-body#settings.promo #settings_tab a,
-body#index.promo #home_tab a,
-body#how.promo #how_tab a,
-body#contact.promo #contact_tab a,
-body#price.promo #price_tab a,
-body#about.promo #about_tab a {
+body#blog.promo #blog_tab a {
   border-top: solid 3px #998299;
   background-color: transparent; }
 
@@ -434,3 +412,8 @@ fieldset.doubledecker {
 
 #hidden_msg {
   display: none; }
+
+iframe {
+  width: 100%;
+  height: 10000px;
+  border: none; }

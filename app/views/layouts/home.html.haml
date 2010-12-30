@@ -2,7 +2,7 @@
 %html
   %head
     <meta name="google-site-verification" content="FUM3w02GCAyjArGC1COWF7vohaUDhM02bDEUtX67YbM" />
-    %title We like our food to come - From Where It's Grown
+    %title="#{ tab_name.capitalize } - We like our food to come - From Where It's Grown"
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
     =stylesheet_link_tag :all
     <script type="text/javascript" src="http://use.typekit.com/rjk6gwu.js"></script>
@@ -19,7 +19,7 @@
         =image_tag 'logo.gif'
       %ul
         %li#home_tab=link_to 'Home', home_path
-        %li#how_tab=link_to 'More...', how_path
+        %li#how_tab=link_to 'How', how_path
         %li#price_tab=link_to 'Pricing', price_path
         %li#about_tab=link_to 'About us', about_path
         %li#blog_tab=link_to 'Blog', blog_path

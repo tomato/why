@@ -29,7 +29,11 @@ module ApplicationHelper
     elsif controller.controller_name == "suppliers" && controller.action_name == "edit"
       "settings"
     elsif controller.controller_name == "home"
-      controller.action_name
+      if controller.action_name == "index"
+        "home"
+      else
+        controller.action_name
+      end
     else
       controller.controller_name
     end

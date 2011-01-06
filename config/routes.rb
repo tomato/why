@@ -40,6 +40,8 @@ Why::Application.routes.draw do
     match '/contact' => :contact, :as => "contact"
     match '/blog' => :blog, :as => "blog"
   end
+
+  match '/embed', :controller => :home, :action => :embed
   
   constraints(Subdomain) do  
     match '/', :to => redirect("/customers/sign_in") 

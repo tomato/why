@@ -4,23 +4,26 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :set_supplier
   before_filter :set_mailer_url_options
-
+  layout :layout
 
   protected
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(SupplierUser) 
+    logger.info "firing after_sign_in_path"
+    if resource.is_a?(SupplierUser) || resource == :supplier_user
       if supplier_user_signed_in?
         supplier_url current_supplier_user.supplier_id
       else
         new_supplier_user_session
       end
-    elsif resource.is_a?(Admin)
+    elsif resource.is_a?(Admin) || resource == :admin
        home_url
-    elsif resource.is_a?(Customer)
+    elsif resource.is_a?(Customer) || resource == :customer
       session[:supplier_id] = current_customer.supplier_id
+      logger.info "Customer about to redirect to orders"
       customer_orders_url(current_customer.id)
     else
+      logger.info "Calling super #{ resource.inspect }"
       super
     end
   end
@@ -30,14 +33,13 @@ class ApplicationController < ActionController::Base
     super
   end
    
-  protected
-  
   def authenticate_supplier!
     if(valid_superuser?)
       return
     elsif supplier_user_signed_in?
       flash[:notice] = 'You may not access this page, it belongs to another supplier'
     end
+    logger.info "Authenticate supplier about to redirect home"
     redirect_to home_path
   end
 
@@ -58,5 +60,9 @@ class ApplicationController < ActionController::Base
     rescue
       logger.error "Invalid Subdomain #{ request.subdomain }"
     end
+  end
+
+  def layout
+    session[:embed] ? 'embed' : 'application'
   end
 end

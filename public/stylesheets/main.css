@@ -171,7 +171,7 @@ body#blog.promo #blog_tab a {
 div#products {
   float: left;
   width: 160px;
-  height: 100%; }
+  height: 1000px; }
   div#products h3 {
     cursor: pointer;
     margin-bottom: 0.5em; }
@@ -309,7 +309,7 @@ ul.boxes > li {
 #help {
   float: right;
   width: 220px;
-  height: 100%;
+  height: 1000px;
   margin-left: 20px; }
 
 #info {

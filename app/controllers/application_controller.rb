@@ -59,6 +59,8 @@ class ApplicationController < ActionController::Base
       end
     rescue
       logger.error "Invalid Subdomain #{ request.subdomain }"
+      flash[:alert] = "Invalid Subdomain"
+      redirect_to home_path
     end
   end
 

@@ -6,17 +6,19 @@ class HomeController < ApplicationController
   def index
     logger.info "Firing Home Controller Index action"
     session[:embed] = false
-    if customer_signed_in?
-      logger.info "redirecting from index to orders path"
-      redirect_to customer_orders_path(current_customer.id) 
-    elsif supplier_user_signed_in?
-      redirect_to  new_supplier_user_session_path
-    elsif admin_signed_in?
-      logger.info "redirecting from index to suppliers_path"
-      redirect_to suppliers_path
-    elsif @supplier
-      logger.info "redirecting from index to new_customer_session_path"
-      redirect_to new_customer_session_path
+    if(request.subdomain.present?)
+      if customer_signed_in?
+        logger.info "redirecting from index to orders path"
+        redirect_to customer_orders_path(current_customer.id) 
+      elsif supplier_user_signed_in?
+        redirect_to  new_supplier_user_session_path
+      elsif admin_signed_in?
+        logger.info "redirecting from index to suppliers_path"
+        redirect_to suppliers_path
+      elsif @supplier
+        logger.info "redirecting from index to new_customer_session_path"
+        redirect_to new_customer_session_path
+      end
     end
 
     @news = get_feed

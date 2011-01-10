@@ -62,6 +62,15 @@ describe RegularOrder do
       RegularOrder.create_all(@params).should have(1).regular_orders
     end
 
+    it "should set frequency to 1 and first delivery date to today if not defined" do
+      @params = {"regular_orders"=>{"0"=>{"items"=>{"0"=>{"first_delivery_date"=>"undefined","frequency"=>"undefined","quantity"=>"1", "product_id"=>"4"}}, "regular_order_id"=>"undefined"}}, "action"=>"create", "orders"=>{"0"=>{"items"=>{"0"=>{"quantity"=>"1", "product_id"=>"2"}, "1"=>{"quantity"=>"2", "product_id"=>"4"}}, "delivery_id"=>"651"}}, "controller"=>"orders", "customer_id"=>"2"}
+      RegularOrder.create_all(@params)
+      ro = RegularOrder.first
+      ro.items[0].frequency.should == 1
+      ro.items[0].first_delivery_date.should_not be_nil
+      
+    end
+
     it "should set pending_update when an order is created by a customer" do
       orders = RegularOrder.create_all(@params, true)
       orders.first.pending_update.should be_true

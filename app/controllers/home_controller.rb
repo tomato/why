@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   def index
     logger.info "Firing Home Controller Index action"
     session[:embed] = false
-    if(request.subdomain.present?)
+    if(@supplier)
       if customer_signed_in?
         logger.info "redirecting from index to orders path"
         redirect_to customer_orders_path(current_customer.id) 

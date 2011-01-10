@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
 
   def set_supplier
     begin
-      if(request.subdomain.present?)
+      if(request.subdomain.present? && !(request.subdomain =~ /www/i))
         @supplier = Supplier.find(request.subdomain)
         logger.info "Supplier=#{@supplier.name}"
       end

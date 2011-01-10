@@ -48,6 +48,8 @@ class RegularOrder < ActiveRecord::Base
         regularOrder.regular_order_items.clear
         if(v['items'])
           v['items'].each do |k,v|
+            v["frequency"] = 1 if v["frequency"] == "undefined" 
+            v["first_delivery_date"] = DateTime.now if v["first_delivery_date"] == "undefined" 
             regularOrder.regular_order_items << RegularOrderItem.new(v.merge(:regular_order_id => regularOrder.id))
           end
         end

@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    logger.info "firing after_sign_in_path"
+    logger.info "firing after_sign_in_path from #{ request.referer }"
+    #if customer and embeded and url contains invitation/accept?invitation_token redirect to parent_url
+
     if resource.is_a?(SupplierUser) || resource == :supplier_user
       if supplier_user_signed_in?
         supplier_url current_supplier_user.supplier_id
@@ -19,9 +21,14 @@ class ApplicationController < ActionController::Base
     elsif resource.is_a?(Admin) || resource == :admin
        home_url
     elsif resource.is_a?(Customer) || resource == :customer
-      session[:supplier_id] = current_customer.supplier_id
-      logger.info "Customer about to redirect to orders"
-      customer_orders_url(current_customer.id)
+      if(@supplier && @supplier.embed? && request.referer.include?('invitation'))
+        logger.info "Customer redirecting to parent url"
+        return @supplier.parent_url
+      else
+        session[:supplier_id] = current_customer.supplier_id
+        logger.info "Customer about to redirect to orders"
+        customer_orders_url(current_customer.id)
+      end
     else
       logger.info "Calling super #{ resource.inspect }"
       super

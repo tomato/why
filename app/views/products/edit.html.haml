@@ -7,7 +7,7 @@
 %h1="#{controller.action_name.capitalize} Product"
 =form_for @product do |p|
   -@product.errors.full_messages.each do |e|
-    %p=e
+    %p.error=e
   %fieldset
     %ul
       %li

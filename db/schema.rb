@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101118204556) do
+ActiveRecord::Schema.define(:version => 20110112201056) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -175,6 +175,8 @@ ActiveRecord::Schema.define(:version => 20101118204556) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.text     "info"
+    t.boolean  "embed",             :default => false, :null => false
+    t.string   "parent_url"
   end
 
 end

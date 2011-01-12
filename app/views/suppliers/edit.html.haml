@@ -1,5 +1,20 @@
+:javascript
+  $(function(){
+    $("#supplier_embed").click(function(){
+      if($("#supplier_embed").is(":checked"))
+      {
+        $("#url_li").slideDown();
+      }
+      else
+      {
+        $("#url_li").slideUp();
+      }
+    });
+  })
 %h1 Update your settings
 =form_for @supplier, :html => { :multipart => true } do |f|
+  -@supplier.errors.full_messages.each do |e|
+    %p.error=e
   %fieldset
     %ul
       %li
@@ -11,6 +26,12 @@
       %li
         =f.label :info
         =f.text_area :info, :class => 'editor'
+      %li
+        =f.label :embed
+        =f.check_box :embed
+      %li#url_li
+        =f.label :parent_url
+        =f.text_field :parent_url
       %li
         =label_tag ''
         =submit_tag 'Update', :class => 'wymupdate'

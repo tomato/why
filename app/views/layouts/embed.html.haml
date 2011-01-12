@@ -21,4 +21,5 @@
         #notice=flash[:notice]
       -if(flash[:alert])
         #alert=flash[:alert]
+      =link_to 'Sign Out', destroy_customer_session_path if customer_signed_in?
       =yield

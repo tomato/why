@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -21,7 +21,7 @@ gem "friendly_id", "~> 3.1"
 gem "paperclip"
 
 group :test, :development do
-  gem "rspec-rails", ">= 2.0.0.beta.19"
+  gem "rspec-rails", "~> 2.4"
   gem 'autotest-rails'
   gem 'autotest'
   gem 'autotest-notification'

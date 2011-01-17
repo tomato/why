@@ -24,7 +24,7 @@
         %li#about_tab=link_to 'About us', about_path
         %li#blog_tab=link_to 'Blog', blog_path
         %li#contact_tab=link_to 'Contact Us', contact_path
-    %hr
+    %hr.navcon
     #content
       -if(flash[:notice])
         #notice=flash[:notice]

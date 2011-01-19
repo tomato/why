@@ -4,7 +4,7 @@ require 'hpricot'
 class HomeController < ApplicationController
 
   def index
-    logger.info "Firing Home Controller Index action"
+    logger.info "Firing Home Controller Index action with subdomain: #{request.subdomain}"
     session[:embed] = false
     if(@supplier)
       if customer_signed_in?

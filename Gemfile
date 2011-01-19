@@ -26,6 +26,9 @@ group :test, :development do
   gem 'autotest'
   gem 'autotest-notification'
   gem 'ruby_parser'
+  gem 'cucumber-rails'
+  gem 'webrat', '>=0.7.2.beta.6', :git => 'git://github.com/orangewise/webrat.git' 
+  gem 'capybara'
 end
 
 

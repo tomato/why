@@ -20,7 +20,7 @@ Factory.define :customer_with_orders, :parent => :customer do |u|
 end
 
 Factory.define :supplier do |u|
-  u.name 'Test Supplier'
+  u.name 'fred'
   u.products {|a| [a.association(:product)]}
 end
 

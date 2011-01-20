@@ -65,9 +65,9 @@ class ApplicationController < ActionController::Base
         logger.info "Supplier=#{@supplier.name}"
       end
     rescue
-      logger.error "Invalid Subdomain #{ request.subdomain }"
+      logger.error "Invalid Subdomain #{ request.subdomain } redirecting to #{ home_url(:subdomain => false) }"
       flash[:alert] = "Invalid Subdomain"
-      redirect_to home_path
+      redirect_to home_url(:subdomain => false)
     end
   end
 

@@ -13,6 +13,10 @@ module NavigationHelpers
       'http://fred.fwig.me'
     when /another site/
       'http://solittlecode.com'
+    when /fred's customer\s?page/
+      'http://fred.fwig.me/customers'
+    when /invalid's customer\s?page/
+      'http://invalid.fwig.me/customers'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

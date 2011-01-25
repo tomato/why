@@ -4,7 +4,17 @@ class Product < ActiveRecord::Base
   has_many :regular_order_items, :dependent => :destroy
   validates_presence_of :name
   validates_numericality_of :price, :allow_blank => true
+  validates_format_of :category, :with => /\A[\w\s]+\z/,
+    :message => "Sorry no special characters (apostrophes, ampersands etc) are allowed in category names", :allow_blank => true
   before_update :set_category_sequence
+
+  def has_description
+    self[:description].present?
+  end
+
+  def has_description=(val)
+    self[:description] = nil unless(val)
+  end
 
   def self.update_sequences(ids, supplier_id)
     return unless ids

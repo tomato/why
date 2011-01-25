@@ -26,6 +26,68 @@ describe Product do
       @product.should_not be_valid
     end
 
+    it "should be valid with a category name" do
+      @product.category = 'organic flours'
+      @product.should be_valid
+    end
+
+    it "should not be valid with a comma in category name" do
+      @product.category = 'organic flours, fish and meat'
+      @product.should_not be_valid
+    end
+
+    it "should not be valid with a apostrophe in category name" do
+      @product.category = "organic flour's fish and meat"
+      @product.should_not be_valid
+    end
+
+    it "should not be valid with an ampersand in category name" do
+      @product.category = "organic flours fish & meat"
+      @product.should_not be_valid
+    end
+
+    it "should be valid with a space in category name" do
+      @product.category = ""
+      @product.should be_valid
+    end
+
+  end
+
+  describe :has_description do
+
+    before(:each) do
+      @valid_attributes = {:name => 'test product', :price => '1.26' }
+      @product = Product.new(@valid_attributes)
+    end
+
+    it "should return true if description has a value" do
+      @product.description = "Hi"
+      @product.has_description.should be_true  
+    end
+
+    it "should return false if description is nil" do
+      @product.description = nil
+      @product.has_description.should be_false
+    end
+
+    it "should return false if description is empty" do
+      @product.description = ""
+      @product.has_description.should be_false
+    end
+
+    it "should clear the description if set to false" do
+      @product.description = "Hi"
+      @product.has_description = false
+      @product.description.should be_nil
+    end
+
+
+    it "should not clear the description if set to true" do
+      @product.description = "Hi"
+      @product.has_description = true
+      @product.description.should == "Hi"
+    end
+
   end
 
   describe "Associations" do

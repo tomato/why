@@ -39,6 +39,7 @@ Why::Application.routes.draw do
     match '/price' => :price, :as => "price"
     match '/contact' => :contact, :as => "contact"
     match '/blog' => :blog, :as => "blog"
+    match '/guide' => :guide, :as => "guide"
   end
 
   match '/embed', :controller => :home, :action => :embed

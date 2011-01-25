@@ -33,6 +33,10 @@ class HomeController < ApplicationController
     redirect_to '/customers/sign_in'
   end
 
+  def guide
+    render :layout => "application"
+  end
+
   private
 
   def get_feed

@@ -2,6 +2,22 @@
   $(function(){
   ="var data = '#{@category_list}'.split(',');"
   $("#product_category").autocomplete(data);
+
+  if($('#product_description').val().length > 0){
+  $('#has_description').attr('checked',true);}
+  else{
+  $("#desc_li").hide();}
+
+  $("#has_description").click(function(){
+  if($("#has_description").is(":checked"))
+  {
+  $("#desc_li").slideDown();
+  }
+  else
+  {
+  $("#desc_li").slideUp();
+  }
+  });
   })
   
 %h1="#{controller.action_name.capitalize} Product"
@@ -21,6 +37,9 @@
         =p.text_field :price
         £
       %li
+        =label_tag :has_description, 'Include Description'
+        =check_box_tag :has_description
+      %li#desc_li
         =p.label :description
         =p.text_area :description, :class => 'editor'
       %li

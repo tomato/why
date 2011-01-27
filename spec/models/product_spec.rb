@@ -53,42 +53,6 @@ describe Product do
 
   end
 
-  describe :has_description do
-
-    before(:each) do
-      @valid_attributes = {:name => 'test product', :price => '1.26' }
-      @product = Product.new(@valid_attributes)
-    end
-
-    it "should return true if description has a value" do
-      @product.description = "Hi"
-      @product.has_description.should be_true  
-    end
-
-    it "should return false if description is nil" do
-      @product.description = nil
-      @product.has_description.should be_false
-    end
-
-    it "should return false if description is empty" do
-      @product.description = ""
-      @product.has_description.should be_false
-    end
-
-    it "should clear the description if set to false" do
-      @product.description = "Hi"
-      @product.has_description = false
-      @product.description.should be_nil
-    end
-
-
-    it "should not clear the description if set to true" do
-      @product.description = "Hi"
-      @product.has_description = true
-      @product.description.should == "Hi"
-    end
-
-  end
 
   describe "Associations" do
     it "should belong to a supplier" do

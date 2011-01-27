@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    params[:product][:description] = '' unless(params[:has_description])
     @product = Product.new(params[:product].merge(:supplier_id => @supplier.id))
     if(@product.save)
       redirect_to products_path
@@ -28,6 +29,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    params[:product][:description] = '' unless(params[:has_description])
     @product = Product.find(params[:id])
     if(@product.update_attributes(params[:product]))
       redirect_to products_path

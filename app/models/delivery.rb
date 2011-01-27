@@ -68,6 +68,13 @@ class Delivery < ActiveRecord::Base
                   end 
   end
 
+  def self.next_dates_for_round(round_id, number)
+    Delivery.all( :conditions => ['round_id = ? and date >= curdate()', round_id],
+                  :order => 'date ').group_by(&:date).to_a.first(number).map do |d|
+                    d[0]
+                  end 
+  end
+
   def self.ids_for_dates(supplier, one_date, start_date, end_date)
     if one_date.present? then
       d = Delivery.for_supplier(supplier).where('date = ?', one_date)

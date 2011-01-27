@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
   def get_deliveries_and_orders
     @regular_orders = RegularOrder.find_or_new(@customer)
     @orders = Order.find_candidates(@customer)
-    @deliveries = Delivery.next_dates(@supplier.id, 10).map{|d| [d.to_s(:short), d]}
+    @deliveries = Delivery.next_dates_for_round(@customer.round_id, 10).map{|d| [d.to_s(:short), d]}
   end
 
 end

@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   has_many :regular_order_items, :dependent => :destroy
   validates_presence_of :name
   validates_numericality_of :price, :allow_blank => true
-  validates_format_of :category, :with => /\A[\w\s]+\z/,
+  validates_format_of :category, :with => /\A[\w\s\-]+\z/,
     :message => "Sorry no special characters (apostrophes, ampersands etc) are allowed in category names", :allow_blank => true
   before_update :set_category_sequence
 

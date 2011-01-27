@@ -51,6 +51,11 @@ describe Product do
       @product.should be_valid
     end
 
+    it "should be valid with a - in category name" do
+      @product.category = "h-a"
+      @product.should be_valid
+    end
+
   end
 
 

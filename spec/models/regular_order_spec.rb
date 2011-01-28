@@ -40,6 +40,13 @@ describe RegularOrder do
       roi.product_id.should == 4
     end
 
+    it "should throw an exception if it trys to create a second regular order" do
+      RegularOrder.create_all(@params)
+      lambda{
+        RegularOrder.create_all(@params)
+      }.should raise_error
+    end
+
     it "should update a regular order" do
       ro = RegularOrder.create(:customer_id => '2')
       ro.should have(0).regular_order_items
@@ -85,6 +92,7 @@ describe RegularOrder do
       orders = RegularOrder.create_all(@params, true)
       orders.first.update_attributes(:pending_update => false)
       orders.first.pending_update.should be_false
+      @params['regular_orders']["0"]['regular_order_id'] = orders.first.id
       orders = RegularOrder.create_all(@params, true)
       orders.first.pending_update.should be_true
     end

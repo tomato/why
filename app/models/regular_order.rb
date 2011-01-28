@@ -37,6 +37,7 @@ class RegularOrder < ActiveRecord::Base
     params['regular_orders'].each do |k,v|
 
       if(v['regular_order_id'] == 'undefined')
+        raise "Regular Order already exists for this customer" if RegularOrder.find_by_customer_id(customer_id) #check one doesn't already exist
         regularOrder = RegularOrder.new(:customer_id => params['customer_id'])
       else
         regularOrder = RegularOrder.find(v['regular_order_id'])

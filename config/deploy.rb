@@ -146,3 +146,6 @@ default_run_options[:pty] = true
 # :soft uses the standard touch tmp/restart.txt which leaves database connections
 # lingering until the workers time out
 # set :passenger_restart_strategy, :hard
+
+        require 'config/boot'
+        require 'hoptoad_notifier/capistrano'

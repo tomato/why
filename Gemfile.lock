@@ -129,7 +129,7 @@ GEM
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     nokogiri (1.4.4)
-    paperclip (2.3.3)
+    paperclip (2.3.8)
       activerecord
       activesupport
     pdf-writer (1.1.8)
@@ -213,7 +213,7 @@ DEPENDENCIES
   hpricot
   launchy
   mysql2
-  paperclip
+  paperclip (~> 2.3.6)
   pdf-writer
   rails (= 3.0.3)
   rspec-rails (~> 2.4)

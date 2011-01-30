@@ -5,6 +5,7 @@ class Customer < ActiveRecord::Base
   has_many :orders, :dependent => :destroy
   has_many :regular_orders, :dependent => :destroy
   acts_as_indexed :fields => [:name, :email, :address, :postcode, :telephone]
+  before_update :remove_orders, :if => Proc.new { |c| c.round_id_changed? }
 
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :lockable, :timeoutable and :activatable
@@ -55,5 +56,12 @@ class Customer < ActiveRecord::Base
 
   def export_fields
     [name, address, postcode, telephone]
+  end
+
+  private
+
+  def remove_orders
+    logger.info "removing customers orders!"
+    orders.each { |o| o.destroy }  if orders
   end
 end

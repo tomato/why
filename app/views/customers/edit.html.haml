@@ -1,3 +1,11 @@
+=content_for :head do
+  :javascript
+    $(function(){
+      $('#customer_round_id').change(function(){
+        alert('If you change the round of this customer any existing changes to the customers regular order will be deleted as these orders are linked to the customers current round');
+      })
+    })
+
 %h1 Update your customer
 
 =form_for @customer do |f|
@@ -7,3 +15,4 @@
       %li
         =label_tag ""
         =f.submit 'Update'
+        =link_to "Cancel", customers_path

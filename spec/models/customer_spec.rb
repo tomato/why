@@ -110,4 +110,21 @@ describe Customer do
       c.export_fields.should eql([c.name, c.address, c.postcode, c.telephone])
     end
   end
+
+  describe "update_round_id" do
+    it "should remove orders if round_id is changed" do
+      @customer = Factory(:customer_with_orders)
+      @customer.round_id = 25
+      @customer.save!
+      Order.find_all_by_customer_id(@customer.id).should have(0).order
+    end
+
+
+    it "should not remove orders if updated but round id is not changed" do
+      @customer = Factory(:customer_with_orders)
+      @customer.name = "FLop"
+      @customer.save!
+      Order.find_all_by_customer_id(@customer.id).should have(1).order
+    end
+  end
 end

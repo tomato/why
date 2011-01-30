@@ -3,7 +3,7 @@
     $(function(){
       why.setupProducts();
       why.setupOrders();
-      $('#watch').click( function(){ $('#movie').slideDown();})
+      $('#watch').live('click', function(){ $('#movie').slideDown();})
       $('#hide').click(function(){ $('#movie').slideUp(); });
       $('.more').hover(
         function(){ $(this).next('.description').fadeIn(); },
@@ -12,10 +12,8 @@
     })
 
 #movie
-  %a#hide Hide the video
-  %object
-    %param{ :name=>"movie", :value=>"http://www.youtube.com/v/v/ytnJlDBwnO8&hl=en_US&fs=1&rel=0&hd=1", :width=>"640", :height=>"385"}
-    %embed{ :src=>"http://www.youtube.com/v/ytnJlDBwnO8&hl=en_US&fs=1&rel=0&hd=1", :type=>"application/x-shockwave-flash", :width=>"640", :height=>"385" }
+  %a#hide Hide help
+  =image_tag 'helpscreenshot.jpg'
 #products
   %h2 Products
   -@product_categories.each do |category, products| 
@@ -32,16 +30,5 @@
           -if product.description.present?
             %span.more ?
             .description=raw product.description
-#help
-  %h2 Help
-  %ul
-    %li Click on a Product Category to see the items within it
-    %li To <strong>add a product to your regular order</strong> drag it from the list on the left into the box titled Regular Order. Set the how often you want the item and when it should be added to your order.
-    %li To <strong>add a product to a specific order</strong> drag it from the list on the left into the box with the correct delivery date
-    %li You can <strong>update the quantity</strong> of any product you receive by changing the number to its left
-    %li To <strong>remove a product</strong> from either your regular or a specific order set the quantity to 0
-    %li Once you are done making your changes <em>#{ @supplier.name }</em> will be automatically notified
-    %li <strong id="greenbox">Green boxes</strong> are your regular order, <strong id="purplebox">Purple boxes</strong> are orders that differ from your regular order (you might not have any of those yet!)
-
 #deliveries
   = render 'deliveries'

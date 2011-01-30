@@ -179,7 +179,7 @@ body#guide.promo #guide_tab a {
 
 div#products {
   float: left;
-  width: 160px;
+  width: 240px;
   height: 1000px; }
   div#products h3 {
     cursor: pointer;
@@ -205,7 +205,7 @@ div#products {
 
 .order {
   border: 2px solid #998299;
-  width: 160px;
+  width: 220px;
   min-height: 120px;
   margin: 10px;
   display: inline-block;
@@ -271,29 +271,15 @@ ul.boxes > li {
 
 #buttons {
   float: right; }
-  #buttons a#submit, #buttons a#undo {
-    display: block;
-    text-align: center;
-    background-color: #998299;
-    width: 200px;
-    padding: 5px;
-    margin: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none; }
-    #buttons a#submit .updated, #buttons a#undo .updated {
-      border: 2px solid red; }
-  #buttons a#submit:hover, #buttons a#undo:hover {
-    text-decoration: underline; }
   #buttons a#watch {
     width: 200px;
     margin: 10px;
     display: block;
     text-align: center; }
+
+a#hide {
+  display: block;
+  text-align: right; }
 
 #movie {
   display: none;

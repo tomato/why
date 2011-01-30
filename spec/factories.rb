@@ -19,6 +19,16 @@ Factory.define :customer_with_orders, :parent => :customer do |u|
   u.regular_orders {|a| [a.association(:regular_order)] }
 end
 
+Factory.define :customer_with_round, :parent => :customer do |u|
+  u.association :round
+end
+
+Factory.define :customer_with_orders_and_round, :parent => :customer do |u|
+  u.orders {|a| [a.association(:order)] }
+  u.regular_orders {|a| [a.association(:regular_order)] }
+  u.association :round
+end
+
 Factory.define :supplier do |u|
   u.name 'fred'
   u.products {|a| [a.association(:product)]}
@@ -38,12 +48,13 @@ Factory.define :order do |u|
 end
 
 Factory.define :order_with_real_customer, :parent => :order do |u|
-  u.customer {|a| a.association(:customer) }
+  u.customer {|a| a.association(:customer_with_round) }
 end
 
 Factory.define :regular_order do |u|
   u.customer_id 1
   u.regular_order_items {|a| [a.association(:regular_order_item)] }
+  u.note "regular order note"
 end
 
 Factory.define :order_item do |u|

@@ -55,7 +55,7 @@ class Customer < ActiveRecord::Base
   end
 
   def export_fields
-    [name, address, postcode, telephone]
+    [round.name, name, address, postcode, telephone] + ((regular_orders[0]) ? [regular_orders[0].note] : [])
   end
 
   private

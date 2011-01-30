@@ -1,11 +1,11 @@
 module Orderable
   
   def export_fields
-    [self.note] + items.map{ |i| [i.quantity, i.product.name, i.product.price.to_s]}.flatten
+    [self.note|| nil] + items.map{ |i| [i.quantity, i.product.name, i.product.price.to_s]}.flatten
   end
 
   def to_csv
-    (customer.export_fields + export_fields).to_csv
+    ((customer.export_fields||[]) + (export_fields||[])).to_csv
   end
   
   def label_lines

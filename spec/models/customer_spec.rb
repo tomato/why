@@ -106,8 +106,8 @@ describe Customer do
 
   describe :export_fields do
     it "should return the correct fields" do
-      c = Factory(:customer)
-      c.export_fields.should eql([c.name, c.address, c.postcode, c.telephone])
+      c = Factory(:customer_with_orders_and_round)
+      c.export_fields.should eql([c.round.name, c.name, c.address, c.postcode, c.telephone,c.regular_orders[0].note ])
     end
   end
 

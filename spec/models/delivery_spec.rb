@@ -150,7 +150,7 @@ describe Delivery do
       it "should return a single string" do
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer.id})
         Factory(:order, {:delivery_id => @delivery.id, :customer_id => @customer2.id})
-        @delivery.all_orders_csv.should == " 1 Jan,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n 1 Jan,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n"
+        @delivery.all_orders_csv.should == " 1 Jan,test,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n 1 Jan,test,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n"
       end
 
       it "should return an empty string if no id's are passed" do

@@ -20,6 +20,7 @@ gem 'acts_as_indexed'
 gem "friendly_id", "~> 3.1"
 gem "paperclip", "~> 2.3.6"
 gem 'hoptoad_notifier'
+gem 'newrelic_rpm'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.4"

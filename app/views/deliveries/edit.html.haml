@@ -17,3 +17,6 @@
       %li
         %label
         =submit_tag 'Update'
+        -if @delivery.persisted?
+          or 
+          =link_to 'Delete', round_delivery_path(@round, @delivery), :confirm => 'Are you sure you want to delete this delivery and any orders made against it?', :method => :delete

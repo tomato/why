@@ -219,4 +219,13 @@ describe Delivery do
       end
     end
   end
+
+  describe :destroy do
+    it "should remove any related orders" do
+      d = Factory(:delivery_with_order)
+      id = d.id 
+      d.destroy
+      Order.find_by_delivery_id(id).should be_nil
+    end
+  end
 end

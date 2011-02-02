@@ -44,6 +44,13 @@ class DeliveriesController < ApplicationController
     redirect_to round_url(params[:round_id])
   end
 
+  def destroy
+    @delivery = Delivery.find(params[:id])
+    @delivery.destroy
+    redirect_to round_path(@round)
+  end
+
+
   private
   def validate()
     problems = []

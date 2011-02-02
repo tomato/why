@@ -1,6 +1,6 @@
 class Delivery < ActiveRecord::Base
   belongs_to :round
-  has_many :orders
+  has_many :orders, :dependent => :destroy
   scope :for_supplier, lambda { |supplier| where('supplier_id = ?', supplier.id).joins(' inner join rounds on deliveries.round_id = rounds.id')}
 
   def all_orders

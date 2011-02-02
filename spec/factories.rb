@@ -91,4 +91,8 @@ Factory.define :delivery do |u|
   u.date DateTime.new
   u.round {|a| a.association(:round)}
 end
+
+Factory.define :delivery_with_order, :parent => :delivery do |u|
+  u.orders {|a| [a.association(:order)] }
+end
   

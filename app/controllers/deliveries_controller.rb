@@ -1,17 +1,33 @@
 class DeliveriesController < ApplicationController
   before_filter :authenticate_supplier!
+  before_filter :get_round
 
   def edit
     @delivery = Delivery.find(params[:id])
   end
 
+  def new
+    @delivery = Delivery.new
+    render :action => :edit
+  end
+
   def update
     @delivery = Delivery.find(params[:id])
     @delivery.update_attributes(params[:delivery])
-    redirect_to round_url(@delivery.round_id)
+    redirect_to round_url(@round)
   end
 
   def create
+    @delivery = Delivery.new(params[:delivery])
+    @delivery.round = @round
+    if(@delivery.save)
+      redirect_to round_url(@delivery.round_id)
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def create_all
     problems = validate()
     if(problems.length == 0)
       set_count_notice(Delivery.create_all(
@@ -25,7 +41,7 @@ class DeliveriesController < ApplicationController
     else
       flash[:notice] = problems.join('<br/>')
     end
-    redirect_to round_url(params[:round])
+    redirect_to round_url(params[:round_id])
   end
 
   private
@@ -69,5 +85,9 @@ class DeliveriesController < ApplicationController
     else
       "#{count} new deliveries were added"
     end
+  end
+
+  def get_round()
+    @round = Round.find(params[:round_id])
   end
 end

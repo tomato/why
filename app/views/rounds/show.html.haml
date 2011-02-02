@@ -10,7 +10,7 @@
     %li
       We recomend you create deliveries for the rest of the year. Select the days for the round and the dates you want the deliveries to run to and hit the 'create delvieries' button. Once the dates are created you can edit them if they change for bank holidays and the like.
 %h1 Deliveries for #{@round.name} Round
-=form_tag({:action => 'create', :controller => 'deliveries'}) do
+=form_tag(create_all_round_deliveries_path(@round.id)) do
   %fieldset.doubledecker
     %legend Add deliveries
     =hidden_field_tag :round, @round.id
@@ -20,6 +20,7 @@
         -@days.each do |i, day| 
           =label_tag "day_#{day}", day
           =check_box_tag "day[]", i, false, :id => "day_#{day}"
+          &nbsp;
       %li
         %label{:for => 'from_day'} From:
         =select_date Time.now,:prefix => 'from', :order => [:day, :month, :year]
@@ -33,6 +34,9 @@
         \:00
       %li
         =submit_tag 'Create Deliveries'
+        or 
+        =link_to 'create', new_round_delivery_path(@round)
+        a single delivery
 %h2 Current scheduled deliveries are:
 %p 
   Show 
@@ -43,4 +47,4 @@
   -@delivery_months.sort.each do |month, deliveries|
     %h3=month.strftime('%B %Y')
     -deliveries.each do |d|
-      =link_to d.date.strftime("%A #{d.date.day.ordinalize}"), edit_delivery_path(d)
+      =link_to d.date.strftime("%A #{d.date.day.ordinalize}"), edit_round_delivery_path(@round,d)

@@ -3,11 +3,16 @@ Why::Application.routes.draw do
   devise_for :supplier_users
   devise_for :admins
 
-  resources  :deliveries, :supplier_users
+  resources  :supplier_users
   resources :rounds do 
     member do
       get :past
       get :future
+    end
+    resources  :deliveries do
+      collection do
+        post :create_all
+      end
     end
   end
   resources :products do

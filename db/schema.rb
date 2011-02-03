@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112201056) do
+ActiveRecord::Schema.define(:version => 20110203214641) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -128,7 +128,8 @@ ActiveRecord::Schema.define(:version => 20110112201056) do
     t.string   "schedule"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "supplier_id", :null => false
+    t.integer  "supplier_id",      :null => false
+    t.text     "customer_message"
   end
 
   create_table "slugs", :force => true do |t|

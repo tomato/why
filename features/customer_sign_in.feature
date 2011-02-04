@@ -23,7 +23,7 @@ Feature: Customer Sign In
     And I fill in "Email" with "person1@example.com"
     And I fill in "Password" with "ab1234"
     And I press "Sign In"
-    Then I should see "Flummoxed? Watch the video"
+    Then I should see "Help me!"
     And I should see "Regular Order"
 
   Scenario: Customer Try to log in with wrong password
@@ -39,13 +39,13 @@ Feature: Customer Sign In
     Given I am authenticated as a customer with a supplier named fred
     When I visit subdomain "fred"
     And I go to fred's customer page
-    Then I should see "Flummoxed? Watch the video"
+    Then I should see "Help me!"
 
   Scenario: Logged in customer goes directly to orders page
     Given I am authenticated as a customer with a supplier named fred
     And I am on another site
     When I visit subdomain "fred"
-    Then I should see "Flummoxed? Watch the video"
+    Then I should see "Help me!"
     And I should see "Regular Order"
 
   Scenario: Supplier Sign in should take you to dashboard

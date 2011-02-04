@@ -11,7 +11,7 @@ When /^I visit subdomain "([^"]*)"$/ do |subdomain|
 end
 
 Given /^I have a customer with a supplier named fred$/ do
-  Factory(:customer)
+  Factory(:customer_with_round)
 end
 
 Given /^I have a supplier user with a supplier named fred$/ do

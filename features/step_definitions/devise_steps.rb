@@ -7,7 +7,7 @@ Given /^I am not authenticated as a supplier/ do
 end
 
 Given /^I am authenticated as a customer with a supplier named fred$/ do
-  customer = Factory(:customer)
+  customer = Factory(:customer_with_round)
   Capybara.default_host = "fred.fwig.me"
   switch_session('fred')
   visit('/customers/sign_out')

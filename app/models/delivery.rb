@@ -30,7 +30,7 @@ class Delivery < ActiveRecord::Base
       total_quantity =  product_items.inject(0) do |t,i|
         t += i.quantity    
       end
-      produce << [p.id,p.name, p.price, total_quantity] unless total_quantity == 0
+      produce << [p.category ,p.name, p.price, total_quantity] unless total_quantity == 0
     end
     return produce
   end

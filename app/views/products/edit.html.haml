@@ -20,6 +20,14 @@
   });
   })
   
+#help
+  %h2 Help
+  %ul
+    %li Give your product a name
+    %li Enter a new category or type the first letter of a category that already exists and it will appear for you to select
+    %li Add a price
+    %li If you want to add more of a description click on the 'include description' check box and text are will magically appear. You can add a photo by linking to pics that have been uploaded to the internet (such as on Flickr, Picasa, or on your own website). Do this by clicking on image button (it's a hill with a sun behind it). Hover over the other buttons to see what they do (they should be familiar)
+
 %h1="#{controller.action_name.capitalize} Product"
 =form_for @product do |p|
   -@product.errors.full_messages.each do |e|

@@ -248,7 +248,7 @@ div#products {
     margin: 12px; }
   .editNote .close, .description .close {
     float: right;
-    margin-right: 5px; }
+    margin: 2px 5px; }
 
 .description {
   padding: 10px;

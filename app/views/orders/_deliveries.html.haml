@@ -27,6 +27,11 @@
               from
               = select_tag "start", options_for_select(@deliveries, oi.first_delivery_date), :class => "start"
           %li.total
+          -if regular.note.present?
+            %li
+              %em
+                Note: 
+                =regular.note
         .editNote
           .close
             =link_to 'close',''
@@ -53,6 +58,11 @@
                 =oi.product.name
                 %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
           %li.total
+          -if order.note.present?
+            %li
+              %em
+                Note: 
+                =order.note
         .editNote
           .close
             =link_to 'close',''

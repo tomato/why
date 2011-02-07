@@ -47,6 +47,9 @@
                         =item.frequency
                         week(s) from
                         =item.first_delivery_date.to_s(:short)
-                  %li
-                    =order.note
+                  -if order.note.present?
+                    %li
+                      %em
+                        Note: 
+                        =order.note
               

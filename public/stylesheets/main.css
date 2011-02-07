@@ -272,13 +272,9 @@ ul.boxes > li {
     ul.boxes > li .box a {
       margin-right: 0.3em; }
 
-#buttons {
-  float: right; }
-  #buttons a#watch {
-    width: 200px;
-    margin: 10px;
-    display: block;
-    text-align: center; }
+#orderHelp {
+  float: right;
+  width: 200px; }
 
 a#hide {
   display: block;

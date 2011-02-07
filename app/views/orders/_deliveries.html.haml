@@ -28,13 +28,14 @@
               = select_tag "start", options_for_select(@deliveries, oi.first_delivery_date), :class => "start"
           %li.total
         .editNote
+          .close
+            =link_to 'close',''
           %h3 
-            Notes for Reqular Order
+            Notes for Regular Order
             \:
           %textarea{ :rows => 14, :cols => 40 }
             =regular.note
           %br
-          =link_to 'close',''
 %hr
 %ul.orders
   -@orders.each do |order|
@@ -53,6 +54,8 @@
                 %span.price{ 'data-price' => oi.product.price }= to_pound(oi.product.price)
           %li.total
         .editNote
+          .close
+            =link_to 'close',''
           %h3 
             Notes for
             =order.delivery.date.to_s(:short)
@@ -60,5 +63,4 @@
           %textarea{ :rows => 14, :cols => 40 }
             =order.note
           %br
-          =link_to 'close',''
 

@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price, :allow_blank => true
   validates_format_of :category, :with => /\A[\w\s\-]+\z/,
     :message => "Sorry no special characters (apostrophes, ampersands etc) are allowed in category names", :allow_blank => true
-  before_update :set_category_sequence
+  before_save :set_category_sequence
 
   def self.update_sequences(ids, supplier_id)
     return unless ids
@@ -36,7 +36,7 @@ class Product < ActiveRecord::Base
   end
 
   def set_category_sequence
-    if(self.category_changed?)
+    if(self.category_changed? || self.new_record?)
       s = Product.where(:category => self.category).first
       self.category_sequence = s ? s.category_sequence : 0
     end

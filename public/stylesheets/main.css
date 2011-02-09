@@ -84,6 +84,9 @@ fieldset {
   font-size: 24px;
   font-family: Georgia; }
 
+#logo img {
+  height: 40px; }
+
 #menu {
   float: right; }
   #menu a {

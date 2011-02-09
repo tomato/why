@@ -27,9 +27,9 @@
               ["every 5 deliveries",5],
               ["every 6 deliveries",6],
               ["every 7 deliveries",7],
-              ["every 8 deliveries",8]],oi.frequency), :class => 'frequency' 
+              ["every 8 deliveries",8]],oi.frequency), :class => 'frequency', :id => nil
             from
-            = select_tag "start", options_for_select(@deliveries, oi.first_delivery_date), :class => "start"
+            = select_tag "start", options_for_select(@deliveries, oi.first_delivery_date), :class => "start", :id => nil
         %li.total
         -if regular.note.present?
           %li

@@ -47,8 +47,8 @@ why.createOrder = function()
   var RegularItem = function(li) {
       this.quantity = li.find('.quantity').val();
       this.product_id = li.attr('data-product_id');
-      this.frequency = li.find('#frequency').val();
-      this.first_delivery_date = li.find('#start').val();
+      this.frequency = li.find('.frequency').val();
+      this.first_delivery_date = li.find('.start').val();
   };
 
   var regularOrders = why.map_slice($('.regularOrders .updated'), function(e){

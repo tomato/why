@@ -11,12 +11,12 @@ module ApplicationHelper
     content_for :logo do 
       if(@supplier)
         if(@supplier.logo)
-          image_tag @supplier.logo.url, :height => '40px'
+          image_tag @supplier.logo.url
         else
           @supplier.name
         end
       else
-        image_tag 'logo.gif', :height => '40px'
+        image_tag 'logo.gif'
       end
     end
   end

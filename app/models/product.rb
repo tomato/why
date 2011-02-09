@@ -37,8 +37,11 @@ class Product < ActiveRecord::Base
 
   def set_category_sequence
     if(self.category_changed? || self.new_record?)
-      s = Product.where(:category => self.category).first
-      self.category_sequence = s ? s.category_sequence : 0
+      s = Product.where(:category => self.category).order("sequence desc").first
+      if(s) then
+        self.category_sequence = s.category_sequence 
+        self.sequence = s.sequence + 1
+      end
     end
   end
 

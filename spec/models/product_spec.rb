@@ -138,10 +138,16 @@ describe Product do
       @p2.category_sequence.should == @p1.category_sequence
     end
 
-    it "should set a new category sequence to 0" do
+    it "should set a new category sequence to 1" do
       @p2.category = "c"
       @p2.save!
-      @p2.category_sequence.should == 0
+      @p2.category_sequence.should == 1
+    end
+
+    it "should set a existing category sequence to 2" do
+      @p2.category = "a"
+      @p2.save!
+      @p2.category_sequence.should == 2
     end
   end
 

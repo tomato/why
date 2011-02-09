@@ -165,7 +165,7 @@ describe Delivery do
         @round.supplier.products.clear
         @round.supplier.products << product
         p = @delivery.all_produce
-        p[0][0].should == product.id
+        p[0][1].should == product.name
         p[0][3].should == 1
       end
 

@@ -23,6 +23,15 @@ Factory.define :customer_with_round, :parent => :customer do |u|
   u.association :round
 end
 
+Factory.define :invited_customer, :parent => :customer_with_round do |u|
+  u.invitation_token 'pXx3BBJYzOCBXv6tijyG'
+  u.invitation_sent_at DateTime.now
+end
+
+Factory.define :lost_customer, :parent => :customer_with_round do |u|
+  u.reset_password_token 'pXx3BBJYzOCBXv6tijyG'
+end
+
 Factory.define :customer_with_orders_and_round, :parent => :customer do |u|
   u.orders {|a| [a.association(:order)] }
   u.regular_orders {|a| [a.association(:regular_order)] }

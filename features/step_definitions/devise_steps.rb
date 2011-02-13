@@ -28,7 +28,4 @@ Given /^I am authenticated as a supplier with a supplier named fred$/ do
   click_button("Sign In")
 end
 
-Then /^I should be redirected to (.+)$/ do |url|
-  response.should redirect_to url 
-end
 

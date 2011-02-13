@@ -53,6 +53,15 @@ Feature: Customer Sign In
     Then I should see "Invalid Subdomain"
     And I should see "Simple Order Management"
 
+  Scenario: Invite should redirect to orders after password set 
+    Given I invite a new user for fred
+    When I visit subdomain "fred"
+    And I go to invite page
+    And I fill in "Password" with "hollo22"
+    And I fill in "Password confirmation" with "hollo22"
+    And I press "Set my password"
+    Then I should see "Regular Order"
+
   Scenario: Password reset?
 
 

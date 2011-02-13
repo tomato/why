@@ -14,8 +14,16 @@ Given /^I have a customer with a supplier named fred$/ do
   Factory(:customer_with_round)
 end
 
+Given /^I invite a new user for fred$/ do
+  Factory(:invited_customer)
+end
+
 Given /^I have a supplier user with a supplier named fred$/ do
   Factory(:supplier_user)
+end
+
+Given /^I have a customer who has forgotten their password$/ do
+  Factory(:lost_customer)
 end
 
 Then /^log the html$/ do
@@ -33,7 +41,7 @@ end
 Given /^fred has chosen to embed the site$/ do
   s = Supplier.where(:name => 'fred').first
   s.embed = true
-  s.parent_url = 'http://grr.co.uk'
+  s.parent_url = 'http://fred.fwig.me/how'
   s.save!
 end
 

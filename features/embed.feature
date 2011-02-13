@@ -33,5 +33,24 @@ Feature: Embed changes layout
     Then I should see "Dashboard"
     And I should see the header
 
+  Scenario: Invite should redirect to parent after password set 
+    Given I invite a new user for fred
+    And fred has chosen to embed the site
+    And I am not authenticated as a customer
+    When I visit subdomain "fred"
+    When I go to invite page
+    And I fill in "Password" with "hollo22"
+    And I fill in "Password confirmation" with "hollo22"
+    And I press "Set my password"
+    Then I should be on "parent page"
+  
+  Scenario: Should redirect to parent after pasword reset
+    Given I have a customer who has forgotten their password
+    And fred has chosen to embed the site
+    When I go to reset password page
+    And I fill in "Password" with "hollo22"
+    And I fill in "Password confirmation" with "hollo22"
+    And I press "Change my password"
+    Then I should be on "parent page"
 
 

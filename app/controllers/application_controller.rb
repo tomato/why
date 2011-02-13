@@ -21,12 +21,11 @@ class ApplicationController < ActionController::Base
     elsif resource.is_a?(Admin) || resource == :admin
        home_url
     elsif resource.is_a?(Customer) || resource == :customer
-      if(@supplier && @supplier.embed? && request.referer.include?('invitation'))
+      if(from_password_set && should_embed)
         logger.info "Customer redirecting to parent url"
         return @supplier.parent_url
       else
-        session[:supplier_id] = current_customer.supplier_id
-        logger.info "Customer about to redirect to orders"
+        logger.info "Customer about to redirect to orders supplier=#{@supplier}"
         customer_orders_url(current_customer.id)
       end
     else
@@ -77,5 +76,9 @@ class ApplicationController < ActionController::Base
 
   def should_embed
     @supplier && @supplier.embed? && !valid_superuser?
+  end
+
+  def from_password_set
+    request.referer.include?('invitation') || request.referer.include?('reset_password') 
   end
 end

@@ -72,6 +72,10 @@ class ApplicationController < ActionController::Base
   end
 
   def layout
-    session[:embed] ? 'embed' : 'application'
+    should_embed ? 'embed' : 'application'
+  end
+
+  def should_embed
+    @supplier && @supplier.embed? && !valid_superuser?
   end
 end

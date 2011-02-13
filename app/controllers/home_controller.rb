@@ -6,7 +6,6 @@ class HomeController < ApplicationController
 
   def index
     logger.info "Firing Home Controller Index action with subdomain: #{request.subdomain}"
-    session[:embed] = false
     if(@supplier)
       if customer_signed_in?
         logger.info "redirecting from index to orders path"
@@ -30,7 +29,6 @@ class HomeController < ApplicationController
   end
 
   def embed
-    session[:embed] = true
     redirect_to '/customers/sign_in'
   end
 

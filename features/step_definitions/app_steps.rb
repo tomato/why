@@ -21,3 +21,20 @@ end
 Then /^log the html$/ do
   puts response.body.inspect
 end
+
+Then /^I should see the header$/ do
+  page.should have_css("div#menu")
+end
+
+Then /^I should not see the header$/ do
+  page.should_not have_css("div#menu")
+end
+
+Given /^fred has chosen to embed the site$/ do
+  s = Supplier.where(:name => 'fred').first
+  s.embed = true
+  s.parent_url = 'http://grr.co.uk'
+  s.save!
+end
+
+

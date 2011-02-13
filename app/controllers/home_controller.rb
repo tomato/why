@@ -2,7 +2,6 @@ require 'rss/2.0'
 require 'hpricot'
 
 class HomeController < ApplicationController
-  caches_page :index
 
   def index
     logger.info "Firing Home Controller Index action with subdomain: #{request.subdomain}"

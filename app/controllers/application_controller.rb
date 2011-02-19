@@ -2,11 +2,16 @@ class ApplicationController < ActionController::Base
   include UrlHelper
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :set_p3p
   before_filter :set_supplier
   before_filter :set_mailer_url_options
   layout :layout
 
   protected
+
+  def set_p3p
+    response.headers["P3P"]='CP="CAO PSA OUR"'
+  end
 
   def after_sign_in_path_for(resource)
     logger.info "firing after_sign_in_path from #{ request.referer }"

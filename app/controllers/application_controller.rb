@@ -41,6 +41,9 @@ class ApplicationController < ActionController::Base
   
 
   def after_sign_out_path_for(resource)
+    if (resource.is_a?(Customer) || resource == :customer) && (on_password_set && should_embed)
+        return @supplier.parent_url
+    end
     super
   end
    
@@ -85,5 +88,9 @@ class ApplicationController < ActionController::Base
 
   def from_password_set
     request.referer.include?('invitation') || request.referer.include?('reset_password') 
+  end
+
+  def on_password_set
+    request.path.include?('invitation') || request.path.include?('reset_password') 
   end
 end

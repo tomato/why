@@ -32,6 +32,7 @@ class Customer < ActiveRecord::Base
     end
   end
 
+
   def self.accept_updates(customer_ids)
     return unless customer_ids
     customer_ids.each do |c|
@@ -45,12 +46,12 @@ class Customer < ActiveRecord::Base
   end
   
   def status
-    if(self.invited?)
-      :invited
-    elsif(valid_password?(DEFAULT_PASSWORD))
-      :new
-    else
+    if(self.invitation_accepted?)
       :active
+    elsif(self.invited?)
+      :invited
+    else
+      :new
     end
   end
 

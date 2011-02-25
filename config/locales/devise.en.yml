@@ -42,4 +42,8 @@ en:
         subject: 'Unlock Instructions'
       invitation: 
         subject: "Welcome to FromWhereItsGrown"
+    invitations:
+      send_instructions: 'An invitation email has been sent to %{email}.'
+      invitation_token_invalid: 'The invitation token provided is not valid!'
+      updated: 'Your password was set successfully. You are now signed in.'
 

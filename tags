@@ -1,0 +1,5 @@
+constraints	./config/routes.rb	/^  constraints(Subdomain) do  $/
+expand_path	./config/application.rb	/^require File.expand_path('..\/boot', __FILE__)$/
+matches	./lib/subdomain.rb	/^  def self.matches?(request)  $/
+new	./spec/factories.rb	/^  u.first_delivery_date DateTime.new(2010,1,1)$/
+set	./config/deploy.rb	/^set(:deploy_to) { File.join("", "home", user, appl/

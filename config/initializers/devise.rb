@@ -103,4 +103,14 @@ Devise.setup do |config|
   # config.default_url_options do
   #   { :locale => I18n.locale }
   # end
+  # ==> Configuration for :invitable
+  # Time interval where the invitation token is valid.
+  # If invite_for is 0 or nil, the invitation will never expire.
+  # Default: 0
+  # config.invite_for = 2.weeks
+
+  # Flag that force a record to be valid before being actually invited.
+  # Default: false
+  config.validate_on_invite = false
+  
 end

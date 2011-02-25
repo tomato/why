@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110203214641) do
+ActiveRecord::Schema.define(:version => 20110224231619) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -32,27 +32,28 @@ ActiveRecord::Schema.define(:version => 20110203214641) do
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
   create_table "customers", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                                :default => "", :null => false
+    t.string   "encrypted_password",                   :default => ""
+    t.string   "password_salt",                        :default => ""
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "invitation_token",     :limit => 20
+    t.string   "invitation_token",       :limit => 20
     t.datetime "invitation_sent_at"
     t.string   "name"
     t.text     "address"
     t.string   "postcode"
     t.string   "telephone"
-    t.integer  "round_id",                                            :null => false
-    t.integer  "supplier_id",                                         :null => false
+    t.integer  "round_id",                                             :null => false
+    t.integer  "supplier_id",                                          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "invitation_accepted_at"
   end
 
   add_index "customers", ["email"], :name => "index_customers_on_email", :unique => true
@@ -145,22 +146,23 @@ ActiveRecord::Schema.define(:version => 20110203214641) do
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "supplier_users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                                :default => "", :null => false
+    t.string   "encrypted_password",                   :default => ""
+    t.string   "password_salt",                        :default => ""
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "invitation_token",     :limit => 20
+    t.string   "invitation_token",       :limit => 20
     t.datetime "invitation_sent_at"
-    t.integer  "supplier_id",                                         :null => false
+    t.integer  "supplier_id",                                          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "invitation_accepted_at"
   end
 
   add_index "supplier_users", ["email"], :name => "index_supplier_users_on_email", :unique => true

@@ -9,7 +9,7 @@ gem "mysql2"
 gem "haml", "~> 3.0.18"
 gem "warden"
 gem "devise",           "~> 1.1.1"
-gem "devise_invitable", :git => "git://github.com/rymai/devise_invitable.git"
+gem "devise_invitable", :git => "git://github.com/rymai/devise_invitable.git", :branch => "new_url"
 gem "factory_girl_rails"
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'simple-rss'

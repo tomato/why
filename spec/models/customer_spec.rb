@@ -16,7 +16,6 @@ describe Customer do
     end
 
     it "should return  :new for a new customer" do
-      @customer.password = Customer::DEFAULT_PASSWORD
       @customer.status.should == :new
     end
 

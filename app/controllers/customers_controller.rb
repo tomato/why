@@ -16,8 +16,9 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(params[:customer])
-    @customer.password = Customer::DEFAULT_PASSWORD
     @customer.supplier_id = @supplier.id
+    @customer.password = Customer::DEFAULT_PASSWORD 
+    @customer.password_confirmation = Customer::DEFAULT_PASSWORD 
     if(@customer.save)
       redirect_to customers_path
     else

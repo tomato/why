@@ -46,5 +46,11 @@ module Why
       g.template_engine :haml
       g.test_framework :rspec, :fixture => false 
     end
+
+    config.to_prepare do
+        Devise::Mailer.class_eval do 
+          include DeviseMailerExtensions
+        end
+      end
   end
 end

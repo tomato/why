@@ -8,8 +8,8 @@ module DeviseMailerExtensions
   
 
   def mailer_sender_with_supplier_email(mapping)
-    if @resource.respond_to?(:supplier)
-      "#{@resource.supplier.friendly_id}@fromwhereitsgrown.com"
+    if @resource.respond_to?(:supplier) && @resource.supplier.from_email
+      @resource.supplier.from_email
     else
       mailer_sender_without_supplier_email(mapping)
     end

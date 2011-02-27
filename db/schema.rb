@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110224231619) do
+ActiveRecord::Schema.define(:version => 20110227081110) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -180,6 +180,8 @@ ActiveRecord::Schema.define(:version => 20110224231619) do
     t.text     "info"
     t.boolean  "embed",             :default => false, :null => false
     t.string   "parent_url"
+    t.string   "from_email"
+    t.text     "invite"
   end
 
 end

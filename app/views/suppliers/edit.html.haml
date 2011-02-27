@@ -1,5 +1,6 @@
 :javascript
   $(function(){
+    $("#url_li").css('display',$("#supplier_embed").is(":checked") ? 'inherit' : 'none');
     $("#supplier_embed").click(function(){
       if($("#supplier_embed").is(":checked"))
       {
@@ -26,6 +27,9 @@
       %li
         =f.label :info, 'News' 
         =f.text_area :info, :class => 'editor'
+      %li
+        =f.label :from_email, 'address that emails are sent from' 
+        =f.text_field :from_email
       %li
         =f.label :embed
         =f.check_box :embed

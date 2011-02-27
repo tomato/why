@@ -47,6 +47,11 @@ module Why
       g.test_framework :rspec, :fixture => false 
     end
 
+    ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+      '<span class="field_with_errors">'.html_safe << html_tag << 
+    '</span>'.html_safe
+    end
+    
     config.to_prepare do
         Devise::Mailer.class_eval do 
           include DeviseMailerExtensions

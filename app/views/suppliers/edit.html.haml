@@ -11,6 +11,8 @@
         $("#url_li").slideUp();
       }
     });
+    why.setupEnableText('#has_invite', '#supplier_invite', '#invite_li');
+    why.setupEnableText('#has_news', '#supplier_info', '#news_li');
   })
 %h1 Update your settings
 =form_for @supplier, :html => { :multipart => true } do |f|
@@ -25,13 +27,22 @@
         =f.label :logo
         =f.file_field :logo
       %li
+        =label_tag :has_news, 'Show News'
+        =check_box_tag :has_news
+      %li#news_li
         =f.label :info, 'News' 
         =f.text_area :info, :class => 'editor'
       %li
-        =f.label :from_email, 'address that emails are sent from' 
+        =f.label :from_email, 'Address that emails are sent from' 
         =f.text_field :from_email
       %li
-        =f.label :embed
+        =label_tag :has_invite, 'Customise Invite'
+        =check_box_tag :has_invite
+      %li#invite_li
+        =f.label :invite, 'Custom Invite Text'
+        =f.text_area :invite, :class => 'editor'
+      %li
+        =f.label :embed, 'Embed in your own website'
         =f.check_box :embed
       %li#url_li
         =f.label :parent_url

@@ -21,6 +21,24 @@ $(function(){
     });
 })
 
+why.setupEnableText = function(checkboxId, textId, textlineId){
+    if($(textId).val().length > 0){
+      $(checkboxId).attr('checked',true);}
+    else{
+      $(textlineId).css('display', 'none');}
+
+    $(checkboxId).click(function(){
+      if($(checkboxId).is(":checked"))
+      {
+        $(textlineId).slideDown();
+      }
+      else
+      {
+        $(textlineId).slideUp();
+      }
+    });
+}
+
 why.hideFlash = function(){
   $('#notice').delay(5000).slideUp();
 }

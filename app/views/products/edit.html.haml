@@ -3,21 +3,7 @@
   ="var data = '#{@category_list}'.split(',');"
   $("#product_category").autocomplete(data);
 
-  if($('#product_description').val().length > 0){
-  $('#has_description').attr('checked',true);}
-  else{
-  $("#desc_li").hide();}
-
-  $("#has_description").click(function(){
-  if($("#has_description").is(":checked"))
-  {
-  $("#desc_li").slideDown();
-  }
-  else
-  {
-  $("#desc_li").slideUp();
-  }
-  });
+  why.setupEnableText('#has_description', '#product_description', '#desc_li');
   })
   
 #help

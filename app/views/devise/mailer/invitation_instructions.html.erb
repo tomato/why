@@ -1,9 +1,14 @@
 Hello <%= (@resource.respond_to?(:name) && @resource.name.present?) ? @resource.name : @resource.email %>!
 <p>
+<%-if @resource.supplier.invite %>
+  <%= raw @resource.supplier.invite %>
+<%- else %>
 <%= @resource.supplier.name %> has invited you to FromWhereItsGrown.com
 </p><p>
 FromWhereItsGrown.com allows you to change your existing and future orders with <%= @resource.supplier.name %> at any time without having to call. 
-</p><p>
+</p>
+<%- end %>
+<p>
 You can accept the invitation through this link:
 <%= link_to 'Accept invitation', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token) %>
 </p><p>

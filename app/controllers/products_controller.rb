@@ -2,8 +2,7 @@ class ProductsController < ApplicationController
   before_filter :authenticate_supplier!
   
   def index
-    @products = Product.find_all_by_supplier_id(@supplier.id).sort
-    @product_categories = @products.group_by { |c| [c.category_sequence, c.category] }
+    @product_categories = Product.get_grouped(@supplier)
   end
 
   def new

@@ -46,10 +46,10 @@ describe Order do
 
 
   describe "find_candidates" do
-    it "should include a new order for the next 12 deliveries if no orders exist" do
+    it "should include a new order for the next 6 deliveries if no orders exist" do
       @customer = Customer.new({:round_id => 1})
       Delivery.create_all(1, DateTime.now, DateTime.now.next_year,[0], LastOrdersDuration.new(0,0))
-      Order.find_candidates(@customer).should have(12).orders
+      Order.find_candidates(@customer).should have(6).orders
     end
 
     it "should find existing orders" do

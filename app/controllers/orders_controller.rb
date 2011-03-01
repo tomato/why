@@ -3,8 +3,7 @@ class OrdersController < ApplicationController
   
   def index
     get_deliveries_and_orders
-    @products = Product.find_all_by_supplier_id(@customer.supplier_id)
-    @product_categories = @products.group_by { |p| p.category }
+    @product_categories = Product.get_grouped(@supplier)
   end
 
   def create

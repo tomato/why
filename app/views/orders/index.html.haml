@@ -18,12 +18,12 @@
   =image_tag 'helpscreenshot.jpg'
 #products
   %h2 Products
-  -@product_categories.each do |category, products| 
+  -@product_categories.sort.each do |category, products| 
     %h3
       %span.catselector +
-      =category
+      =category[1]
     %ul
-      -products.each do |product|
+      -products.sort.each do |product|
         %li.product{"data-product_id" => product.id}
           %span.prodname
             =product.name

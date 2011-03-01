@@ -35,6 +35,10 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def self.get_grouped(supplier)
+    Product.find_all_by_supplier_id(supplier.id).sort.group_by { |c| [c.category_sequence, c.category] }
+  end
+
   def set_category_sequence
     if(self.category_changed? || self.new_record?)
       s = Product.where(:category => self.category).order("sequence desc").first

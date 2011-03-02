@@ -237,7 +237,7 @@ div#products {
   width: 480px; }
 
 .editNote, .description {
-  position: absolute;
+  position: fixed;
   top: 30%;
   left: 30%;
   height: 310px;

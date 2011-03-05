@@ -2,9 +2,9 @@
 %html
   %body
     =image_tag "#{root_url}#{@customer.supplier.logo.url.gsub(/^\//, '')}"
-    Hello 
-    = @customer.name.present? ? @customer.name : @customer.email 
-
+    %p
+      Hello 
+      = @customer.name.present? ? @customer.name : @customer.email 
     %p 
       Thanks for changing your order. Here is a confirmation of what your new order looks like:
     %p

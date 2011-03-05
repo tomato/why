@@ -15,7 +15,7 @@ Factory.define :customer do |u|
 end
 
 Factory.define :customer_with_orders, :parent => :customer do |u|
-  u.orders {|a| [a.association(:order)] }
+  u.orders {|a| [a.association(:order_future)] }
   u.regular_orders {|a| [a.association(:regular_order)] }
 end
 
@@ -41,6 +41,7 @@ end
 Factory.define :supplier do |u|
   u.name 'fred'
   u.products {|a| [a.association(:product)]}
+  u.from_email 'to.@to.com'
 end
 
 Factory.define :supplier_user do |u|
@@ -54,6 +55,14 @@ Factory.define :order do |u|
   u.customer_id 1
   u.delivery_id 1
   u.order_items {|a| [a.association(:order_item)] }
+end
+
+Factory.define :order_past, :parent => :order do |u|
+  u.delivery {|a| a.association(:delivery_past) }
+end
+
+Factory.define :order_future, :parent => :order do |u|
+  u.delivery {|a| a.association(:delivery_future) }
 end
 
 Factory.define :order_with_real_customer, :parent => :order do |u|
@@ -99,6 +108,16 @@ end
 Factory.define :delivery do |u|
   u.date DateTime.new
   u.round {|a| a.association(:round)}
+end
+
+Factory.define :delivery_past, :parent => :delivery do |u|
+  u.date DateTime.new + 1.day
+  u.last_order DateTime.new(2010,1,1)
+end
+
+Factory.define :delivery_future, :parent => :delivery do |u|
+  u.date DateTime.new 
+  u.last_order DateTime.new(2110,1,1)
 end
 
 Factory.define :delivery_with_order, :parent => :delivery do |u|

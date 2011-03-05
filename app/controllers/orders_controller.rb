@@ -18,6 +18,11 @@ class OrdersController < ApplicationController
     render 'deliveries' , :layout => nil
   end
 
+  def confirm
+    confirmation = Confirm.to_customer(@customer)
+    confirmation.deliver
+  end
+
   private
 
   def check_access!()

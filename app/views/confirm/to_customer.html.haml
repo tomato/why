@@ -1,0 +1,48 @@
+!!!5
+%html
+  %body
+    =image_tag "#{root_url}#{@customer.supplier.logo.url.gsub(/^\//, '')}"
+    Hello 
+    = @customer.name.present? ? @customer.name : @customer.email 
+
+    %p 
+      Thanks for changing your order. Here is a confirmation of what your new order looks like:
+    %p
+      You will normally receive:
+      %br
+      -@customer.regular_orders[0].items.each do |item|
+        %br
+        =item.quantity
+        =' x '
+        =item.product.name
+        -if item.respond_to?(:frequency)
+          every
+          =item.frequency
+          week(s) from
+          =item.first_delivery_date.to_s(:short)
+      -if @customer.regular_orders[0].note.present?
+        %br
+        %em
+          Note: 
+          =@customer.regular_orders[0].note
+    -if @customer.future_orders.present?
+      %p
+        But on the following dates you will receive
+        -@customer.future_orders.each do |order|
+          %br
+          %br
+          =order.delivery.date.to_s(:long)
+          -order.items.each do |item|
+            %br
+            =item.quantity
+            =' x '
+            =item.product.name
+          -if order.note.present?
+            %br
+            %em
+              Note: 
+              =order.note
+
+
+
+

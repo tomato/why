@@ -6,7 +6,8 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "mysql2"
-gem "haml", "~> 3.0.18"
+gem "haml", "~> 3.0.25"
+gem "haml-rails"
 gem "warden"
 gem "devise",           "~> 1.1.1"
 gem "devise_invitable", :git => "git://github.com/rymai/devise_invitable.git", :branch => "new_url"
@@ -32,6 +33,8 @@ group :test, :development do
   gem 'webrat', '>=0.7.2.beta.6', :git => 'git://github.com/orangewise/webrat.git' 
   gem 'capybara'
   gem 'launchy'
+  gem 'email_spec'
+  gem 'spork', '~> 0.9.0.rc'
 end
 
 

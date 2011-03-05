@@ -55,6 +55,10 @@ class Customer < ActiveRecord::Base
     end
   end
 
+  def future_orders
+    orders.find_all{|o| o.delivery.last_order > DateTime.now }
+  end
+
   def export_fields
     [round.name, name, address, postcode, telephone] + ((regular_orders[0]) ? [regular_orders[0].note] : [])
   end

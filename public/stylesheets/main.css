@@ -444,3 +444,37 @@ iframe.blog {
   color: #333333;
   font-size: 16px;
   font-weight: bold; }
+
+a#submit {
+  display: block;
+  text-align: center;
+  background-color: #998299;
+  width: 150px;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none; }
+  a#submit .updated {
+    border: 2px solid red; }
+
+a#submit:hover, a#undo:hover {
+  text-decoration: underline; }
+
+#nicemessage {
+  display: block;
+  text-align: center;
+  border: solid 2px #998299;
+  width: 60%;
+  padding: 30px;
+  margin: 50px auto;
+  font-size: 16px;
+  font-weight: bold;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px; }

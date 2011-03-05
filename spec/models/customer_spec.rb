@@ -126,4 +126,19 @@ describe Customer do
       Order.find_all_by_customer_id(@customer.id).should have(1).order
     end
   end
+
+  describe :future_orders do
+    it "should only display orders in the future" do
+      c = Factory(:customer)
+      c.orders << Factory(:order_past)
+      c.orders << Factory(:order_future)
+      c.should have(2).orders
+      c.should have(1).future_orders
+    end
+
+  end
+
+  describe :past_orders do
+
+  end
 end

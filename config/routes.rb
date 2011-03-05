@@ -24,7 +24,11 @@ Why::Application.routes.draw do
     member do
       get :invite
     end
-    resources :orders
+    resources :orders do
+      collection do
+        get :confirm
+      end
+    end
   end
 
   resources :suppliers do

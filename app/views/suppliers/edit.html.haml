@@ -13,6 +13,7 @@
     });
     why.setupEnableText('#has_invite', '#supplier_invite', '#invite_li');
     why.setupEnableText('#has_news', '#supplier_info', '#news_li');
+    why.setupEnableText('#has_footer', '#supplier_email_footer', '#footer_li');
   })
 %h1 Update your settings
 =form_for @supplier, :html => { :multipart => true } do |f|
@@ -41,6 +42,12 @@
       %li#invite_li
         =f.label :invite, 'Custom Invite Text'
         =f.text_area :invite, :class => 'editor'
+      %li
+        =label_tag :has_footer, 'Add an email footer'
+        =check_box_tag :has_footer
+      %li#footer_li
+        =f.label :email_footer, 'Email Footer (shown on invite and confirmation email)'
+        =f.text_area :email_footer, :class => 'editor'
       %li
         =f.label :embed, 'Embed in your own website'
         =f.check_box :embed

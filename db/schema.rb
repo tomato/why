@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110227081110) do
+ActiveRecord::Schema.define(:version => 20110305154011) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(:version => 20110227081110) do
     t.string   "parent_url"
     t.string   "from_email"
     t.text     "invite"
+    t.text     "email_footer"
   end
 
 end

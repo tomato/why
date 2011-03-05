@@ -35,6 +35,11 @@ describe Confirm do
       @c.should have(1).orders
       mail.body.encoded.should match("But on the following dates you will receive")
     end
+
+    it "should show a footer if there is one" do
+      @c.supplier.email_footer = "thanks for all the fish"
+      mail.body.encoded.should match(@c.supplier.email_footer )
+    end
   end
 
 end

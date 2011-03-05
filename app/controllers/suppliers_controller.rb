@@ -22,6 +22,7 @@ class SuppliersController < ApplicationController
   def update
     params[:supplier][:invite] = nil unless(params[:has_invite])
     params[:supplier][:info] = nil unless(params[:has_news])
+    params[:supplier][:email_footer] = nil unless(params[:has_footer])
     if(@supplier.update_attributes(params[:supplier]))
       flash[:notice] = "Your settings have been updated"
       redirect_to supplier_path(@supplier)

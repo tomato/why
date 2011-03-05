@@ -61,7 +61,7 @@ describe Order do
     
     it "should not find orders that have an expired last order" do
       @customer = Factory(:customer)
-      @delivery = Delivery.create!({:round_id => 1, :date => Date.new(2040,1,1), :last_order => Date.new(2000,1,1)})
+      @delivery = Delivery.create!({:round_id => 1, :date => Date.new(2040,1,1), :last_order => DateTime.now - 1.second})
       @order = Order.create!({ :delivery_id => @delivery.id, :customer_id => @customer.id })
       Order.find_candidates(@customer).should have(0).orders
     end

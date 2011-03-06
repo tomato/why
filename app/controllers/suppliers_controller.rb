@@ -15,7 +15,7 @@ class SuppliersController < ApplicationController
   end
 
   def create
-    Supplier.create(params[:supplier])
+    Supplier.create!(params[:supplier])
     redirect_to :action => 'index'
   end
 

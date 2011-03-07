@@ -63,6 +63,12 @@ class Customer < ActiveRecord::Base
     [round.name, name, address, postcode, telephone] + ((regular_orders[0]) ? [regular_orders[0].note] : [])
   end
 
+  protected
+  def password_required?
+    !password.nil? || !password_confirmation.nil?
+  end
+  
+
   private
 
   def remove_orders

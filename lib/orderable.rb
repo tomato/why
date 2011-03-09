@@ -14,6 +14,8 @@ module Orderable
       arr << customer.address
       arr << customer.postcode
       arr << customer.telephone
+      arr << note if note
+      arr << customer.regular_note if customer.regular_note
       items.each{|i| arr << "#{i.quantity} x #{i.product.name}" }
     end
   end

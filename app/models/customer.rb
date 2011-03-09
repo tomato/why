@@ -55,6 +55,14 @@ class Customer < ActiveRecord::Base
     end
   end
 
+  def regular_note
+    regular_order.note if regular_order
+  end
+
+  def regular_order
+    regular_orders[0]
+  end
+
   def future_orders
     orders.find_all{|o| o.delivery.last_order > DateTime.now }
   end

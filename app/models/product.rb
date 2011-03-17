@@ -1,3 +1,6 @@
+require 'hpricot'
+require 'open-uri'
+
 class Product < ActiveRecord::Base
   belongs_to :supplier
   has_many :order_items, :dependent => :destroy
@@ -7,6 +10,7 @@ class Product < ActiveRecord::Base
   validates_format_of :category, :with => /\A[\w\s\-]+\z/,
     :message => "Sorry no special characters (apostrophes, ampersands etc) are allowed in category names", :allow_blank => true
   before_save :set_category_sequence
+  has_attached_file :photo, :styles => { :original => '250x250^'}, :convert_options => { :original => "-gravity center -extent 250x250" } 
 
   def self.update_sequences(ids, supplier_id)
     return unless ids
@@ -37,6 +41,20 @@ class Product < ActiveRecord::Base
 
   def self.get_grouped(supplier)
     Product.find_all_by_supplier_id(supplier.id).sort.group_by { |c| [c.category_sequence, c.category] }
+  end
+
+  def split_description
+    d =  Hpricot(self.description)
+    self.descriptive_text = d.inner_text
+    d.search("img") do |i|
+      begin
+        remote_photo = open(i.attributes['src']) 
+        def remote_photo.original_filename;base_uri.path.split('/').last; end   
+        self.photo = remote_photo 
+        break
+      rescue
+      end
+    end
   end
 
   def set_category_sequence

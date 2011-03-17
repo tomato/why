@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
     @product_categories = Product.get_grouped(@supplier)
   end
 
+  def cat
+    @product_categories = Product.get_grouped(@supplier)
+  end
+
   def new
     @product = Product.new
     cat_list()

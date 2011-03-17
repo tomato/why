@@ -1,0 +1,14 @@
+%h1 Manage your products
+
+#categories
+  -@product_categories.sort.each do |category, products|
+    .category{:id => "category_#{products.first.id}"}
+      %h3 
+        %span.handle >> 
+        =category[1]
+      -products.sort.each do |p|
+        =p.name
+        -if(p.price)
+          %span.price= to_pound(p.price)
+        -if p.description.present?
+          .description=raw p.description

@@ -171,4 +171,28 @@ describe Product do
     end
   end
 
+  describe :split_description do
+    before(:each) do
+      @p = Product.new :name => "test" 
+    end
+
+    it "should set description text from html" do
+      @p.description = "<body><table>message</table></body>"
+      @p.split_description
+      @p.descriptive_text.should == "message"
+    end
+
+    it "should add a photo from html" do
+      @p.description = '<body><img src="http://fwig.me/images/logo.gif">'
+      @p.split_description
+      @p.photo.url.should include("logo.gif")
+    end
+
+    it "should add the first valid photo from html" do
+      @p.description = '<body><img src="http://fwig.me/images/doesntexist.gif"><img src="http://fwig.me/images/logo.gif"><img src="<img src="http://fwig.me/images/comic.jpg">'
+      @p.split_description
+      @p.photo.url.should include("logo.gif")
+    end
+  end
+
 end

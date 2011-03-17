@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110305154011) do
+ActiveRecord::Schema.define(:version => 20110313160646) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -92,6 +92,23 @@ ActiveRecord::Schema.define(:version => 20110305154011) do
   add_index "orders", ["delivery_id", "customer_id"], :name => "index_orders_on_delivery_id_and_customer_id", :unique => true
 
   create_table "products", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "price",              :precision => 7, :scale => 2
+    t.string   "category"
+    t.integer  "supplier_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sequence",                                         :default => 0, :null => false
+    t.integer  "category_sequence",                                :default => 0, :null => false
+    t.text     "descriptive_text"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "products2", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.decimal  "price",             :precision => 7, :scale => 2

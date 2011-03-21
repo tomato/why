@@ -188,6 +188,12 @@ describe Product do
       @p.photo.url.should include("logo.gif")
     end
 
+    it "should not add a photo with a dodgy extension from html" do
+      @p.description = '<body><img src="http://fwig.me/images/logo.bbb">'
+      @p.split_description
+      @p.photo.url.should_not include("logo.bbb")
+    end
+
     it "should add the first valid photo from html" do
       @p.description = '<body><img src="http://fwig.me/images/doesntexist.gif"><img src="http://fwig.me/images/logo.gif"><img src="<img src="http://fwig.me/images/comic.jpg">'
       @p.split_description

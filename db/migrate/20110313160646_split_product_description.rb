@@ -5,6 +5,10 @@ class SplitProductDescription < ActiveRecord::Migration
     add_column :products, :photo_content_type, :string
     add_column :products, :photo_file_size, :integer
     add_column :products, :photo_updated_at, :datetime
+    Product.all.each do |p|
+      p.split_description
+      p.save!
+    end
   end
 
   def self.down

@@ -44,15 +44,30 @@ class Product < ActiveRecord::Base
   end
 
   def split_description
+    return unless self.description.present?
     d =  Hpricot(self.description)
     self.descriptive_text = d.inner_text
     d.search("img") do |i|
       begin
-        remote_photo = open(i.attributes['src']) 
-        def remote_photo.original_filename;base_uri.path.split('/').last; end   
+        src_url = i.attributes['src']
+        src_url =~ /imgres\?imgurl=(.*?)\&imgrefurl/
+        src_url = $1 if $1
+        #puts src_url[0,100]
+        #next unless /gif|jpg|jpeg|png\z/ =~ src_url
+        remote_photo = open(src_url) 
+        def remote_photo.original_filename
+          p = base_uri.path.split('/').last.gsub(/ |\%20/,'')
+          c = content_type.split('/').last
+          p += ".#{c}" unless  /gif|jpg|jpeg|png\z/ =~ p
+          next unless  /gif|jpg|jpeg|png\z/ =~ p
+          p
+        end   
         self.photo = remote_photo 
+        #puts "photo added: #{ self.photo.url }"
         break
-      rescue
+      rescue Exception => e
+        puts "product=#{self.name}"
+        puts e.to_s[0,100]
       end
     end
   end

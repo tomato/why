@@ -31,6 +31,9 @@
               %span.price{ 'data-price' => product.price }= to_pound(product.price)
           -if product.description.present?
             %span.more ?
-            .description=raw product.description
+            .description
+              =image_tag product.photo.url
+              =product.descriptive_text
+              =raw product.description
 #deliveries
   = render 'deliveries'

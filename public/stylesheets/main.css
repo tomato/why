@@ -257,6 +257,18 @@ div#products {
   padding: 10px;
   background-color: #fdfef9; }
 
+.product .description {
+  width: 500px;
+  height: 300px; }
+  .product .description img {
+    float: left;
+    margin: 10px;
+    width: 250px;
+    height: 250px; }
+  .product .description p {
+    overflow-y: scroll;
+    height: 250px; }
+
 .updated {
   border: 2px solid red !important; }
 
@@ -478,3 +490,6 @@ a#submit:hover, a#undo:hover {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px; }
+
+.clearboth {
+  clear: both; }

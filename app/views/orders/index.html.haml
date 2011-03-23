@@ -5,10 +5,13 @@
       why.setupOrders();
       $('#watch').live('click', function(){ $('#movie').slideDown();})
       $('#hide').click(function(){ $('#movie').slideUp(); });
-      $('.more').hover(
-        function(){ $(this).next('.description').fadeIn(); },
-        function(){ $(this).next('.description').fadeOut(); }
-      );
+      $('.more').click( function(){ 
+        $('.description').fadeOut(); 
+        $(this).next('.description').fadeIn(); 
+      });
+      $('.description .close a').click( function(){ 
+        $('.description').fadeOut(); return false; 
+      });
     })
 
 -if @customer.round.customer_message.present?
@@ -32,8 +35,16 @@
           -if product.description.present?
             %span.more ?
             .description
-              =image_tag product.photo.url
-              =product.descriptive_text
-              =raw product.description
+              .close
+                =link_to 'close',''
+              %h3=product.name
+              -if product.photo?
+                =image_tag product.photo.url
+              %p
+                =product.descriptive_text
+                %br
+                =to_pound(product.price)
+              .clearboth
+              
 #deliveries
   = render 'deliveries'

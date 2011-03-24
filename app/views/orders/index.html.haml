@@ -32,7 +32,7 @@
             =product.name
             -if(product.price)
               %span.price{ 'data-price' => product.price }= to_pound(product.price)
-          -if product.description.present?
+          -if product.descriptive_text.present?
             %span.more ?
             .description
               .close
@@ -40,8 +40,8 @@
               %h3=product.name
               -if product.photo?
                 =image_tag product.photo.url
-              %p
-                =product.descriptive_text
+              .descriptive_text
+                =raw product.descriptive_text
                 %br
                 =to_pound(product.price)
               .clearboth

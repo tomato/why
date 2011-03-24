@@ -265,7 +265,7 @@ div#products {
     margin: 10px;
     width: 250px;
     height: 250px; }
-  .product .description p {
+  .product .description .descriptive_text {
     overflow-y: scroll;
     height: 250px; }
 

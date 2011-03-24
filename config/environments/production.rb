@@ -54,6 +54,8 @@ Why::Application.configure do
     :enable_starttls_auto => false
   }
 
+  Paperclip.options[:command_path] = '/usr/bin/identify'
+
   config.after_initialize do
     Devise::Mailer.class_eval do 
       include DeviseMailerExtensions

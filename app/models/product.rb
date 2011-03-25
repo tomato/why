@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
   validates_format_of :category, :with => /\A[\w\s\-]+\z/,
     :message => "Sorry no special characters (apostrophes, ampersands etc) are allowed in category names", :allow_blank => true
   before_save :set_category_sequence
-  has_attached_file :photo, :styles => { :original => '250x250^'}, :convert_options => { :original => "-gravity center -extent 250x250" } 
+  has_attached_file :photo, :styles => { :original => '250x250'}, :convert_options => { :original => "-gravity center -extent 250x250" } 
 
   def self.update_sequences(ids, supplier_id)
     return unless ids

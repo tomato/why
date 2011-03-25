@@ -55,6 +55,7 @@ Why::Application.configure do
   }
 
   Paperclip.options[:command_path] = '/usr/bin'
+  Paperclip.options[:swallow_stderr] = false
 
   config.after_initialize do
     Devise::Mailer.class_eval do 

@@ -15,8 +15,6 @@
     =yield :head
   %body{ :id => tab_name }
     #content
-      /[if lte IE 8]
-        #badbrowser Your are running an old version of Internet Explorer which does not correctly support modern web standards this will cause the site to look a bit odd in places although hopefully it will be useable
       -if(flash[:notice])
         #notice=flash[:notice]
       -if(flash[:alert])

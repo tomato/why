@@ -266,8 +266,25 @@ div#products {
     width: 250px;
     height: 250px; }
   .product .description .descriptive_text {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 250px; }
+
+#catalogue h2 {
+  margin: 1em 0 0 0; }
+#catalogue .details {
+  display: inline-block;
+  width: 400px;
+  vertical-align: top; }
+  #catalogue .details h3 {
+    margin: 1em 0 0.5em; }
+  #catalogue .details img {
+    width: 160px;
+    height: 160px;
+    margin: 0 1em;
+    float: left; }
+  #catalogue .details .descriptive_text {
+    max-height: 125px;
+    overflow: hidden; }
 
 .updated {
   border: 2px solid red !important; }

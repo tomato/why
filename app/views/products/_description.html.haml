@@ -1,0 +1,18 @@
+%li.product{"data-product_id" => product.id}
+  %span.prodname
+    =product.name
+    -if(product.price)
+      %span.price{ 'data-price' => product.price }= to_pound(product.price)
+  -if product.descriptive_text.present?
+    %span.more ?
+    .description
+      .close
+        =link_to 'close',''
+      %h3=product.name
+      -if product.photo?
+        =image_tag product.photo.url
+      .descriptive_text
+        =raw product.descriptive_text
+        %br
+        =to_pound(product.price)
+      .clearboth

@@ -1,14 +1,39 @@
-%h1 Manage your products
+=content_for :head do
+  :javascript
+    $(function(){
+      $(".products").hide();
+      $("#catalogue h2").toggle(function(){
+        $('.catselector',this).html('-');
+        $(this).next('.products').slideDown();
+      },function(){
+        $('.catselector',this).html('+');
+        $(this).next('.products').slideUp();
+      })
+    })
 
-#categories
+%h1 Our Produce
+
+#catalogue
   -@product_categories.sort.each do |category, products|
     .category{:id => "category_#{products.first.id}"}
-      %h3 
-        %span.handle >> 
+      %h2 
+        %span.catselector +
         =category[1]
-      -products.sort.each do |p|
-        =p.name
-        -if(p.price)
-          %span.price= to_pound(p.price)
-        -if p.description.present?
-          .description=raw p.description
+      .products
+        -products.sort.each do |p|
+          -if p.descriptive_text.present?
+            .details
+              %h3=p.name
+              -if p.photo?
+                =image_tag p.photo.url
+              .product_description
+                .descriptive_text
+                  =raw p.descriptive_text
+                =to_pound(p.price)
+              .clearboth
+        %p
+          -products.sort.each do |p|
+            -unless p.descriptive_text.present?
+              %strong=p.name
+              -if(p.price)
+                %span.price{ 'data-price' => p.price }= to_pound(p.price)

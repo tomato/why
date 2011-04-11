@@ -115,7 +115,7 @@ GEM
     hoe (2.6.1)
       rake (>= 0.8.7)
       rubyforge (>= 2.0.4)
-    hoptoad_notifier (2.4.4)
+    hoptoad_notifier (2.4.9)
       activesupport
       builder
     hpricot (0.8.2)
@@ -225,7 +225,7 @@ DEPENDENCIES
   friendly_id (~> 3.1)
   haml (~> 3.0.25)
   haml-rails
-  hoptoad_notifier
+  hoptoad_notifier (~> 2.4.9)
   hpricot
   launchy
   mysql2

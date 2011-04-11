@@ -20,7 +20,7 @@ gem 'pdf-writer', :require => "pdf/writer"
 gem 'acts_as_indexed'
 gem "friendly_id", "~> 3.1"
 gem "paperclip", "~> 2.3.6"
-gem 'hoptoad_notifier'
+gem 'hoptoad_notifier', "~> 2.4.9"
 gem 'newrelic_rpm'
 
 group :test, :development do

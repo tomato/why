@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110313160646) do
+ActiveRecord::Schema.define(:version => 20110404195838) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -30,6 +30,26 @@ ActiveRecord::Schema.define(:version => 20110313160646) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "archived_order_items", :force => true do |t|
+    t.integer "archived_orders_id"
+    t.integer "product_id",                                       :null => false
+    t.integer "quantity",                                         :null => false
+    t.string  "product_name",                                     :null => false
+    t.decimal "price",              :precision => 7, :scale => 2
+  end
+
+  add_index "archived_order_items", ["archived_orders_id"], :name => "index_archived_order_items_on_archived_order_id"
+
+  create_table "archived_orders", :force => true do |t|
+    t.integer  "delivery_id",           :null => false
+    t.integer  "customer_id",           :null => false
+    t.datetime "originally_created_at"
+    t.datetime "originally_updated_at"
+    t.text     "note"
+  end
+
+  add_index "archived_orders", ["delivery_id", "customer_id"], :name => "index_archived_orders_on_delivery_id_and_customer_id", :unique => true
 
   create_table "customers", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -64,10 +84,11 @@ ActiveRecord::Schema.define(:version => 20110313160646) do
 
   create_table "deliveries", :force => true do |t|
     t.date     "date"
-    t.integer  "round_id",   :null => false
+    t.integer  "round_id",                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_order"
+    t.boolean  "archived",   :default => false, :null => false
   end
 
   create_table "order_items", :force => true do |t|

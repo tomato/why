@@ -6,6 +6,10 @@ class OrdersController < ApplicationController
     @product_categories = Product.get_grouped(@supplier)
   end
 
+  def past_orders
+
+  end
+
   def create
     begin
       RegularOrder.create_all(params, customer_signed_in?)

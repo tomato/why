@@ -9,6 +9,15 @@ class Delivery < ActiveRecord::Base
         Order.new_for_delivery(c, self)
     end).compact.reject{|o| o.items.empty?}
   end
+
+  def archive_orders
+    all_orders.each do |o|
+      #need to add order items for each order
+      #add an archive method on orderable
+      #what about products that have been deleted
+      #add product name and price to orderitem
+    end
+  end
   
   def self.all_orders(delivery_ids)
     Delivery.find(delivery_ids.split(',')).map {|d| d.all_orders}.flatten

@@ -55,6 +55,7 @@ Factory.define :order do |u|
   u.customer_id 1
   u.delivery_id 1
   u.order_items {|a| [a.association(:order_item)] }
+  u.note "order note"
 end
 
 Factory.define :order_past, :parent => :order do |u|

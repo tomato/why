@@ -11,6 +11,19 @@ class Order < ActiveRecord::Base
     order_items
   end
 
+  def archive
+    o = ArchivedOrder.new(
+      :delivery_id => self[:delivery_id],
+      :customer_id => self[:customer_id],
+      :originally_created_at => self[:created_at],
+      :originally_updated_at => self[:updated_at],
+      :note => self[:note])
+    items.each do |i|
+      o.archived_order_items << i.new_archived_order_item
+    end
+    o.save
+  end
+
   def self.find_candidates(customer)
     Delivery.all(:conditions => 
       ["round_id = ? and last_order >= now()", customer.round_id], 

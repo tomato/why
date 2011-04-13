@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(:version => 20110404195838) do
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
   create_table "archived_order_items", :force => true do |t|
-    t.integer "archived_orders_id"
-    t.integer "product_id",                                       :null => false
-    t.integer "quantity",                                         :null => false
-    t.string  "product_name",                                     :null => false
-    t.decimal "price",              :precision => 7, :scale => 2
+    t.integer "archived_order_id"
+    t.integer "product_id",                                      :null => false
+    t.integer "quantity",                                        :null => false
+    t.string  "product_name",                                    :null => false
+    t.decimal "price",             :precision => 7, :scale => 2
   end
 
-  add_index "archived_order_items", ["archived_orders_id"], :name => "index_archived_order_items_on_archived_order_id"
+  add_index "archived_order_items", ["archived_order_id"], :name => "index_archived_order_items_on_archived_order_id"
 
   create_table "archived_orders", :force => true do |t|
     t.integer  "delivery_id",           :null => false

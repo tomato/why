@@ -6,11 +6,4 @@ class OrderItem < ActiveRecord::Base
   validates_numericality_of :product_id, :greater_than => 0
   validates_numericality_of :quantity
 
-  def new_archived_order_item
-    ArchivedOrderItem.new(
-      :product_id => product_id,
-      :quantity => quantity,
-      :product_name => product.name,
-      :price => product.price)
-  end
 end

@@ -11,12 +11,13 @@ class Delivery < ActiveRecord::Base
   end
 
   def archive_orders
-    all_orders.each do |o|
-      #need to add order items for each order
-      #add an archive method on orderable
-      #what about products that have been deleted
-      #add product name and price to orderitem
-    end
+    all_orders.each { |o| o.archive }
+    self[:archived] = true
+    save
+  end
+
+  def self.archive
+    Delivery.where('archived = 0 and last_order < ?', DateTime.now).each{ |d| d.archive_orders }
   end
   
   def self.all_orders(delivery_ids)

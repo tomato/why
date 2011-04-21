@@ -194,7 +194,7 @@ describe Order do
   describe :export_fields do
     it "should contain the quantity" do
       o = Factory(:order)
-      o.export_fields.should eql([nil, 1, 'asparagus', "1.32"])
+      o.export_fields.should eql(["order note", 1, 'asparagus', "1.32"])
       o.export_fields.should be_a(Array)
     end
   end

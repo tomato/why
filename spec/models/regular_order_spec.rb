@@ -114,7 +114,34 @@ describe RegularOrder do
   describe :to_csv do
     it "should return csv for an order" do
       csv = Factory(:order_with_real_customer).to_csv
-      csv.should == "test,tom,42 East End Road,gl53 8qe,01242 523607,,1,asparagus,1.32\n"
+      csv.should == "test,tom,42 East End Road,gl53 8qe,01242 523607,order note,1,asparagus,1.32\n"
+    end
+  end
+
+  describe :archive do
+    before(:each) do
+      @o = Factory(:order) 
+      @o.archive
+    end
+    
+    it "should create an ArchivedOrder" do
+      ArchivedOrder.all.should have(1).order
+      a = ArchivedOrder.first
+      a.delivery_id.should == @o.delivery_id
+      a.customer_id.should == @o.customer_id
+      a.originally_created_at.to_s.should == @o.created_at.to_s
+      a.originally_updated_at.to_s.should == @o.updated_at.to_s
+      a.note.should == @o.note
+    end
+
+    it "should create archived order items" do
+      ArchivedOrder.first.should have(1).archived_order_items
+      oi = @o.items[0]
+      i = ArchivedOrder.first.archived_order_items.first
+      i.product_id.should == oi.product_id
+      i.quantity.should == oi.quantity
+      i.product_name.should == oi.product.name
+      i.price.should == oi.product.price
     end
   end
 end

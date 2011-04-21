@@ -52,8 +52,8 @@ Factory.define :supplier_user do |u|
 end
 
 Factory.define :order do |u|
-  u.customer_id 1
-  u.delivery_id 1
+  u.customer { |c| c.association(:customer_with_orders_and_round) }
+  u.delivery { |d| d.association(:delivery_with_order) }
   u.order_items {|a| [a.association(:order_item)] }
   u.note "order note"
 end

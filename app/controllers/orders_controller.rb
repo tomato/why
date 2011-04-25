@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
     @product_categories = Product.get_grouped(@supplier)
   end
 
-  def past_orders
-
+  def past
+    @past = ArchivedOrder.joins(:delivery).where(:customer_id => @customer.id).order("date desc")
   end
 
   def create

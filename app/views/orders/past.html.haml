@@ -1,0 +1,25 @@
+%h1 Past Orders
+
+#help
+  %h2 Help
+  %ul
+    %li Here's your past orders and your orders that you can no longer edit because its too close to delivery time.
+    %li We have only started tracking past orders on the system from May '11 so you won't see orders prior to that.
+
+#deliveries
+  .orders
+    -@past.each do |order|
+      %div{:class => order.originally_created_at? ? "order" : "order regular"}  
+        %h3=order.delivery.date.to_s(:long)
+        %ul
+          -order.archived_order_items.each do |oi|
+            %li.item
+              %span.quantity{ :value => oi.quantity }
+              %span.product
+                =oi.product.name
+                %span.price= to_pound(oi.product.price)
+          -if order.note.present?
+            %li
+              %em
+                Note: 
+                =order.note

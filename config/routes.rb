@@ -28,6 +28,7 @@ Why::Application.routes.draw do
     resources :orders do
       collection do
         get :confirm
+        get :past
       end
     end
   end

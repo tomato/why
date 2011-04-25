@@ -1,7 +1,9 @@
 #hidden_msg=@msg
 #orderHelp
   =link_to 'Confirm', confirm_customer_orders_path(@customer), :id => 'submit'
-  Updates to your order are made automatically as soon as you make changes. Just Drag &amp; Drop. Click the button above to receive a confirmation email.
+  Updates to your order are made automatically as soon as you make changes. Just Drag &amp; Drop. Click the button above to receive a confirmation email. View your past orders 
+  %em
+    =link_to 'here', past_customer_orders_path(@customer)
   
   Still confused? 
   %a#watch 

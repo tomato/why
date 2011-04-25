@@ -22,7 +22,7 @@ module Orderable
           :product_name => i.product.name,
           :price => i.product.price)
         end
-    o.save
+    o.save!
   end
 
   def label_lines

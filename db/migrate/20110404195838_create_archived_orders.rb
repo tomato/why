@@ -21,6 +21,8 @@ class CreateArchivedOrders < ActiveRecord::Migration
     add_index :archived_order_items, :archived_order_id, :name => "index_archived_order_items_on_archived_order_id"
 
     add_column :deliveries, :archived, :boolean, :null => false, :default => 0
+
+    Delivery.all.each{ |d| d.update_attribute(:archived, true) }
   end
 
   def self.down

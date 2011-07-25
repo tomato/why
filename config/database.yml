@@ -35,12 +35,5 @@ test: &TEST
   username: root
   password: 
 
-production:
-  adapter: mysql2
-  database: tomato_why
-  username: tomato
-  password: tom2710
-  host: sqlreadwrite.brightbox.net
-
 cucumber:
   <<: *TEST
